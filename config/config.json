@@ -1,0 +1,6 @@
+{
+  "mainApi": {
+    "test": "https://visitme1.herokuapp.com/api",
+    "production": "https://visitme1.herokuapp.com/api"
+  }
+}

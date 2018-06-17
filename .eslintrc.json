@@ -1,0 +1,79 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jquery": true
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "globals": {
+    "global": false,
+    "Sammy": false,
+    "getCurrentData": false,
+    "postMainApi": false,
+    "postAccountsApi": false,
+    "postSecureAccountsApi": false,
+    "getMainApi": false,
+    "startPreload": false,
+    "stopPreload": false,
+    "deleteMainApi": false,
+    "toastr": false,
+    "PROGRESS_MESSAGE_E": false,
+    "CHECK_MESSAGE_E": false,
+    "ERROR_HEADER": false,
+    "LOADING_MESSAGE_E": false,
+    "SUBMIT_MESSAGE_E": false,
+    "getQuery": true,
+    "initSession": true,
+    "notifyIdle": true,
+    "MyApp": false,
+    "loadTemplate": false,
+    "Dropzone": false,
+    "Handlebars": false,
+    "moment": false,
+    "Chart": false,
+    "updateColor": false,
+    "_": false,
+    "Global": false,
+    "delay": false,
+    "putMainApi": false,
+    "MAIN_API": false,
+    "PAYMENT_PLANS": false,
+    "TOASTR_OPTIONS": false,
+    "SAMMY_STORE": false,
+    "TIME_FORMAT": false,
+    "handleError": false,
+    "sanitizeInputs": false,
+    "KEYS_TO_SANITIZE": false,
+    "ENVIRONMENT": false
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
+  "rules": {
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "windows"
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ]
+  }
+}

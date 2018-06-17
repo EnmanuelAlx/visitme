@@ -1,0 +1,10 @@
+# Visitme frontend
+
+This repo will host visitme client side code
+
+# Deployment process: netlify  deployment
+
+### Prerequisite
+
+Steps:
+1. `npm install`
