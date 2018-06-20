@@ -6,16 +6,21 @@ const delay = (t, v) => {
   });
 };
 
-const loadTemplate = (container, template) => {
+$.fn.exists = function () {
+  return this.length !== 0;
+};
+
+const loadTemplate = (container, name, template) => {
 
   if (!$(container).exists()) {
-    const session = getCurrentData().session;
-
-    const index = Global.templates["index"];
-    $("body").html(index({ session }));
+    //const session = getCurrentData().session;
+    const index = MyApp.templates["main"];
+    $("body").html(index());
   }
+
   $(container)
     .hide()
     .html(template)
     .fadeIn(500);
+    
 };

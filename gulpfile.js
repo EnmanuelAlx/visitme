@@ -89,7 +89,7 @@ gulp.task("babel", () => {
   const settings = JSON.parse(fs.readFileSync("config/config.json", "utf8"));
   const mainApi = settings.mainApi[ENVIRONMENT];
   return gulp
-    .src(["src/visitme/js/**/*.js"])
+    .src(["src/visitme/js/**/*.js", "!src/visitme/js/lib/**/*.js"])
     .pipe(sourcemaps.init())
     .pipe(
       babel({

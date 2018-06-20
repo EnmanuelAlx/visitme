@@ -12,9 +12,9 @@
 
   store.checkSession = () => {};
 
-  const startApp = () => app.run("#/");
+  const startApp = () => app.run("#/dashboard");
 
-  $(document).ready(async () => {
+  $(document).ready(() => {
     toastr.options = TOASTR_OPTIONS;
     startApp();
     store.checkSession();

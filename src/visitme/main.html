@@ -11,6 +11,10 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!--build:css css/styles.min.css-->
+  <link href="styles/css/bootstrap.css" rel="stylesheet" />
+  <link href="styles/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet" />
+  <link href="styles/css/toastr.min.css" rel="stylesheet" />
+
   <!--endbuild-->
   <meta name="theme-color" content="#fff">
 
@@ -20,8 +24,44 @@
 
 
 </body>
-<script src="https://use.fontawesome.com/3eff7637e2.js"></script>
+<!--<script src="https://use.fontawesome.com/3eff7637e2.js"></script> -->
 <!--build:js js/main.min.js -->
+<script src="js/lib/polyfill.min.js" type="text/javascript"></script>
+<script src="js/lib/jquery.min.js" type="text/javascript"></script>
+<script src="js/lib/popper.min.js" type="text/javascript"></script>
+<script src="js/lib/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/lib/toastr.min.js"></script>
+<script src="js/lib/lodash.js"></script>
+
+<!--Sammy-->
+<script src="js/lib/sammy-latest.min.js" type="text/javascript"></script>
+<script src="js/lib/sammy.json.js" type="text/javascript"></script>
+<script src="js/lib/sammy.oauth2.js" type="text/javascript"></script>
+<script src="js/lib/sammy.storage.js" type="text/javascript"></script>
+
+<!--Handlebars-->
+<script src="js/lib/handlebars.min.js" type="text/javascript"></script>
+<script src="js/lib/handlebars.runtime.js" type="text/javascript"></script>
+<script src="dist/templates/templates.js" type="text/javascript"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+<script src="js/custom/js/plugins/bootstrap-switch.js"></script>
+<!--  Chartist Plugin  -->
+<script src="js/custom/js/plugins/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="js/custom/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="js/custom/js/light-bootstrap-dashboard.js" type="text/javascript"></script>
+
+<!--utils-->
+<script src="dist/custom/constant.js" type="text/javascript"></script>
+<script src="dist/custom/ajax.js" type="text/javascript"></script>
+<script src="dist/custom/utils.js" type="text/javascript"></script>
+
+<!--Controllers-->
+<script src="dist/index.js" type="text/javascript"></script>
+<script src="dist/controllers/dashboard.js" type="text/javascript"></script>
+
+
 <!-- endbuild -->
 
 </html>
