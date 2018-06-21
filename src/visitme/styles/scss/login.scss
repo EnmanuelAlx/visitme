@@ -1,0 +1,24 @@
+html,
+body {
+  height: 100%;
+  margin-top: 0 !important;
+}
+
+.logo-login {
+  max-width: 200px;
+  max-height: 100px;
+}
+
+.login-bg {
+  background-image: url("../../assets/img/login-bg.jpg");
+  background-size: cover;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: radial-gradient( 72% 101%, rgba(0, 0, 0, 0) 24%, rgba(0, 0, 0, 0) 58%, rgba(0, 0, 0, 0.11) 100%);
+  }
+}

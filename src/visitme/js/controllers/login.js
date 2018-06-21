@@ -5,7 +5,7 @@
   const BODY = "body";
   const ROOT = "#/login";
   const TEMPLATE_NAME = "login";
-  const HB = Global; // handlebars;
+  const HB = MyApp; // handlebars;
   const SESSION_DENIED = "oauth.denied";
   const SESSION_CONNECTED = "oauth.connected";
   const SESSION_ENDED = "oauth.disconnected";

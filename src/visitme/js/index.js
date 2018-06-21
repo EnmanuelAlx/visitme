@@ -12,7 +12,12 @@
 
   store.checkSession = () => {};
 
-  const startApp = () => app.run("#/dashboard");
+  const startApp = () => app.run("#/");
+
+  app.get("#/", context => {
+    if (!app.getAccessToken()) return context.redirect("#/login");
+    context.redirect("#/dashboard");
+  });
 
   $(document).ready(() => {
     toastr.options = TOASTR_OPTIONS;
