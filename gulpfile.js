@@ -39,6 +39,7 @@ gulp.task("sass", () => {
   return gulp
     .src([
       "src/visitme/styles/scss/*.scss",
+      "node_modules/bootstrap/dist/css/bootstrap.css",
       "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
       "node_modules/toastr/build/toastr.min.css",
       "node_modules/dropzone/dist/dropzone.css",

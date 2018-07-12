@@ -10,5 +10,5 @@ This repo will host visitme client side code
 
 Steps:
 1. `npm install`
-2. `gulp cleam-sammy`
-3. `gulp start visitme`
+2. `gulp clean-sammy`
+3. `gulp start-visitme`
