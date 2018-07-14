@@ -2,10 +2,7 @@
 
 const postMainApi = (data, endpoint) => {
   const app = Sammy.apps.body;
-  const {
-    apiBasePath,
-    username
-  } = getCurrentData().session;
+  const { apiBasePath, username } = getCurrentData().session;
   const url = `${MAIN_API}${apiBasePath}/${username}${endpoint}`;
   return $.ajax({
     data: JSON.stringify(data),

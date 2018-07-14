@@ -2,8 +2,8 @@
 (() => {
   const app = Sammy.apps.body;
   const CONTAINER = ".content";
-  const ROOT = "#/dashboard";
-  const TEMPLATE_NAME = "dashboard";
+  const ROOT = "#/users";
+  const TEMPLATE_NAME = "users";
   const HB = MyApp; // handlebars;
 
 
@@ -12,9 +12,6 @@
     loadTemplate(CONTAINER, TEMPLATE_NAME, template());
   });
 
-  app.put(ROOT, () => {
-    const template = HB.templates[TEMPLATE_NAME];
-    loadTemplate(CONTAINER, TEMPLATE_NAME, template());
-  });
+  
 
 })();
