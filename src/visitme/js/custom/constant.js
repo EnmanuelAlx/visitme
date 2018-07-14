@@ -8,8 +8,7 @@ const PROGRESS_MESSAGE_E =
   "An error occurred  when trying to save your information. Check and try again";
 
 
-const API_VERSION = "v1";
-const MAIN_API = `@@mainApi/${API_VERSION}`;
+const MAIN_API = "@@mainApi";
 
 const TOASTR_OPTIONS = {
   positionClass: "toast-bottom-right",

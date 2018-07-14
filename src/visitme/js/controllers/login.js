@@ -30,7 +30,7 @@
     let startUrl = unescape(getQuery(app.getLocation(), "state"));
     if (startUrl === "false") startUrl = "#/";
     startPreload(BODY);
-    const login = postMainApi(data, "/login");
+    const login = postMainApi(data, "user/auth");
     login
       .then(res => {
         initSession(res);
@@ -38,7 +38,7 @@
       })
       .catch(e => {
         stopPreload();
-        app.trigger(SESSION_DENIED, e.responseJSON.message);
+        app.trigger(SESSION_DENIED, e.responseText);
       });
   });
 
@@ -50,4 +50,11 @@
 
   app.bind(SESSION_DENIED, (evt, error) => toastr.error(error, ERROR_HEADER));
   
+  const initSession = session => {
+    const app = Sammy.apps.body;
+    const store = app.store;
+    Object.keys(session).forEach(key => store.set(key, session[key]));
+    app.setAccessToken(session.token);
+  };
+
 })();

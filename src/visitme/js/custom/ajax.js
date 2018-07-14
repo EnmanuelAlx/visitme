@@ -2,14 +2,14 @@
 
 const postMainApi = (data, endpoint) => {
   const app = Sammy.apps.body;
-  const { apiBasePath, username } = getCurrentData().session;
-  const url = `${MAIN_API}${apiBasePath}/${username}${endpoint}`;
+  const url = `${MAIN_API}/${endpoint}`;
+  const token = app.getAccessToken();
   return $.ajax({
     data: JSON.stringify(data),
     type: "POST",
     headers: {
       "content-type": "application/json",
-      "x-auth-token": app.getAccessToken()
+      "Authorization": `Bearer ${token}`
     },
     url
   });
@@ -17,17 +17,14 @@ const postMainApi = (data, endpoint) => {
 
 const putMainApi = (data, endpoint) => {
   const app = Sammy.apps.body;
-  const {
-    apiBasePath,
-    username
-  } = getCurrentData().session;
-  const url = `${MAIN_API}${apiBasePath}/${username}${endpoint}`;
+  const url = `${MAIN_API}/${endpoint}`;
+  const token = app.getAccessToken();
   return $.ajax({
     data: JSON.stringify(data),
     type: "PUT",
     headers: {
       "content-type": "application/json",
-      "x-auth-token": app.getAccessToken()
+      "Authorization": `Bearer ${token}`
     },
     url
   });
@@ -35,16 +32,13 @@ const putMainApi = (data, endpoint) => {
 
 const deleteMainApi = endpoint => {
   const app = Sammy.apps.body;
-  const {
-    apiBasePath,
-    username
-  } = getCurrentData().session;
-  const url = `${MAIN_API}${apiBasePath}/${username}${endpoint}`;
+  const url = `${MAIN_API}/${endpoint}`;
+  const token = app.getAccessToken();
   const request = {
     type: "DELETE",
     headers: {
       "content-type": "application/json",
-      "x-auth-token": app.getAccessToken()
+      "Authorization": `Bearer ${token}`
     },
     url: url
   };
@@ -53,16 +47,13 @@ const deleteMainApi = endpoint => {
 
 const getMainApi = (data, endpoint) => {
   const app = Sammy.apps.body;
-  const {
-    apiBasePath,
-    username
-  } = getCurrentData().session;
-  const url = `${MAIN_API}${apiBasePath}/${username}${endpoint}`;
+  const url = `${MAIN_API}/${endpoint}`;
+  const token = app.getAccessToken();
   const request = {
     type: "GET",
     headers: {
       "content-type": "application/json",
-      "x-auth-token": app.getAccessToken()
+      "Authorization": `Bearer ${token}`
     },
     url
   };
