@@ -1,4 +1,4 @@
-/*exported delay getQuery loadTemplate*/
+/*exported delay getSessionData validateForms getQuery loadTemplate*/
 
 const delay = (t, v) => {
   return new Promise(resolve => {
@@ -53,3 +53,43 @@ const getQuery = (path, query) => {
   if (results) return results[1];
   return false;
 };
+
+$.fn.getType = function () {
+  return this[0].tagName == "INPUT" ?
+    this[0].type.toLowerCase() :
+    this[0].tagName.toLowerCase();
+};
+
+$.fn.exists = function () {
+  return this.length !== 0;
+};
+
+
+const validateForms = () => {
+  $(":input").on("focus", event => {
+    validateInputForms(event.currentTarget);
+  });
+
+  const validateInputForms = input => {
+    const form = $(input)
+      .closest("form")
+      .attr("id");
+
+    $(`#${form} :input`).each((idx, element) => {
+      if (element == input) return false;
+      if (!$(element).val()) $(element).valid();
+      if ($(element).getType() === "radio") $(element).valid();
+    });
+  };
+};
+
+const getSessionData = () => {
+  const app = Sammy.apps.body;
+  const session = app.store;
+  const sessionData = {};
+  session.each((key, value) => {
+    sessionData[key] = value;
+  });
+  return sessionData;
+};
+
