@@ -1,63 +1,61 @@
 <div class="wrapper">
-  <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
-    <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
+  <div class="sidebar" data-color="primary" data-image="../assets/img/login-bg.jpg">
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text">
-          Creative Tim
+        <a href="#/" class="simple-text">
+          <img class="img-fluid w-50" src="../assets/img/visitmetext.png">
         </a>
       </div>
       <ul class="nav">
         <li class="nav-item active">
-          <a class="nav-link" href="dashboard.html">
-            <i class="nc-icon nc-chart-pie-35"></i>
+          <a class="nav-link" href="#/">
+            <i class="fa fa-pie-chart" aria-hidden="true"></i>
             <p>Dashboard</p>
           </a>
         </li>
         <li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#/">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+            <p>Alertas</p>
+          </a>
+        </li>
+
+        <li>
           <a class="nav-link" href="#/users">
-            <i class="nc-icon nc-circle-09"></i>
-            <p>User Profile</p>
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <p>Residentes</p>
           </a>
         </li>
         <li>
-          <a class="nav-link" href="./table.html">
-            <i class="nc-icon nc-notes"></i>
-            <p>Table List</p>
+          <a class="nav-link" href="#/security">
+            <i class="fa fa-shield" aria-hidden="true"></i>
+            <p>Seguridad</p>
           </a>
         </li>
         <li>
-          <a class="nav-link" href="./typography.html">
-            <i class="nc-icon nc-paper-2"></i>
-            <p>Typography</p>
+          <a class="nav-link" href="#/admins">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+            <p>Administradores</p>
           </a>
         </li>
         <li>
-          <a class="nav-link" href="./icons.html">
-            <i class="nc-icon nc-atom"></i>
-            <p>Icons</p>
+          <a class="nav-link" href="#/visits">
+            <i class="fa fa-male" aria-hidden="true"></i>
+            <p>Visitas</p>
           </a>
         </li>
         <li>
-          <a class="nav-link" href="./maps.html">
-            <i class="nc-icon nc-pin-3"></i>
-            <p>Maps</p>
+          <a class="nav-link" href="#/access">
+            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+            <p>Acceso</p>
           </a>
         </li>
         <li>
-          <a class="nav-link" href="./notifications.html">
-            <i class="nc-icon nc-bell-55"></i>
-            <p>Notifications</p>
-          </a>
-        </li>
-        <li class="nav-item active active-pro">
-          <a class="nav-link active" href="upgrade.html">
-            <i class="nc-icon nc-alien-33"></i>
-            <p>Upgrade to PRO</p>
+          <a class="nav-link" href="#/account">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <p>Mi cuenta</p>
           </a>
         </li>
       </ul>
@@ -78,13 +76,13 @@
           <ul class="nav navbar-nav mr-auto">
             <li class="nav-item">
               <a href="#" class="nav-link" data-toggle="dropdown">
-                <i class="nc-icon nc-palette"></i>
+                <i class="fa fa-tachometer" aria-hidden="true"></i>
                 <span class="d-lg-none">Dashboard</span>
               </a>
             </li>
             <li class="dropdown nav-item">
               <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                <i class="nc-icon nc-planet"></i>
+                <i class="fa fa-bell" aria-hidden="true"></i>
                 <span class="notification">5</span>
                 <span class="d-lg-none">Notification</span>
               </a>
@@ -96,36 +94,16 @@
                 <a class="dropdown-item" href="#">Another notification</a>
               </ul>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nc-icon nc-zoom-split"></i>
-                <span class="d-lg-block">&nbsp;Search</span>
-              </a>
-            </li>
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#pablo">
-                <span class="no-icon">Account</span>
+              <a class="nav-link" href="#/account">
+                <span class="no-icon">Mi cuenta</span>
               </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <span class="no-icon">Dropdown</span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
-              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#/logout">
-                <span class="no-icon">Log out</span>
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
               </a>
             </li>
           </ul>
@@ -141,29 +119,29 @@
         <nav>
           <ul class="footer-menu">
             <li>
-              <a href="#">
-                Home
+              <a href="#/">
+                Dashboard
               </a>
             </li>
             <li>
-              <a href="#">
-                Company
+              <a href="#/residents">
+                Residentes
               </a>
             </li>
             <li>
-              <a href="#">
-                Portfolio
+              <a href="#/admins">
+                Administradores
               </a>
             </li>
             <li>
-              <a href="#">
-                Blog
+              <a href="#/visits">
+                Visitas
               </a>
             </li>
           </ul>
           <p class="copyright text-center">
             ©
-            <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+            <a href="#/">Visitme</a>, seguridad a tu alcance.
           </p>
         </nav>
       </div>

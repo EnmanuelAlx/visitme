@@ -1,0 +1,39 @@
+.text-teal {
+  color: var(--teal);
+}
+
+$color-primary-0: #209ECE; // Main Primary color */
+$color-primary-1: #6EC1E1;
+$color-primary-2: #44AED7;
+$color-primary-3: #0691C6;
+$color-primary-4: #046589;
+.form-control::placeholder {
+  color: #909090;
+  opacity: 1;
+}
+
+.form-control:focus {
+  background-color: #FFFFFF;
+  border: 1px solid $color-primary-0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: 0 !important;
+  color: #333333;
+}
+
+.form-control.error {
+  border: 1px solid var(--danger);
+}
+
+.btn {
+  &.btn-no-style {
+    background: none;
+    border: none;
+  }
+}
+
+.modal.show .modal-dialog.initial {
+  -webkit-transform: translate(0, 0%);
+  -o-transform: translate(0, 0%);
+  transform: translate(0, 0%);
+}

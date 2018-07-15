@@ -1,0 +1,6 @@
+$theme-colors: ( "primary": #20a0ce, "primary-1": #6EC1E1, "primary-2": #44AED7, "primary-3": #0691C6, "primary-4": #046589, "secondary": #0097a7, "clear-gray": #d3d4db, "gray": #555555, "dark-gray": #434343, "light-gray": #777777, "regular-gray": #b7b7b7, "black": #000000);
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+.btn-primary.disabled,
+.btn-primary:disabled {
+  color: #20a0ce;
+}
