@@ -67,6 +67,7 @@ gulp.task("js", () => {
       "node_modules/jquery-validation/dist/jquery.validate.min.js",
       "node_modules/toastr/build/toastr.min.js",
       "node_modules/jquery-validation/dist/additional-methods.js",
+      "node_modules/jquery-validation/dist/localization/messages_es.js",
       "node_modules/jquery-serializejson/jquery.serializejson.min.js",
       "node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
       "node_modules/bluebird/js/browser/bluebird.core.min.js",
@@ -181,7 +182,7 @@ gulp.task("serve-visitme", () => {
     middleware: [historyApiFallback()],
     open: false
   });
-  gulp.watch(["src/visitme/styles/scss/*.scss"], ["sass"]);
+  gulp.watch(["src/visitme/styles/scss/*.scss", "src/visitme/styles/scss/**/*.scss"], ["sass"]);
   gulp.watch(["src/visitme/js/**/*.js"], ["babel"]);
   gulp.watch(["src/visitme/views/**/*.hbs"], ["templates"]);
   gulp.watch(["src/visitme/views/**/_*.hbs"], ["partials"]);
