@@ -17,7 +17,26 @@
     if (app.getAccessToken()) return context.redirect("#/dashboard");
     const template = HB.templates[TEMPLATE_NAME];
     loadTemplate(BODY, TEMPLATE_NAME, template());
+    handleLogin();
   });
+
+  const handleLogin = () => {
+    $("#login-form").validate({
+      focusCleanup: true,
+      errorPlacement: function (label, element) {
+        label.addClass("invalid-feedback");
+        label.insertAfter(element);
+      },
+      lang: "es",
+      wrapper: "div",
+      rules: {
+        "email": {
+          email: true
+        }
+      },
+    });
+    validateForms();
+  };
 
   app.get("#/logout", context => {
     context.loseAccessToken();
@@ -32,7 +51,10 @@
     startPreload(BODY);
     const login = postMainApi(data, "user/auth");
     login
-      .then(res => {
+      .then(async res => {
+        initSession(res);
+        const { communities } = await getMainApi({}, "user/me/communities");
+        res.communities = communities;
         initSession(res);
         return context.redirect(startUrl);
       })
