@@ -10,7 +10,7 @@
   "globals": {
     "global": false,
     "Sammy": false,
-    "getCurrentData": false,
+    "getSessionData": false,
     "postMainApi": false,
     "postAccountsApi": false,
     "postSecureAccountsApi": false,
@@ -46,7 +46,8 @@
     "handleError": false,
     "sanitizeInputs": false,
     "KEYS_TO_SANITIZE": false,
-    "ENVIRONMENT": false
+    "ENVIRONMENT": false,
+    "validateForms": false
   },
   "extends": [
     "eslint:recommended",
