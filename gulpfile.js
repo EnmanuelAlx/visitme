@@ -211,15 +211,9 @@ gulp.task("start-visitme", [
   "templates",
   "partials",
 ]);
-
 gulp.task("build-visitme", callback => {
   runSequence(
-    "clean:dist", "sass", "js", "babel", "images", [
-      "screens-visitme",
-      "templates",
-      "partials",
-      "useref-main",
-    ],
+    "clean:dist", "sass", "js", "babel", "images", "screens-visutme", "templates", "partials", "useref-main",
     callback
   );
 });
