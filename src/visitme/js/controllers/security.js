@@ -2,8 +2,8 @@
 (() => {
   const app = Sammy.apps.body;
   const CONTAINER = ".content";
-  const ROOT = "#/users";
-  const TEMPLATE_NAME = "users";
+  const ROOT = "#/security";
+  const TEMPLATE_NAME = "security";
   const HB = MyApp; // handlebars;
 
 

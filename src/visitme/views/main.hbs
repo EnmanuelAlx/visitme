@@ -27,7 +27,7 @@
 
           {{#ifCond session.userType "ADMINISTRATOR"}}
             <li>
-              <a class="nav-link" href="#/userTypes">
+              <a class="nav-link" href="#/residents">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <p>Residentes</p>
               </a>
@@ -126,7 +126,7 @@
         </div>
       </div>
     </nav>   
-    {{>community-selection session.communities}}
+    {{>community-selection communities=communities allCommunities=session.allCommunities}}
     <!-- End Navbar -->
     <div class="content">
 
