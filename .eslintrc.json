@@ -47,7 +47,8 @@
     "sanitizeInputs": false,
     "KEYS_TO_SANITIZE": false,
     "ENVIRONMENT": false,
-    "validateForms": false
+    "validateForms": false,
+    "FORM_VALIDATION_DEFAULTS": false
   },
   "extends": [
     "eslint:recommended",
