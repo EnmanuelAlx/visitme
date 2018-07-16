@@ -15,7 +15,7 @@ const loadTemplate = (container, name, template) => {
   if (!$(container).exists()) {
     const session =  getSessionData();
     const { communities } = session;
-    const approvedCommunities = communities.find(comm => comm.status === "APPROVED");
+    const approvedCommunities = communities.filter(comm => comm.status === "APPROVED");
     const community = communities.find(comm => comm.selected === true);
     const data = {
       session,
