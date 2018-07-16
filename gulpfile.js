@@ -214,12 +214,12 @@ gulp.task("start-visitme", [
 
 gulp.task("build-visitme", callback => {
   runSequence(
-    "clean:dist-broker", [
-      "sassr",
+    "clean:dist", [
+      "sass",
       "babel",
-      "useref",
+      "useref-main",
       "images",
-      "screens",
+      "screens-visitme",
       "templates",
       "partials",
     ],
