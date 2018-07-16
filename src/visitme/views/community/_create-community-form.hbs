@@ -1,0 +1,41 @@
+<div class="create-community-div form-div" style="display: none" class="mt-2">
+  <form novalidate id="add-community-form" class="px-1 mt-1" action="#/add-community" method="POST">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Nombre de la comunidad</label>
+      <input required class="form-control" type="text" name="name" placeholder="Urbanización Las Garzas.">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Logo de la comunidad</label>
+      <div class="community-option col-xl-3 col-sm-4 col-6 d-flex align-items-center flex-column">
+        <input type="file" required name="image" id="community-logo" class="square-option">
+        <img class="input-img img-property img-fluid w-100" src="../../assets/img/house.png" alt="{{name}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Ciudad</label>
+      <input required class="form-control" type="text" name="address[city]" placeholder="Puerto Ordaz">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="exampleInputEmail1">Estado</label>
+        <select required class="form-control custom-select" name="address[state]">
+          <option value="">Selecciona un estado</option>
+          <option value="Bolívar">Bolívar</option>
+        </select>
+      </div>
+
+      <div class="form-group col-6">
+        <label for="exampleInputEmail1">Código Postal</label>
+        <input required class="form-control" type="text" name="address[zip]" placeholder="ZIP">
+      </div>
+
+      <input type="hidden" name="address[country]" value="Venezuela" />
+
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary">Registrar comunidad</button>
+    </div>
+  </form>
+</div>
