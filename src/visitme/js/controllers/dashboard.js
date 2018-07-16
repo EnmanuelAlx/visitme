@@ -32,14 +32,21 @@
     const addComunity = postMainApi(data, "communities");
     startPreload("#add-community-form");
     addComunity
-      .then(res => {
+      .then(async res => {
         res.status = "APPROVED";
         res.selected = true;
-        app.store.set("communities", [res]);
+        let { communities } = getSessionData();
+        communities = communities.map(comm => {
+          comm.selected = false;
+          return comm;
+        });
+        communities.push(res);
+        app.store.set("communities", communities);
         app.store.set("userType", "ADMINISTRATOR");
         stopPreload();
         toastr.info("La comunidad ha sido añadida exitosamente");
-        app.runRoute("put", "#/dashboard");
+        await delay(500);
+        location.reload();
       })
       .catch(e=>{
         stopPreload();
