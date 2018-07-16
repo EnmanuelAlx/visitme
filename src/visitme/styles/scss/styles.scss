@@ -2,11 +2,40 @@
   color: var(--teal);
 }
 
+$text_color-0: #ffffff;
+$text_color-1: #ececec;
+$text_color-2: #dddddd;
+$text_color-3: #aaaaaa;
+$text_color-4: #6b6b6b;
+$text_color-5: #555555;
+$text_color-6: #3e3e3e;
 $color-primary-0: #209ECE; // Main Primary color */
 $color-primary-1: #6EC1E1;
 $color-primary-2: #44AED7;
 $color-primary-3: #0691C6;
 $color-primary-4: #046589;
+$light: 300;
+$regular: 400;
+$bold: 700;
+$black: 900;
+@mixin copy {
+  font-weight: $regular;
+  font-style: normal;
+  font-size: 14px;
+}
+
+@mixin big-copy {
+  font-weight: $regular;
+  font-style: normal;
+  font-size: 16px;
+}
+
+@mixin microcopy {
+  font-weight: $light;
+  font-style: normal;
+  font-size: 14px;
+}
+
 .form-control::placeholder {
   color: #909090;
   opacity: 1;
@@ -36,4 +65,53 @@ $color-primary-4: #046589;
   -webkit-transform: translate(0, 0%);
   -o-transform: translate(0, 0%);
   transform: translate(0, 0%);
+}
+
+.property-option {
+  padding: 10px 0 0 0;
+  &:not(:last-child) {
+    padding-right: 10px;
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+    height: 100%;
+  }
+  img {
+    padding: 4px;
+    border-radius: 6px;
+    box-shadow: 0 1px 10px $text-color-2;
+    transition: transform 0.5s;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+    &.checked {
+      border: 2px solid $color-primary-1;
+      transition: transform 0.5s;
+    }
+  }
+  img:hover {
+    transform: scale(1.07);
+  }
+  img:active {
+    transform: scale(1.06);
+  }
+  label {
+    width: 120px;
+    text-align: center;
+    @include copy;
+    color: $text_color-5;
+    margin: 0;
+  }
+}
+
+a[clickable],
+input[type='submit'],
+input[type='image'],
+label[for],
+select,
+button,
+.pointer {
+  cursor: pointer;
 }

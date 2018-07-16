@@ -13,9 +13,15 @@ $.fn.exists = function () {
 const loadTemplate = (container, name, template) => {
 
   if (!$(container).exists()) {
-    //const session = getCurrentData().session;
+    const session =  getSessionData();
+    const { communities } = session;
+    const community = communities.find(comm => comm.selected === true);
+    const data = {
+      session,
+      community
+    };
     const index = MyApp.templates["main"];
-    $("body").html(index());
+    $("body").html(index(data));
   }
 
   $(container)
@@ -92,4 +98,16 @@ const getSessionData = () => {
   });
   return sessionData;
 };
+
+$.fn.select2.defaults.set("theme", "bootstrap4");
+
+
+
+Handlebars.registerHelper("ifCond", function (v1, v2, options) {
+  return v1 == v2 ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper("ifCondOr", function (v1, v2, v3, v4, options) {
+  return v1 == v2 || v3 == v4  ? options.fn(this) : options.inverse(this);
+});
 

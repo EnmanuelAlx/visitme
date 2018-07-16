@@ -7,57 +7,73 @@
         </a>
       </div>
       <ul class="nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#/">
-            <i class="fa fa-pie-chart" aria-hidden="true"></i>
-            <p>Dashboard</p>
-          </a>
-        </li>
-        <li>
+          {{#ifCond session.userType "ADMINISTRATOR"}}
+            <li class="nav-item active">
+              <a class="nav-link" href="#/">
+                <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li>
+          {{/ifCond}}
 
-        <li class="nav-item">
-          <a class="nav-link" href="#/">
-            <i class="fa fa-bell" aria-hidden="true"></i>
-            <p>Alertas</p>
-          </a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#/">
+              <i class="fa fa-bell" aria-hidden="true"></i>
+              <p>Alertas</p>
+            </a>
+          </li>
 
-        <li>
-          <a class="nav-link" href="#/users">
-            <i class="fa fa-users" aria-hidden="true"></i>
-            <p>Residentes</p>
-          </a>
-        </li>
-        <li>
-          <a class="nav-link" href="#/security">
-            <i class="fa fa-shield" aria-hidden="true"></i>
-            <p>Seguridad</p>
-          </a>
-        </li>
-        <li>
-          <a class="nav-link" href="#/admins">
-            <i class="fa fa-tasks" aria-hidden="true"></i>
-            <p>Administradores</p>
-          </a>
-        </li>
-        <li>
-          <a class="nav-link" href="#/visits">
-            <i class="fa fa-male" aria-hidden="true"></i>
-            <p>Visitas</p>
-          </a>
-        </li>
-        <li>
-          <a class="nav-link" href="#/access">
-            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-            <p>Acceso</p>
-          </a>
-        </li>
-        <li>
-          <a class="nav-link" href="#/account">
-            <i class="fa fa-cog" aria-hidden="true"></i>
-            <p>Mi cuenta</p>
-          </a>
-        </li>
+
+          {{#ifCond session.userType "ADMINISTRATOR"}}
+            <li>
+              <a class="nav-link" href="#/userTypes">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <p>Residentes</p>
+              </a>
+            </li>
+          {{/ifCond}}
+
+          {{#ifCond session.userType "ADMINISTRATOR"}}
+            <li>
+              <a class="nav-link" href="#/security">
+                <i class="fa fa-shield" aria-hidden="true"></i>
+                <p>Seguridad</p>
+              </a>
+            </li>
+          {{/ifCond}}
+
+          {{#ifCond session.userType "ADMINISTRATOR"}}
+            <li>
+              <a class="nav-link" href="#/admins">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                <p>Administradores</p>
+              </a>
+            </li>
+          {{/ifCond}}
+
+
+          <li>
+            <a class="nav-link" href="#/visits">
+              <i class="fa fa-male" aria-hidden="true"></i>
+              <p>Visitas</p>
+            </a>
+          </li>
+          
+          {{#ifCondOr session.userType "ADMINISTRATOR" session.userType "SECURITY"}}
+            <li>
+              <a class="nav-link" href="#/access">
+                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                <p>Acceso</p>
+              </a>
+            </li>
+          {{/ifCondOr}}
+          <li>
+            <a class="nav-link">
+              <i class="fa fa-cog" aria-hidden="true"></i>
+              <p>Mi cuenta</p>
+            </a>
+          </li>
       </ul>
     </div>
   </div>
@@ -97,8 +113,8 @@
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#/account">
-                <span class="no-icon">Mi cuenta</span>
+              <a class="nav-link" clickable data-toggle="modal" data-target="#community-modal">
+                <span id="community-name" class="no-icon">{{community.name}}</span>
               </a>
             </li>
             <li class="nav-item">
@@ -109,7 +125,8 @@
           </ul>
         </div>
       </div>
-    </nav>
+    </nav>   
+    {{>community-selection session.communities}}
     <!-- End Navbar -->
     <div class="content">
 

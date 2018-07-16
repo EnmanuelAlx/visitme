@@ -1,21 +1,50 @@
 <div id="community-modal-container"> 
-  <div id="community-modal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered initial" role="document">
+  <div id="community-modal" class="modal" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered initial" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title text-primary">Selecciona tu comunidad</h5>
+          <div class="row w-100 justify-content-center">
+            <div class="col-11">
+              <h6 class="modal-title font-weight-bold text-uppercase text-primary">Selecciona tu comunidad</h6>
+            </div>
+          </div>
         </div>
         <div class="modal-body">
           <div class="row justify-content-center">
             <div class="col-11">
               <h6 class="text-light-gray">Comunidades</h6>
                 {{#each communities}}
-                  <div class="col">
-                    <img src="{{image}}">
+                  {{#if @first}}
+                    <div class="d-flex justify-content-end">
+                      <button id="join-community" class="no-community btn btn-no-style btn-success">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>Unirme a otra comunidad
+                      </button>
+                    </div>
+                  
+                  {{/if}}
+                {{/each}}
+
+                {{#each communities}}
+                  {{#if @first}}
+                    <form novalidate id="select-community-form" action="#/select-community" method="POST">
+                      <div class="row">
+                  {{/if}}
+                  <div class="property-option col-xl-3 col-sm-4 col-6 d-flex align-items-center flex-column">
+                    <input type="radio" required name="community" id="prop_option_detached" class="square-option" value="{{_id}}">
+                    <img class="img-property img-fluid w-100" src="{{image}}" alt="{{name}}">
+                    <label for="community">{{name}}</label>
                   </div>
+                  {{#if @last}}
+                      </div>
+                      <div class="row justify-content-end">
+                        <button type="submit" class="btn btn-primary">Seleccionar comunidad</button>
+                      </div>                      
+                    </form>
+                  {{/if}}
                 {{else}}
                   <p>
                     Actualmente, no te encuentras registrado a ninguna comunidad. Selecciona una opción para continuar:
+                    Si aún no has sido aprobado por tu administrador, ponte en contacto con éste.
                   </p>
                   <div class="community-choice">
                     <button id="create-community" class="no-community btn btn-no-style btn-primary">
@@ -63,13 +92,36 @@
                       </div>
                     </form> 
                   </div>
+                  <div id="join-community-div" style="display: none">
+                     <form novalidate id="join-community-form" class="px-1 mt-1" action="#/join-community" method="POST">
+
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Comunidad</label>
+                            <select required name="community" class="w-75" id="join-community-select">
+                              {{#each allCommunities}}
+                                <option value={{_id}}>{{name}}</option>
+                              {{/each}}
+                            </select>
+                          </div> 
+
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Localidad</label>
+                          <input name="reference" class="form-control w-75" required placeholder="Número de casa / Oficina / Apto." type="text"> 
+                        </div> 
+
+                      
+
+                      <div class="row mt-4 justify-content-end">
+                        <button type="submit" class="btn btn-primary">Seleccionar comunidad</button>
+                      </div>
+                     </form>
+
+                  </div>
 
                 {{/each}}
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   </div>

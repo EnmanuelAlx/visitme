@@ -54,7 +54,9 @@
       .then(async res => {
         initSession(res);
         const { communities } = await getMainApi({}, "user/me/communities");
+        const allCommunities = await getMainApi({}, "communities");
         res.communities = communities;
+        res.allCommunities = allCommunities;
         initSession(res);
         return context.redirect(startUrl);
       })
