@@ -1,5 +1,5 @@
 /*global*/
-(async () => {
+(() => {
   const app = Sammy.apps.body;
   const store = app.store;
   const BODY = "body";
@@ -9,9 +9,6 @@
   const SESSION_DENIED = "oauth.denied";
   const SESSION_CONNECTED = "oauth.connected";
   const SESSION_ENDED = "oauth.disconnected";
-
-
-  /* ================  SAMPLE CODE   ============================ */
 
   app.get(ROOT, async context => {
     if (app.getAccessToken()) return context.redirect("#/dashboard");

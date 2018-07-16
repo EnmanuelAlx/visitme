@@ -9,12 +9,14 @@
 
   app.get(ROOT, async context => {
     if (!app.getAccessToken()) return context.redirect("#/login");
-    const { communities, allCommunities } = getSessionData();
-    stopPreload();
-    const hasSelected = communities.filter(comm => comm.selected === true).length > 0;
-    if (!hasSelected)
-      return communitySelection(communities, allCommunities);
-    
+    const { userType } = getSessionData();
+
+    if(userType === "RESIDENT")
+      return context.redirect("#/visits");
+
+    if (userType === "SECURITY")
+      return context.redirect("#/security");
+
     app.runRoute("put", "#/dashboard");
   });
 
@@ -32,10 +34,12 @@
     addComunity
       .then(res => {
         res.status = "APPROVED";
+        res.selected = true;
         app.store.set("communities", [res]);
+        app.store.set("userType", "ADMINISTRATOR");
         stopPreload();
         toastr.info("La comunidad ha sido añadida exitosamente");
-        context.redirect("#/dashboard");
+        app.runRoute("put", "#/dashboard");
       })
       .catch(e=>{
         stopPreload();
@@ -60,7 +64,7 @@
         }]);
         app.store.set("userType", "RESIDENT");
         toastr.info("Te has unido exitosamente a la comunidad");
-        context.redirect("#/dashboard");
+        context.redirect("#/unverified");
       })
       .catch(e => {
         stopPreload();
@@ -85,7 +89,7 @@
     app.store.set("communities", communities);
     $("#community-modal").modal("hide");
     $("#community-name").text(name);
-    app.runRoute("put", "#/dashboard");
+    location.reload();
   });
 
   const initCharts = () => {
@@ -208,63 +212,9 @@
     });
   };
 
-  const communitySelection = (communities, allCommunities) => {
-    const template = Handlebars.partials["community-selection"];
-    communities = communities.filter(com => com.status === "APPROVED");
-    const data = {
-      communities,
-      allCommunities
-    };
-
-    $("body").append(template(data));
-    $("#community-modal").modal("show");
-    $(".no-community").click(event => {
-
-      $(".community-choice").hide();
-      $(`#${event.currentTarget.id}-div`).show();
-      $("#add-community-form").validate({
-        focusCleanup: true,
-        errorPlacement: (label, element) => {
-          label.addClass("invalid-feedback");
-          label.insertAfter(element);
-        },
-        lang: "es",
-        wrapper: "div"
-      });
-
-    
-      validateForms();
-
-      $("#join-community-select").select2({
-        language: {
-          noResults: () => "No se encontraron resultados",
-          searching: () => "Buscando..."
-        }
-      });
-    });
-
-
-    $("#community-modal").on("hidden.bs.modal", () => {
-      const { communities } = getSessionData();
-      const hasSelected = communities.filter(comm => comm.selected === true).length > 0;
-      if (!hasSelected)
-        $("#community-modal").modal("show");
-    });
-
-  };
-
 
   const initDashboard = () => {
     initCharts();
   };
-
-  $(document).on("click", ".property-option img", event => {
-    const target = $(event.currentTarget);
-    const radioInput = target.prev();
-    radioInput[0].checked = true;
-    $("img").removeClass("checked");
-    target.addClass("checked");
-  });
-
 
 })();
