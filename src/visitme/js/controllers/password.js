@@ -21,6 +21,46 @@
     handlePassword();
   });
 
+  app.get(`${ROOT}/password`, context => {
+    const details = context.params;
+    const template = HB.templates["change-password"];
+    loadTemplate(SUBCONTENT, "change-password", template(details));
+    handlePassword();
+  });
+
+  app.post(`${ROOT}/change`, context => {
+    const data = $(context.target).serializeJSON();
+    startPreload(BODY);
+    postMainApi(data, "/forgotPassword/changePassword")
+      .then(() => {
+        stopPreload();
+        toastr.info("Contraseña cambiada exitosamente");
+        context.redirect("#/login");
+      })
+      .catch(() => {
+        stopPreload();
+        toastr.error("No se pudo enviar el correo de recuperación", "Error");
+      });
+  });
+
+
+  app.post(`${ROOT}/code`, context => {
+    const details = context.params;
+    const data = $(context.target).serializeJSON();
+    startPreload(BODY);
+    postMainApi(data, "/forgotPassword/code")
+      .then(() => {
+        details.code = data.code;
+        stopPreload();
+        toastr.info("Código confirmado exitosamente");
+        app.runRoute("get", `${ROOT}/password`, details);
+      })
+      .catch(() => {
+        stopPreload();
+        toastr.error("No se pudo enviar el correo de recuperación", "Error");
+      });
+  });
+
   app.post(ROOT, context => {
     const details = $(context.target).serializeJSON();
     startPreload(BODY);
