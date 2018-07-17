@@ -18,20 +18,7 @@
   });
 
   const handleLogin = () => {
-    $("#login-form").validate({
-      focusCleanup: true,
-      errorPlacement: function (label, element) {
-        label.addClass("invalid-feedback");
-        label.insertAfter(element);
-      },
-      lang: "es",
-      wrapper: "div",
-      rules: {
-        "email": {
-          email: true
-        }
-      },
-    });
+    $("#login-form").validate(FORM_VALIDATION_DEFAULTS);
     validateForms();
   };
 

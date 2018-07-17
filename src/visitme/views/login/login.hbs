@@ -1,14 +1,11 @@
 <div class="container-fluid h-100">
   <div class="row h-100">
-    <div id="oneSideLogin" class="col-12 col-lg-6">
-      <div class="row mt-4 justify-content-center">
-        <div class="col-5 text-center">
+    <div class="col-12 col-lg-6">
+      <div class="row h-100 align-items-center justify-content-center">
+        <div class="col-9">
+        <div class="text-center">
           <img class="logo-login" src="../../assets/img/visitme.png">
         </div>
-      </div>
-
-      <div class="row justify-content-center mt-4">
-        <div class="col-9">
           <h2 id="title-login" class="text-gray">Log in</h2>
           <p id="subtitle-login" class="text-light-gray">Ingresa tus datos</p>
           <form novalidate id="login-form" class="px-1 mt-4" action="#/login" method="POST">
@@ -16,7 +13,7 @@
             <input id="password" required class="form-control required" type="password" name="password" placeholder="Contraseña">
             <div class="row mt-3">
               <div class="col-6">
-                <a class="" href="#/reset-password">Olvidé mi contraseña</a>
+                <a class="" href="#/forgot-password">Olvidé mi contraseña</a>
               </div>
             </div>
             <div class="row justify-content-center mt-5">
@@ -24,40 +21,13 @@
                 <button class="btn-primary btn white-text px-5">Iniciar sesión</button>
               </div>
             </div>
-            <div id="login-alert" class="text-center" style="margin-top: 1.625em"></div>
           </form>
         </div>
-        <div class="row invisible">
-          <div style="padding: 0" class="col-5">
-            <div class="divider"></div>
-          </div>
-          <div style="padding: 0" class="col-2">
-            <p class="tiny-divider text-light-gray">or</p>
-          </div>
-          <div style="padding: 0" class="col-5">
-            <div class="divider"></div>
-          </div>
+        <div class="col-12 text-center align-self-start">
+          <p class="text-light-gray">¿No tienes una cuenta?
+            <a href="#/registration">Regístrate ahora</a>
+          </p>
         </div>
-        <br>
-        <div class="col-12 center">
-          <button class="btn-social text-light-gray invisible">
-            <img style="padding: 3px" width="20px" src="../../shared/assets/img/google-icon.png"> Sign in with Google
-          </button>
-        </div>
-        <div class="col-12 center">
-          <button class=" btn-social text-light-gray invisible">
-            <img style="padding: 3px" width="20px" src="../../shared/assets/img/facebook-icon.png"> Sign in with Facebook
-          </button>
-        </div>
-        <div class="row">
-          <div class="col-12 text-center">
-            <p class="text-light-gray">¿No tienes una cuenta?
-              <a href="#/registration">Regístrate ahora</a>
-            </p>
-          </div>
-        </div>
-
-
       </div>
     </div>
 
