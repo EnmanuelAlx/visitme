@@ -29,7 +29,13 @@
 
   app.post("#/add-community", context => {
     const data = $(context.target).serializeJSON();
-    const addComunity = postMainApi(data, "communities");
+    data.image = $("#community-logo")[0].files[0];
+    const formData = new FormData();
+    Object.keys(data).map(key => {
+      const value = key === "image" ? data[key] : JSON.stringify(data[key]);
+      formData.append(key, value);
+    });
+    const addComunity = multipartApi(formData, "communities", "POST");
     startPreload("#add-community-form");
     addComunity
       .then(async res => {

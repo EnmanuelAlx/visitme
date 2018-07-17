@@ -25,6 +25,7 @@
     "LOADING_MESSAGE_E": false,
     "SUBMIT_MESSAGE_E": false,
     "getQuery": true,
+    "multipartApi": false,
     "initSession": true,
     "notifyIdle": true,
     "MyApp": false,

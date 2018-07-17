@@ -1,4 +1,4 @@
-/*exported postMainApi putMainApi deleteMainApi getMainApi */
+/*exported multipartApi postMainApi putMainApi deleteMainApi getMainApi */
 
 const postMainApi = (data, endpoint) => {
   const app = Sammy.apps.body;
@@ -9,6 +9,22 @@ const postMainApi = (data, endpoint) => {
     type: "POST",
     headers: {
       "content-type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    url
+  });
+};
+
+const multipartApi = (data, endpoint, method) => {
+  const app = Sammy.apps.body;
+  const url = `${MAIN_API}/${endpoint}`;
+  const token = app.getAccessToken();
+  return $.ajax({
+    data: data,
+    type: method,
+    contentType: false,
+    processData: false,
+    headers: {
       "Authorization": `Bearer ${token}`
     },
     url
