@@ -34,11 +34,8 @@
         }
       },
       messages: {
-        passwordRepeat: {
-          equalTo: "Both passwords must be the same."
-        },
         password: {
-          pattern: "The password must contain at least 8 characters, 1 uppercase, 1 digit and 1 special character(! @ # $ & *)"
+          pattern: "La contraseña debe contener al menos 8 letras, 1 mayúscula, 1 número y un caracter especial (! @ # $ & *)"
         }
       }
     });

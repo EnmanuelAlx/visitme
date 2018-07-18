@@ -80,5 +80,16 @@
 
   const handlePassword = () => {
     $("#forgot-password-form").validate(FORM_VALIDATION_DEFAULTS);
+    const defaults = _.clone(FORM_VALIDATION_DEFAULTS);
+    defaults.rules = {
+      password: {
+        pattern: /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,24}$/
+      },
+      "repeat-password": {
+        equalTo: "#password"
+      },
+    };
+    if ($("#change-password-form").exists())
+      $("#change-password-form").validate(defaults);
   };
 })();
