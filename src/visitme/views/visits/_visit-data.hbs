@@ -1,0 +1,66 @@
+<div class="row justify-content-center" style="min-height: 50vh">
+  <div class="col-12 text-center">
+    <h4 class="text-primary">Datos de la visita</h4>
+    <p>
+      Ingresa los datos del visitante
+    </p>
+  </div>
+  <form novalidate id="account-form" class="w-75 px-1 mt-1" action="#/account" method="POST">
+    <h4 id="title-login" class="text-gray px-2">Información personal</h4>
+    <input type="hidden" name="visitType" value="{{type}}">
+    <div class="form-row">
+      <div class="form-group col-6">
+        <label for="exampleInputEmail1">Cédula</label>
+        <input required class="form-control" type="text" name="identification" value="{{name}}" placeholder="Cédula">
+      </div>
+      <div class="form-group col-6">
+        <label for="exampleInputEmail1">Nombre Completo</label>
+        <input required class="form-control" type="text" name="email" placeholder="Juan Ramírez">
+      </div>
+    </div>
+
+    <h4 id="title-login" class="text-gray px-2 pt-2">Datos de la visita</h4>
+    <div class="form-row">
+      <div class="form-group col-4">
+        <label for="exampleInputEmail1">Día</label>
+        <select required name="birth-month" id="visit-month" class="date-select form-control custom-select date-month select-field">
+          <option value="" disabled>Mes</option>
+          {{fillMonths birth-month}}
+        </select>
+      </div>
+
+      <div class="form-group col-4">
+        <label for="exampleInputEmail1">Día</label>
+        <select required name="" id="visit-day" class="form-control custom-select" name="address[state]">
+          <option value="" disabled>Día</option>
+        </select>
+      </div>
+
+      <div class="form-group col-4">
+        <label for="exampleInputEmail1">Año</label>
+        <select required name="" id="visit-day" class="form-control custom-select" name="address[state]">
+          <option value="" disabled>Día</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-4">
+        <label for="exampleInputEmail1">Horario de la visita</label>
+        <select required name="" id="visit-day" class="form-control custom-select" name="address[state]">
+          <option value="" disabled>Selecciona una opción</option>
+          <option value="day" >Mañana</option>
+          <option value="">Tarde</option>
+          <option value="">Noche</option>
+        </select>
+      </div>
+    </div>
+
+    <input type="hidden" name="address[country]" value="Venezuela" />
+
+    <div class="row justify-content-end mb-3">
+      <div class="col-3">
+        <button class="btn-primary btn white-text px-5">Registrar visita</button>
+      </div>
+    </div>
+  </form>

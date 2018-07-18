@@ -14,3 +14,15 @@ Handlebars.registerHelper("select", function (value, options) {
   element.find("[value='']").removeAttr("selected");
   return element.html();
 });
+
+Handlebars.registerHelper("fillMonths", function (selectedMonth) {
+  return new Handlebars.SafeString(
+    MONTHS_NAMES.map(
+      (month, index) =>
+        `<option value="${index + 1}" ${
+          selectedMonth == index + 1 ? "selected" : ""
+        }>${month}</option>`
+    ).join(" ")
+  );
+});
+
