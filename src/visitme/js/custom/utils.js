@@ -30,6 +30,9 @@ const loadTemplate = (container, name, template) => {
     .hide()
     .html(template)
     .fadeIn(500); 
+
+  $(".nav-item").removeClass("active");
+  $(`.nav-item.${name}`).addClass("active");
 };
 
 

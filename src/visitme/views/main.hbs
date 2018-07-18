@@ -7,73 +7,73 @@
         </a>
       </div>
       <ul class="nav">
-          {{#ifCond session.userType "ADMINISTRATOR"}}
-            <li class="nav-item active">
-              <a class="nav-link" href="#/">
-                <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                <p>Dashboard</p>
-              </a>
-            </li>
-            <li>
-          {{/ifCond}}
-
-          <li class="nav-item">
+        {{#ifCond session.userType "ADMINISTRATOR"}}
+          <li class="nav-item dashboard active">
             <a class="nav-link" href="#/">
-              <i class="fa fa-bell" aria-hidden="true"></i>
-              <p>Alertas</p>
+              <i class="fa fa-pie-chart" aria-hidden="true"></i>
+              <p>Dashboard</p>
             </a>
           </li>
-
-
-          {{#ifCond session.userType "ADMINISTRATOR"}}
-            <li>
-              <a class="nav-link" href="#/residents">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <p>Residentes</p>
-              </a>
-            </li>
-          {{/ifCond}}
-
-          {{#ifCond session.userType "ADMINISTRATOR"}}
-            <li>
-              <a class="nav-link" href="#/security">
-                <i class="fa fa-shield" aria-hidden="true"></i>
-                <p>Seguridad</p>
-              </a>
-            </li>
-          {{/ifCond}}
-
-          {{#ifCond session.userType "ADMINISTRATOR"}}
-            <li>
-              <a class="nav-link" href="#/admins">
-                <i class="fa fa-tasks" aria-hidden="true"></i>
-                <p>Administradores</p>
-              </a>
-            </li>
-          {{/ifCond}}
-
-
           <li>
-            <a class="nav-link" href="#/visits">
-              <i class="fa fa-male" aria-hidden="true"></i>
-              <p>Visitas</p>
+        {{/ifCond}}
+
+        <li class="nav-item alerts">
+          <a class="nav-link" href="#/">
+            <i class="fa fa-bell" aria-hidden="true"></i>
+            <p>Alertas</p>
+          </a>
+        </li>
+
+
+        {{#ifCond session.userType "ADMINISTRATOR"}}
+          <li class="nav-item residents">
+            <a class="nav-link" href="#/residents">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <p>Residentes</p>
             </a>
           </li>
-          
-          {{#ifCondOr session.userType "ADMINISTRATOR" session.userType "SECURITY"}}
-            <li>
-              <a class="nav-link" href="#/access">
-                <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-                <p>Acceso</p>
-              </a>
-            </li>
-          {{/ifCondOr}}
-          <li>
-            <a class="nav-link">
-              <i class="fa fa-cog" aria-hidden="true"></i>
-              <p>Mi cuenta</p>
+        {{/ifCond}}
+
+        {{#ifCond session.userType "ADMINISTRATOR"}}
+          <li class="nav-item security">
+            <a class="nav-link" href="#/security">
+              <i class="fa fa-shield" aria-hidden="true"></i>
+              <p>Seguridad</p>
             </a>
           </li>
+        {{/ifCond}}
+
+        {{#ifCond session.userType "ADMINISTRATOR"}}
+          <li class="nav-item administrators">
+            <a class="nav-link" href="#/admins">
+              <i class="fa fa-tasks" aria-hidden="true"></i>
+              <p>Administradores</p>
+            </a>
+          </li>
+        {{/ifCond}}
+
+
+        <li class="nav-item visits">
+          <a class="nav-link" href="#/visits">
+            <i class="fa fa-male" aria-hidden="true"></i>
+            <p>Visitas</p>
+          </a>
+        </li>
+        
+        {{#ifCondOr session.userType "ADMINISTRATOR" session.userType "SECURITY"}}
+          <li class="nav-item access">
+            <a class="nav-link" href="#/access">
+              <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+              <p>Acceso</p>
+            </a>
+          </li>
+        {{/ifCondOr}}
+        <li class="nav-item account">
+          <a class="nav-link" href="#/account">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+            <p>Mi cuenta</p>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

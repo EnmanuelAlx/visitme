@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-11">
+      <h2 id="title-login" class="text-gray">Mi cuenta</h2>
+    </div>
+    <div class="col-11 card">
+      <form novalidate id="account-form" class="px-1 mt-1" action="#/account" method="POST">
+        <h4 id="title-login" class="text-gray px-2">Información personal</h4>
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label for="exampleInputEmail1">Nombre completo</label>
+            <input required class="form-control" type="text" name="name" value="{{name}}" placeholder="Nombre completo">
+          </div>
+          <div class="form-group col-6">
+            <label for="exampleInputEmail1">Correo electrónico</label>
+            <input required class="form-control" type="text" name="email" value="{{email}}" placeholder="joan@visitme.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label for="exampleInputEmail1">Cédula</label>
+            <input required class="form-control" type="text" name="identification" value="{{identification}}" placeholder="Cédula">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Teléfono de casa</label>
+            <input required class="form-control required" type="text" name="homePhone" value="{{homePhone}}" placeholder="Teléfono Casa">
+          </div>
+          <div class="form-group col-md-6 order-1">
+            <label for="inputEmail4">Teléfono personal</label>
+            <input required class="form-control" type="text" name="cellPhone" value="{{cellPhone}}" placeholder="Teléfono Personal">
+          </div>
+        </div>
+
+        <h4 id="title-login" class="text-gray px-2 pt-2">Dirección actual</h4>
+        {{#with address}}
+          <div class="form-row">
+            <div class="form-group col-4">
+              <label for="exampleInputEmail1">Ciudad</label>
+              <input required class="form-control" type="text" name="address[city]" value="{{city}}" placeholder="Puerto Ordaz">
+            </div>
+
+            <div class="form-group col-4">
+              <label for="exampleInputEmail1">Estado</label>
+              <select required class="form-control custom-select" name="address[state]">
+                {{#select state}}
+                  <option value="">Selecciona un estado</option>
+                  <option value="Bolívar">Bolívar</option>
+                {{/select}}
+              </select>
+            </div>
+
+            <div class="form-group col-4">
+              <label for="exampleInputEmail1">Código Postal</label>
+              <input required class="form-control" type="text" name="address[zip]" value="{{zip}}" placeholder="ZIP">
+            </div>
+          </div>
+        {{/with}}
+
+        <input type="hidden" name="address[country]" value="Venezuela" />
+
+        <div class="row justify-content-end mb-3">
+          <div class="col-3">
+            <button class="btn-primary btn white-text px-5">Guardar detalles</button>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
