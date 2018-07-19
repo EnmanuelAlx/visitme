@@ -78,6 +78,7 @@ gulp.task("js", () => {
       "node_modules/handlebars/dist/handlebars.runtime.js",
       "node_modules/dropzone/dist/dropzone.js",
       "node_modules/moment/moment.js",
+      "node_modules/moment/locale/es.js",
       "node_modules/lodash/lodash.js",
       "node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js",
       "node_modules/datatables.net/js/jquery.dataTables.js",

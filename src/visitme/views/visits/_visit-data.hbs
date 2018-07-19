@@ -5,58 +5,85 @@
       Ingresa los datos del visitante
     </p>
   </div>
-  <form novalidate id="account-form" class="w-75 px-1 mt-1" action="#/account" method="POST">
-    <h4 id="title-login" class="text-gray px-2">Información personal</h4>
-    <input type="hidden" name="visitType" value="{{type}}">
-    <div class="form-row">
-      <div class="form-group col-6">
-        <label for="exampleInputEmail1">Cédula</label>
-        <input required class="form-control" type="text" name="identification" value="{{name}}" placeholder="Cédula">
-      </div>
-      <div class="form-group col-6">
-        <label for="exampleInputEmail1">Nombre Completo</label>
-        <input required class="form-control" type="text" name="email" placeholder="Juan Ramírez">
-      </div>
-    </div>
 
-    <h4 id="title-login" class="text-gray px-2 pt-2">Datos de la visita</h4>
-    <div class="form-row">
-      <div class="form-group col-4">
-        <label for="exampleInputEmail1">Día</label>
-        <select required name="birth-month" id="visit-month" class="date-select form-control custom-select date-month select-field">
-          <option value="" disabled>Mes</option>
-          {{fillMonths birth-month}}
-        </select>
+  <form novalidate id="visits" class="w-75 px-1 mt-1" action="#/visits" method="POST">
+    <h4 id="title-login" class="text-gray px-2">Información del visitante</h4>
+    
+    {{#ifCondOr type "SCHEDULED" type "FREQUENT"}}
+      <div class="form-row">
+        <div class="form-group col-6">
+          <label for="exampleInputEmail1">Cédula</label>
+          <input required class="form-control" type="text" name="identification" value="{{name}}" placeholder="Cédula">
+        </div>
+        <div class="form-group col-6">
+          <label for="exampleInputEmail1">Nombre Completo</label>
+          <input required class="form-control" type="text" name="name" placeholder="Juan Ramírez">
+        </div>
       </div>
+      
+      <h4 id="title-login" class="text-gray px-2 pt-2">Datos de la visita</h4>
+    
+      {{#ifCond type "SCHEDULED"}}
+        <div class="form-row">
+          <div class="form-group col-4">
+            <label for="exampleInputEmail1">Mes</label>
+            <select required name="visit[month]" id="visit-month" class="date-select form-control date-month select-field">
+              <option value="" disabled>Mes</option>
+              {{fillMonths}}
+            </select>
+          </div>
 
-      <div class="form-group col-4">
-        <label for="exampleInputEmail1">Día</label>
-        <select required name="" id="visit-day" class="form-control custom-select" name="address[state]">
-          <option value="" disabled>Día</option>
-        </select>
+          <div class="form-group col-4">
+            <label for="exampleInputEmail1">Día</label>
+            <select required name="visit[day]" id="visit-day" class="form-control" name="address[state]">
+              <option value="" disabled>Día</option>
+            </select>
+          </div>
+
+          <div class="form-group col-4">
+            <label for="exampleInputEmail1">Año</label>
+            <select required name="visit[year]" id="visit-year" class="form-control" name="address[state]">
+              <option value="" disabled>Año</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-4">
+            <label for="exampleInputEmail1">Horario de la visita</label>
+            <select required name="partOfDay" id="visit-day" class="form-control" name="partOfDay">
+              <option value="" disabled>Selecciona una opción</option>
+              <option value="MORNING" >Mañana</option>
+              <option value="AFTERNOON">Tarde</option>
+              <option value="NIGHT">Noche</option>
+            </select>
+          </div>
+        </div>
+      {{else}}
+        <div class="intervals">
+          {{#each (limit (daysInWeek) 3)}}
+            {{>interval this}}
+          {{/each}}
+        </div>
+        <button type="button" class="add-interval py-0 btn btn-no-style btn-success">
+          <i class="fa fa-plus-circle"></i> Añadir otro día
+        </button>
+      {{/ifCond}}
+
+    {{else}}
+      <div class="form-row">
+        <div class="form-group col-12">
+          <label for="exampleInputEmail1">Nombre De la Empresa</label>
+          <input required class="form-control" type="text" name="name" placeholder="ZOOM Multiservcicios">
+        </div>
       </div>
+    {{/ifCondOr}}
+    
 
-      <div class="form-group col-4">
-        <label for="exampleInputEmail1">Año</label>
-        <select required name="" id="visit-day" class="form-control custom-select" name="address[state]">
-          <option value="" disabled>Día</option>
-        </select>
-      </div>
-    </div>
+    
 
-    <div class="form-row">
-      <div class="form-group col-4">
-        <label for="exampleInputEmail1">Horario de la visita</label>
-        <select required name="" id="visit-day" class="form-control custom-select" name="address[state]">
-          <option value="" disabled>Selecciona una opción</option>
-          <option value="day" >Mañana</option>
-          <option value="">Tarde</option>
-          <option value="">Noche</option>
-        </select>
-      </div>
-    </div>
-
-    <input type="hidden" name="address[country]" value="Venezuela" />
+    <input type="hidden" name="timezone" value="{{getTimezone}}" />
+    <input type="hidden" name="kind" value="{{type}}" />
 
     <div class="row justify-content-end mb-3">
       <div class="col-3">

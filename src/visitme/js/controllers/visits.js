@@ -13,21 +13,63 @@
     handleVisits();
   });
 
+  app.post(ROOT, context => {
+    startPreload(CONTAINER);
+    const data = $(context.target).serializeJSON();
+    if(data.intervals)
+      data.intervals = data.intervals.map(item => {
+        item.from = item.from.replace(":","");
+        item.to = item.to.replace(":","");
+        return item;
+      });
+    if (data.visit){
+      const { year, month, day } = data.visit;
+      data.dayOfVisit = `${year}-${month}-${day}`;
+    }
+    const { communities } = getSessionData();
+    data.community = communities.find(comm => comm.selected === true)._id;
+    postMainApi(data,"visits")
+      .then(()=> {
+        stopPreload();
+        toastr.info("Visita creada exitosamente", "Éxito");
+        app.refresh();
+      })
+      .catch(() => {
+        stopPreload();
+        toastr.error("No se pudo crear visita", "Error");
+      });
+  });
+
   const handleVisits = () => {
     $("#add-visit").click(()=>{
       $("div.add-visit").show();
     });
 
     $("#visit-type").click(()=>{
-      const type = $("input[name='visit-type']").val();
+      const type = $("input[name='visit-type']:checked").val();
       $("div.visit-container").html(Handlebars.partials["visit-data"]({
         type
       }));
+      listenDates();
+      listenIntervals();
     });
-
-    listenDates();
   };
 
+  const listenIntervals = () => {
+    $(".add-interval").click(()=>{
+      $("div.intervals").append(Handlebars.partials["interval"]("Lunes"));
+      bindRemove();
+    });
+
+    const bindRemove = () => 
+      $(".remove-interval").click(async event => {
+        const row = $(event.currentTarget).closest(".form-row");
+        row.hide(()=>{
+          row.remove();
+        });
+      });
+    bindRemove();
+  };
 
   const listenDates = () => {
     const setDays = (daySelector, lastDay) => {
@@ -38,7 +80,7 @@
       ).join(" ");
       daySelector
         .html(dayOptions)
-        .prepend("<option value='' disabled>Day</option>");
+        .prepend("<option value='' disabled>Día</option>");
 
       if (!daySelector.find(`[value='${selected}']`).exists()) selected = "1";
       daySelector.val(selected);
@@ -55,12 +97,12 @@
 
       if (!$("#visit-year :selected:not(:disabled)").exists()) {
         let yearOptions = "";
-        for (let i = currentYear - 18; i > currentYear - 100; i--) {
+        for (let i = currentYear; i <= currentYear+1; i++) {
           yearOptions += `<option value="${i}">${i}</option>`;
         }
         yearSelector
           .html(yearOptions)
-          .prepend("<option value='' disabled selected>Year</option>");
+          .prepend("<option value='' disabled selected>Año</option>");
       }
 
       if (!$("#visit-month :selected:not(:disabled)").exists()) {
@@ -81,6 +123,9 @@
         ).daysInMonth();
         setDays(daySelector, lastDay);
       });
+      monthSelector.trigger("change");
+      daySelector.val(moment().date());
+      yearSelector.val(moment().year());
     }
 
 

@@ -1,0 +1,21 @@
+<div class="form-row align-items-center">
+  <div class="form-group col-5">
+    <label for="exampleInputEmail1">Día</label>
+    <select required name="intervals[][day]" class="form-control" name="partOfDay">
+      {{daysInWeekSelect this}}
+    </select>
+  </div>
+  <div class="form-group col-3">
+    <label for="exampleInputEmail1">Desde</label>
+    <input required name="intervals[][from]" type="time" value="" class="form-control">
+  </div>
+  <div class="form-group col-3">
+    <label for="exampleInputEmail1">Hasta</label>
+    <input required name="intervals[][to]" type="time" class="form-control">
+  </div>
+  <div class="col-1">
+    <button type="button" class="remove-interval py-0 btn btn-no-style btn-danger">
+      <i class="fa fa-times"></i>
+    </button>
+  </div>
+</div>

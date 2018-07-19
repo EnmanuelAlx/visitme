@@ -60,6 +60,8 @@
     target.addClass("checked");
   });
 
+  
+
 
   $(document).on("click", ".no-community", event => {
     $(".form-div").hide();
