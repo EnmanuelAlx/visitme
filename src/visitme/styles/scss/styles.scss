@@ -125,7 +125,8 @@ button,
 
 tbody {
   tr {
-    &.odd {
+    &.odd,
+    &.even {
       &.selected {
         background-color: lighten($color-primary-0, 50%);
       }

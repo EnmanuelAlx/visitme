@@ -76,5 +76,12 @@ const DATATABLES_SPANISH = {
   "oAria": {
     "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+  },
+  buttons: {
+    copyTitle: "Copiado al portapapeles",
+    copySuccess: {
+      _: "%d linea copiada",
+      1: "1 linea copiada"
+    }
   }
 };
