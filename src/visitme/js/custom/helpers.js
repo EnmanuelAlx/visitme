@@ -60,7 +60,6 @@ Handlebars.registerHelper("limit", function(arr, limit) {
 
 Handlebars.registerHelper("tableColumns", columns => {
   const htmlStr = columns.map(column => `<th>${column}</th>`).join(" ");
-  console.log("HTMLSTR", htmlStr);
   return new Handlebars.SafeString(htmlStr);
 });
 
@@ -71,6 +70,13 @@ Handlebars.registerHelper("tableRows", rows => {
 
 const renderRow = row => {
   return Object.keys(row)
-    .map(key => `<td>${row[key]}</td>`)
+    .map(key => renderByTypeOfValue(row[key]))
     .join(" ");
+};
+
+const renderByTypeOfValue = data => {
+  const safeNull = data ? data : "N/A";
+  return safeNull.match(/\.(jpeg|jpg|gif|png)$/) != null
+    ? `<td style="padding:0;"><img src="${safeNull}" class="img-fluid w-25"></img></td>`
+    : `<td>${safeNull}</td>`;
 };
