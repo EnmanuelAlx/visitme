@@ -7,7 +7,7 @@
   const HB = MyApp; // handlebars;
 
   app.get(ROOT, async () => {
-    try{
+    try {
       const template = HB.templates[TEMPLATE_NAME];
       startPreload(CONTAINER);
       const { communities } = getSessionData();
@@ -25,12 +25,29 @@
         })
       );
       $("#adminTable").DataTable({
-        buttons: ["copy"]
+        dom: "Bfrtrip",
+        buttons: [
+          "copy",
+          "excel",
+          "pdf",
+          {
+            text: "Eliminar",
+            action: function() {
+              console.log("DELETE ");
+            }
+          },
+          {
+            text: "Añadir",
+            action: function() {
+              console.log("DELETE ");
+            }
+          }
+        ]
       });
-      $("#adminTable tbody").on("click", "tr", function () {
+      $("#adminTable tbody").on("click", "tr", function() {
         $(this).toggleClass("selected");
       });
-    }catch(e){
+    } catch (e) {
       toastr.error("Ocurrió un error al cargar la data", "Error");
     }
   });
