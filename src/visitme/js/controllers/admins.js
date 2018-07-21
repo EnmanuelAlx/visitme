@@ -6,27 +6,33 @@
   const TEMPLATE_NAME = "admins";
   const HB = MyApp; // handlebars;
 
-  app.get(ROOT, () => {
-    const template = HB.templates[TEMPLATE_NAME];
-
-    const { communities } = getSessionData();
-    const community = communities.find(comm => comm.selected === true)._id;
-    getMainApi({}, `communities/${community}/admins`).then(admins => {
+  app.get(ROOT, async () => {
+    try{
+      const template = HB.templates[TEMPLATE_NAME];
+      startPreload(CONTAINER);
+      const { communities } = getSessionData();
+      const community = communities.find(comm => comm.selected === true)._id;
+      const admins = await getMainApi({}, `communities/${community}/admins`);
       const rows = format(admins);
       const columns = Object.keys(rows[0]);
       loadTemplate(
         CONTAINER,
         TEMPLATE_NAME,
-        template({ id: "adminTable", rows, columns })
+        template({
+          id: "adminTable",
+          rows,
+          columns
+        })
       );
       $("#adminTable").DataTable({
-        buttons: ["Eliminar", "Añadir", "Actualizar"]
+        buttons: ["copy"]
       });
-      $("#adminTable tbody").on("click", "tr", function() {
-        console.log("CLICK SELECTED");
+      $("#adminTable tbody").on("click", "tr", function () {
         $(this).toggleClass("selected");
       });
-    });
+    }catch(e){
+      toastr.error("Ocurrió un error al cargar la data", "Error");
+    }
   });
 })();
 

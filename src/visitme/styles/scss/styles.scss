@@ -122,3 +122,13 @@ button,
 .modal-lg {
   max-width: 600px;
 }
+
+tbody {
+  tr {
+    &.odd {
+      &.selected {
+        background-color: lighten($color-primary-0, 50%);
+      }
+    }
+  }
+}
