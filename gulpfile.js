@@ -27,11 +27,13 @@ const rename = require("gulp-rename");
 const ENVIRONMENT = process.env.NODE_ENV || "test";
 
 gulp.task("clean-sammy", () => {
-
-  gulp.src(["node_modules/sammy/lib/plugins/sammy.oauth2.js"])
-    .pipe(removeLine({
-      "sammy.oauth2.js": ["103-108"]
-    }))
+  gulp
+    .src(["node_modules/sammy/lib/plugins/sammy.oauth2.js"])
+    .pipe(
+      removeLine({
+        "sammy.oauth2.js": ["103-108"]
+      })
+    )
     .pipe(gulp.dest("node_modules/sammy/lib/plugins/"));
 });
 
@@ -131,10 +133,12 @@ gulp.task("templates", () => {
     .src("./src/visitme/views/**/*.hbs")
     .pipe(handlebars())
     .pipe(wrap("Handlebars.template(<%= contents %>)"))
-    .pipe(declare({
-      namespace: "MyApp.templates",
-      noRedeclare: true
-    })) // Avoid duplicate declarations
+    .pipe(
+      declare({
+        namespace: "MyApp.templates",
+        noRedeclare: true
+      })
+    ) // Avoid duplicate declarations
     .pipe(concat("templates.js"))
     .pipe(gulp.dest("src/visitme/dist/templates"));
 });
@@ -145,9 +149,11 @@ gulp.task("partials", () => {
     .pipe(handlebars())
     .pipe(
       wrap(
-        "Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));", {}, {
+        "Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));",
+        {},
+        {
           imports: {
-            processPartialName: function (fileName) {
+            processPartialName: function(fileName) {
               // Strip the extension and the underscore
               // Escape the output with JSON.stringify
               return JSON.stringify(path.basename(fileName, ".js").substr(1));
@@ -160,7 +166,6 @@ gulp.task("partials", () => {
     .pipe(gulp.dest("src/visitme/dist/templates"));
 });
 
-
 gulp.task("useref-main", () => {
   return gulp
     .src("src/visitme/*.html")
@@ -169,7 +174,6 @@ gulp.task("useref-main", () => {
     .pipe(gulpIf("*.css", cssnano()))
     .pipe(gulp.dest("dist/visitme"));
 });
-
 
 gulp.task("images", () => {
   return gulp
@@ -184,9 +188,13 @@ gulp.task("serve-visitme", () => {
       baseDir: ["./src/visitme", "./src"]
     },
     middleware: [historyApiFallback()],
-    open: false
+    open: false,
+    port: 3010
   });
-  gulp.watch(["src/visitme/styles/scss/*.scss", "src/visitme/styles/scss/**/*.scss"], ["sass"]);
+  gulp.watch(
+    ["src/visitme/styles/scss/*.scss", "src/visitme/styles/scss/**/*.scss"],
+    ["sass"]
+  );
   gulp.watch(["src/visitme/js/**/*.js"], ["babel"]);
   gulp.watch(["src/visitme/views/**/*.hbs"], ["templates"]);
   gulp.watch(["src/visitme/views/**/_*.hbs"], ["partials"]);
@@ -202,7 +210,6 @@ gulp.task("serve-visitme", () => {
     .on("change", browserSync.reload);
 });
 
-
 gulp.task("start-visitme", [
   "serve-visitme",
   "index",
@@ -210,11 +217,20 @@ gulp.task("start-visitme", [
   "babel",
   "js",
   "templates",
-  "partials",
+  "partials"
 ]);
 gulp.task("build-visitme", callback => {
   runSequence(
-    "clean:dist", "sass", "babel", "images", "screens-visitme", "templates", "partials", "index", "js", "useref-main",
+    "clean:dist",
+    "sass",
+    "babel",
+    "images",
+    "screens-visitme",
+    "templates",
+    "partials",
+    "index",
+    "js",
+    "useref-main",
     callback
   );
 });
