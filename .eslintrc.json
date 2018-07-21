@@ -50,7 +50,10 @@
     "ENVIRONMENT": false,
     "validateForms": false,
     "FORM_VALIDATION_DEFAULTS": false,
-    "MONTHS_NAMES": false
+    "MONTHS_NAMES": false,
+    "lbd": false,
+    "toggleInitialized": true,
+    "mobileMenuInitialized": true
   },
   "extends": [
     "eslint:recommended",

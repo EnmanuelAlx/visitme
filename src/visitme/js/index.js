@@ -17,6 +17,9 @@
   $(document).ready(() => {
     toastr.options = TOASTR_OPTIONS;
     startApp();
+    mobileMenuInitialized = false;
+    toggleInitialized = false;
+    lbd.initRightMenu();
     store.checkSession();
 
     setInterval(() => {
