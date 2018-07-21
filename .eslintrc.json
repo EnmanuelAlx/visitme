@@ -53,7 +53,8 @@
     "MONTHS_NAMES": false,
     "lbd": false,
     "toggleInitialized": true,
-    "mobileMenuInitialized": true
+    "mobileMenuInitialized": true,
+    "DATATABLES_SPANISH": false
   },
   "extends": [
     "eslint:recommended",

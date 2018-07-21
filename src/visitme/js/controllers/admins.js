@@ -25,7 +25,8 @@
         })
       );
       $("#adminTable").DataTable({
-        buttons: ["copy"]
+        buttons: ["copy"],
+        language: DATATABLES_SPANISH
       });
       $("#adminTable tbody").on("click", "tr", function () {
         $(this).toggleClass("selected");
