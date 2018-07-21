@@ -59,7 +59,13 @@ Handlebars.registerHelper("limit", function(arr, limit) {
 });
 
 Handlebars.registerHelper("tableColumns", columns => {
-  const htmlStr = columns.map(column => `<th>${column}</th>`).join(" ");
+  const htmlStr = 
+  columns
+    .map((column, idx) => 
+      idx === 0 
+        ? `<th width="5%">${column}</th>` 
+        : `<th>${column}</th>`)
+    .join(" ");
   return new Handlebars.SafeString(htmlStr);
 });
 
@@ -77,6 +83,6 @@ const renderRow = row => {
 const renderByTypeOfValue = data => {
   const safeNull = data ? data : "N/A";
   return safeNull.match(/\.(jpeg|jpg|gif|png)$/) != null
-    ? `<td style="padding:0;"><img src="${safeNull}" class="img-fluid w-25"></img></td>`
+    ? `<td class="p-1"><img src="${safeNull}" class="img-fluid"></img></td>`
     : `<td>${safeNull}</td>`;
 };

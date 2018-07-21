@@ -8,7 +8,7 @@ class Table {
         className: "btn-table btn-sm btn-info btn-no-style",
         titleAttr: "Copy to clipboard",
         text: "Copiar al portapapeles",
-        init: function(api, node, config) {
+        init: function(api, node) {
           $(node).removeClass("btn-default");
           $(node).append("<i class='fa fa-clone'></i>");
         }
@@ -67,7 +67,7 @@ class Table {
       buttons: this.buttons,
       language: DATATABLES_SPANISH
     });
-    this.tableInstance.columns.adjust();
+    this.tableInstance.columns.adjust().draw();
     $("#adminTable tbody").on("click", "tr", function() {
       $(this).toggleClass("selected");
     });

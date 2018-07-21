@@ -123,6 +123,14 @@ button,
   max-width: 600px;
 }
 
+thead {
+  tr {
+    th {
+      text-align: center !important;
+    }
+  }
+}
+
 tbody {
   tr {
     &.odd,
@@ -131,6 +139,12 @@ tbody {
         background-color: lighten($color-primary-0, 50%);
       }
     }
+  }
+  td {
+    img {
+      max-height: 45px;
+    }
+    text-align: center !important;
   }
 }
 
