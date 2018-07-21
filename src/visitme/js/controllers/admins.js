@@ -27,19 +27,56 @@
       $("#adminTable").DataTable({
         dom: "Bfrtrip",
         buttons: [
-          "copy",
-          "excel",
-          "pdf",
+          {
+            extend: "copy",
+            className: "btn-table btn-sm btn-info btn-no-style",
+            titleAttr: "Copy to clipboard",
+            text: "Copiar al portapapeles",
+            init: function (api, node, config) {
+              $(node).removeClass("btn-default");
+              $(node).append("<i class='fa fa-clone'></i>");
+            }
+          },
+          {
+            extend: "pdf",
+            className: "btn-table btn-sm btn-secondary btn-no-style",
+            titleAttr: "Copy to clipboard",
+            text: "Exportar a PDF",
+            init: function (api, node) {
+              $(node).removeClass("btn-default");
+              $(node).append("<i class='fa fa-file-pdf-o'></i>");
+            }
+          },
+          {
+            extend: "excel",
+            className: "btn-table btn-sm btn-success-dark btn-no-style",
+            titleAttr: "Export to Excel",
+            text: "Exportar a Excel",
+            init: function (api, node) {
+              $(node).removeClass("btn-default");
+              $(node).append("<i class='fa fa-file-excel-o'></i>");
+            }
+          },
           {
             text: "Eliminar",
+            className: "btn-table btn-sm btn-danger btn-no-style",
             action: function() {
               console.log("DELETE ");
+            },
+            init: function (api, node) {
+              $(node).removeClass("btn-default");
+              $(node).append("<i class='fa fa-times'></i>");
             }
           },
           {
             text: "Añadir",
+            className: "btn-table btn-sm btn-success btn-no-style",
             action: function() {
               console.log("DELETE ");
+            },
+            init: function (api, node) {
+              $(node).removeClass("btn-default");
+              $(node).append("<i class='fa fa-plus-circle'></i>");
             }
           }
         ],
