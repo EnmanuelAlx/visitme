@@ -68,7 +68,7 @@ class Table {
       language: DATATABLES_SPANISH
     });
     this.tableInstance.columns.adjust().draw();
-    $("#adminTable tbody").on("click", "tr", function() {
+    $("#" + this.id + " tbody").on("click", "tr", function() {
       $(this).toggleClass("selected");
     });
   }
@@ -87,7 +87,33 @@ class Table {
     $("tr.selected").removeClass("selected");
   }
 
+  add(items) {
+    items.forEach(item => {
+      this.tableInstance.row.add(this.toArrayOfValues(item));
+    });
+  }
+
+  toArrayOfValues(obj) {
+    const keys = Object.keys(obj);
+    return keys.map(key => renderByTypeOfValue(obj[key]));
+  }
+
   addButton(button) {
-    this.buttons.push(button);
+    this.buttons.push({
+      text: button,
+      className: "btn-table btn-sm btn-success btn-no-style",
+      action: () => {
+        const data = this.tableInstance.rows(".selected")[0];
+        this.events[button](data);
+      },
+      init: function(api, node) {
+        $(node).removeClass("btn-default");
+        $(node).append("<i class='fa fa-plus-circle'></i>");
+      }
+    });
+  }
+
+  removeButton(buttonName) {
+    this.buttons = this.buttons.filter(button => button.text !== buttonName);
   }
 }

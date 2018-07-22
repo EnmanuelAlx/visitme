@@ -51,7 +51,8 @@ gulp.task("sass", () => {
       "node_modules/easy-autocomplete/dist/easy-autocomplete.min.css",
       "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",
       "node_modules/select2/dist/css/select2.css",
-      "node_modules/select2-bootstrap4-theme/dist/select2-bootstrap4.css"
+      "node_modules/select2-bootstrap4-theme/dist/select2-bootstrap4.css",
+      "node_modules/jquery-confirm/dist/jquery-confirm.min.css"
     ])
     .pipe(sass())
     .pipe(gulp.dest("src/visitme/styles/css"))
@@ -87,7 +88,8 @@ gulp.task("js", () => {
       "node_modules/clipboard/dist/clipboard.min.js",
       "node_modules/chart.js/dist/Chart.min.js",
       "node_modules/chart.piecelabel.js/build/Chart.PieceLabel.min.js",
-      "node_modules/select2/dist/js/select2.js"
+      "node_modules/select2/dist/js/select2.js",
+      "node_modules/jquery-confirm/dist/jquery-confirm.min.js"
     ])
     .pipe(gulp.dest("src/visitme/js/lib"))
     .pipe(browserSync.stream());

@@ -6,16 +6,17 @@ const delay = (t, v) => {
   });
 };
 
-$.fn.exists = function () {
+$.fn.exists = function() {
   return this.length !== 0;
 };
 
 const loadTemplate = (container, name, template) => {
-
   if (!$(container).exists()) {
-    const session =  getSessionData();
+    const session = getSessionData();
     const { communities } = session;
-    const approvedCommunities = communities.filter(comm => comm.status === "APPROVED");
+    const approvedCommunities = communities.filter(
+      comm => comm.status === "APPROVED"
+    );
     const community = communities.find(comm => comm.selected === true);
     const data = {
       session,
@@ -29,18 +30,19 @@ const loadTemplate = (container, name, template) => {
   $(container)
     .hide()
     .html(template)
-    .fadeIn(500); 
+    .fadeIn(500);
 
   $(".nav-item").removeClass("active");
   $(`.nav-item.${name}`).addClass("active");
 };
 
-
 /*exported startPreload  stopPreload*/
 const startPreload = (container, text = "") => {
-  const contentClass = (container == ".content") ? "col-md-10 offset-md-2 position-fixed" : "position-absolute";
-  const preloadContent = 
-    `<div id="preload" class="preload ${contentClass}">
+  const contentClass =
+    container == ".content"
+      ? "col-md-10 offset-md-2 position-fixed"
+      : "position-absolute";
+  const preloadContent = `<div id="preload" class="preload ${contentClass}">
       <div class="row h-100 justify-content-center align-items-center">
         <div class="col-12 text-center">
           <div class="ld ld-ring ld-spin-fast huge text-primary">
@@ -54,9 +56,11 @@ const startPreload = (container, text = "") => {
   $(container).append(preloadContent);
 };
 
-const stopPreload = (container) => {
+const stopPreload = container => {
   if (!container) container = "body";
-  $(container).find("#preload").remove();
+  $(container)
+    .find("#preload")
+    .remove();
 };
 
 const getQuery = (path, query) => {
@@ -65,16 +69,15 @@ const getQuery = (path, query) => {
   return false;
 };
 
-$.fn.getType = function () {
-  return this[0].tagName == "INPUT" ?
-    this[0].type.toLowerCase() :
-    this[0].tagName.toLowerCase();
+$.fn.getType = function() {
+  return this[0].tagName == "INPUT"
+    ? this[0].type.toLowerCase()
+    : this[0].tagName.toLowerCase();
 };
 
-$.fn.exists = function () {
+$.fn.exists = function() {
   return this.length !== 0;
 };
-
 
 const validateForms = () => {
   $(":input").on("focus", event => {
@@ -102,6 +105,18 @@ const getSessionData = () => {
     sessionData[key] = value;
   });
   return sessionData;
+};
+
+const confirm = (message, callback) => {
+  $.confirm({
+    title: "",
+    theme: "light",
+    content: message,
+    buttons: {
+      aceptar: callback,
+      cancelar: function() {}
+    }
+  });
 };
 
 $.fn.select2.defaults.set("theme", "bootstrap4");
