@@ -59,7 +59,8 @@
     "loadTable": false,
     "format": false,
     "createCrud": false,
-    "renderByTypeOfValue": false
+    "renderByTypeOfValue": false,
+    "showAdditionModal": false
   },
   "extends": [
     "eslint:recommended",

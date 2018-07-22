@@ -11,6 +11,7 @@
     const template = HB.templates[TEMPLATE_NAME];
     startPreload(CONTAINER);
     const data = await getMainApi({}, "user/me");
+    data.address = data.address || {};
     loadTemplate(CONTAINER, TEMPLATE_NAME, template(data));
   });
 
