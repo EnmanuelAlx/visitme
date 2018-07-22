@@ -1,3 +1,5 @@
+/*exported createCrud */
+
 const deleteEventGenerator = (table, items) => {
   return async pos => {
     confirm("¿Esta seguro?", async () => {

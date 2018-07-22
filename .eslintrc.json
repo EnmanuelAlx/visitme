@@ -54,7 +54,12 @@
     "lbd": false,
     "toggleInitialized": true,
     "mobileMenuInitialized": true,
-    "DATATABLES_SPANISH": false
+    "DATATABLES_SPANISH": false,
+    "Table": false,
+    "loadTable": false,
+    "format": false,
+    "createCrud": false,
+    "renderByTypeOfValue": false
   },
   "extends": [
     "eslint:recommended",
