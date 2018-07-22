@@ -89,7 +89,7 @@ class Table {
 
   add(items) {
     items.forEach(item => {
-      this.tableInstance.row.add(this.toArrayOfValues(item));
+      this.tableInstance.row.add(this.toArrayOfValues(item)).draw(false);
     });
   }
 

@@ -1,6 +1,7 @@
-
 /*exported showAdditionModal*/
-
+// TODO
+//cancel on callback success
+// CLEAN FIELD
 const showAdditionModal = callback => {
   const template = Handlebars.partials["addition-modal"];
   $("body").append(template());
@@ -17,20 +18,20 @@ const showAdditionModal = callback => {
       }),
       headers: {
         "content-type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
+        Authorization: `Bearer ${token}`
+      }
     },
-    results: function (data, params) {
+    results: function(data, params) {
       params.page = params.page || 1;
       return {
         results: data,
         pagination: {
-          more: (params.page * 30) < data.length
+          more: params.page * 30 < data.length
         }
       };
     },
     placeholder: "Buscar un usuario",
-    escapeMarkup: function (markup) {
+    escapeMarkup: function(markup) {
       return markup;
     },
     minimumInputLength: 3,
@@ -48,9 +49,10 @@ const showAdditionModal = callback => {
   function formatRepoSelection(user) {
     return user.name;
   }
-
-  $(".addition-cb").click(event=> callback($(event.target.form).serializeJSON()));
+  $(".addition-cb").click(event => {
+    const user = $("#user-select").select2("data")[0];
+    const result = $(event.target.form).serializeJSON();
+    result.user = user;
+    callback(result);
+  });
 };
-
-
-

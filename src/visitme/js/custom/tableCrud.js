@@ -8,12 +8,28 @@ const deleteEventGenerator = (table, items) => {
       );
       await Promise.all(promises);
       table.remove(pos);
+      items = items.filter((item, index) => pos.indexOf(index) === -1);
     });
   };
 };
 
-const addEventGenerator = (table, type) => {
-  return async () => {};
+const addEventGenerator = (table, community, type) => {
+  return async () => {
+    showAdditionModal(async data => {
+      try {
+        const res = await postMainApi(
+          {
+            reference: data.reference,
+            user: data.user._id
+          },
+          `communities/${community}/${type.toLowerCase()}`
+        );
+        table.add([formatItem(data)]);
+      } catch (error) {
+        return error;
+      }
+    });
+  };
 };
 
 async function createCrud(resource, type, template, CONTAINER, TEMPLATE_NAME) {
@@ -32,10 +48,12 @@ function loadTable(items, id, type, template, CONTAINER, TEMPLATE_NAME) {
     rows,
     columns
   });
+  const { communities } = getSessionData();
+  const community = communities.find(comm => comm.selected === true)._id;
   loadTemplate(CONTAINER, TEMPLATE_NAME, templateStr);
   const table = new Table(id);
   const onDelete = deleteEventGenerator(table, items);
-  const onAdd = addEventGenerator(table, type);
+  const onAdd = addEventGenerator(table, community, type);
   table.addEvent("Add", onAdd);
   table.addEvent("Eliminar", onDelete);
   return table;

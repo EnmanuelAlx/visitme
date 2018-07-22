@@ -18,7 +18,7 @@
         TEMPLATE_NAME
       );
     } catch (error) {
-      console.log("E", e);
+      console.log("E", error);
       toastr.error("Ocurrió un error al cargar la data", "Error");
     }
   });
