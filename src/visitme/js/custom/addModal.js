@@ -67,6 +67,8 @@ const showAdditionModal = callback => {
       const result = form.serializeJSON();
       result.user = user;
       form.trigger("reset");
+      $("#user-select").val("");
+      $("#user-select").trigger("change");
       startPreload("#addition-modal");
 
       const res = await callback(result);
