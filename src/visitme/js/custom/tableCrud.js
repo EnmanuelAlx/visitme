@@ -24,13 +24,14 @@ async function createCrud(resource, type, template, CONTAINER, TEMPLATE_NAME) {
 
 function loadTable(items, id, type, template, CONTAINER, TEMPLATE_NAME) {
   const rows = format(items);
-  const columns = Object.keys(rows[0]);
+  const columns = ["Imagen", "Nombre", "Cedula", "Localidad"];
   const templateStr = template({
     id,
     rows,
     columns
   });
   loadTemplate(CONTAINER, TEMPLATE_NAME, templateStr);
+
   const table = new Table(id);
   const onDelete = deleteEventGenerator(table, items);
   const onAdd = addEventGenerator(table, type);
