@@ -3,8 +3,11 @@
 //cancel on callback success
 // CLEAN FIELD
 const showAdditionModal = callback => {
-  const template = Handlebars.partials["addition-modal"];
-  $("body").append(template());
+  if (!$("#addition-modal").exists()){
+    const template = Handlebars.partials["addition-modal"];
+    $("body").append(template());
+  }
+
   $("#addition-modal").modal("show");
   const token = Sammy.apps.body.getAccessToken();
   $("#user-select").select2({
@@ -49,10 +52,21 @@ const showAdditionModal = callback => {
   function formatRepoSelection(user) {
     return user.name;
   }
-  $(".addition-cb").click(event => {
+  $(".addition-cb").one("click", async event => {
     const user = $("#user-select").select2("data")[0];
-    const result = $(event.target.form).serializeJSON();
+    const form = $(event.target.form);
+    const result = form.serializeJSON();
     result.user = user;
-    callback(result);
+    form.trigger("reset");
+    startPreload("#addition-modal");
+
+    const res = await callback(result);
+    if (res){
+      stopPreload();
+      toastr.error("Ocurrió un error al agregar", "Error");
+    }else{
+      $("#addition-modal").modal("hide");
+      toastr.info("Solicitud exitosa", "Éxito");
+    }
   });
 };
