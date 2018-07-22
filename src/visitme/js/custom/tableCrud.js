@@ -1,3 +1,5 @@
+/*exported createCrud */
+
 const deleteEventGenerator = (table, items) => {
   return async pos => {
     confirm("¿Esta seguro?", async () => {
@@ -31,7 +33,6 @@ function loadTable(items, id, type, template, CONTAINER, TEMPLATE_NAME) {
     columns
   });
   loadTemplate(CONTAINER, TEMPLATE_NAME, templateStr);
-
   const table = new Table(id);
   const onDelete = deleteEventGenerator(table, items);
   const onAdd = addEventGenerator(table, type);
