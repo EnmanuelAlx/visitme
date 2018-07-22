@@ -151,3 +151,16 @@ tbody {
 .btn-table {
   font-size: 14px;
 }
+
+.select2-container--bootstrap4 .select2-results__option--highlighted[aria-selected] {
+  background-color: $color-primary-0 !important;
+}
+
+.select2-results__option {
+  padding: 2px !important;
+}
+
+.select2-container--bootstrap4 .select2-results__option {
+  padding: 0;
+  font-size: 1rem;
+}
