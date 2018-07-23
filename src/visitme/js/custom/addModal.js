@@ -8,6 +8,8 @@ const showAdditionModal = callback => {
     $("body").append(template());
     listenClick();
     listenSelect();
+    $("#addition-form").validate(FORM_VALIDATION_DEFAULTS);
+    validateForms();
   }
 
   $("#addition-modal").modal("show");
@@ -46,6 +48,15 @@ const showAdditionModal = callback => {
       templateResult: formatRepo,
       templateSelection: formatRepoSelection
     });
+
+    $("#user-select").change(event => {
+      const user = $("#user-select").select2("data")[0];
+      if (!user) return;
+      const inputs = $(`#${event.target.form.id} :input`);
+      inputs.each((idx, element) =>
+        $(`input[name='${element.name}'`).val(user[element.name])
+      );
+    });
   };
 
 
@@ -62,22 +73,26 @@ const showAdditionModal = callback => {
 
   function listenClick() {
     $(".addition-cb").click(async event => {
-      const user = $("#user-select").select2("data")[0];
-      const form = $(event.target.form);
-      const result = form.serializeJSON();
-      result.user = user;
-      form.trigger("reset");
-      $("#user-select").val("");
-      $("#user-select").trigger("change");
-      startPreload("#addition-modal");
+      try{
+        startPreload("#addition-modal");
+        const form = $(event.target.form);
+        const result = form.serializeJSON();
+        let user = $("#user-select").select2("data")[0];
+        if (!user) {
+          user = (await postMainApi(result, "user")).user;
+        };
 
-      const res = await callback(result);
-      stopPreload();
-      if (res) {
-        toastr.error("Ocurrió un error al agregar", "Error");
-      } else {
+        result.user = user;
+        form.trigger("reset");
+        $("#user-select").val("");
+        $("#user-select").trigger("change");
+        await callback(result);
         $("#addition-modal").modal("hide");
         toastr.info("Solicitud exitosa", "Éxito");
+      }catch (error){
+        toastr.error("Ocurrió un error al agregar", "Error");
+      }finally{
+        stopPreload();
       }
     });
   };
