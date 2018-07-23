@@ -17,7 +17,7 @@ const addEventGenerator = (table, community, type) => {
   return async () => {
     showAdditionModal(async data => {
       try {
-        const res = await postMainApi(
+        await postMainApi(
           {
             reference: data.reference,
             user: data.user._id
@@ -26,7 +26,7 @@ const addEventGenerator = (table, community, type) => {
         );
         table.add([formatItem(data)]);
       } catch (error) {
-        return error;
+        throw error;
       }
     });
   };
