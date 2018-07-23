@@ -21,11 +21,11 @@
     startPreload(CONTAINER);
     putMainApi(data, "user/me")
       .then(()=>{
-        toastr.info("Tus datos fueron modificados exitosamente", "Éxito");
+        notify.info("Tus datos fueron modificados exitosamente", "Éxito");
         app.refresh();
       })
       .catch(()=>{
-        toastr.error("Ocurrió un error al guardar tus datos", "Error");
+        notify.error("Ocurrió un error al guardar tus datos", "Error");
       }).finally(()=>{
         stopPreload();
       });

@@ -50,11 +50,11 @@
     const login = postMainApi(data, "user");
     login
       .then(() => {
-        toastr.info("Usuario registrado satisfactoriamente", "Petición exitosa");
+        notify.info("Usuario registrado satisfactoriamente", "Petición exitosa");
         context.redirect("#/login");
       })
       .catch(e => {
-        toastr.error(e.responseJSON.error.name, "Error");
+        notify.error(e.responseJSON.error.name, "Error");
         stopPreload();
       });
   });

@@ -60,7 +60,9 @@
     "format": false,
     "createCrud": false,
     "renderByTypeOfValue": false,
-    "showAdditionModal": false
+    "showAdditionModal": false,
+    "notify": false,
+    "NOTIFY_OPTIONS": false
   },
   "extends": [
     "eslint:recommended",

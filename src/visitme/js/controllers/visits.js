@@ -31,12 +31,12 @@
     postMainApi(data,"visits")
       .then(()=> {
         stopPreload();
-        toastr.info("Visita creada exitosamente", "Éxito");
+        notify.info("Visita creada exitosamente", "Éxito");
         app.refresh();
       })
       .catch(() => {
         stopPreload();
-        toastr.error("No se pudo crear visita", "Error");
+        notify.error("No se pudo crear visita", "Error");
       });
   });
 

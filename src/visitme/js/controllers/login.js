@@ -56,7 +56,7 @@
     store.clearAll();
   });
 
-  app.bind(SESSION_DENIED, (evt, error) => toastr.error(error, ERROR_HEADER));
+  app.bind(SESSION_DENIED, (evt, error) => notify.error(error, ERROR_HEADER));
   
   const initSession = session => {
     const app = Sammy.apps.body;

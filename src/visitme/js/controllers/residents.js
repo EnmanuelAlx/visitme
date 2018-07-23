@@ -78,7 +78,7 @@
       pendingTable.init();
     } catch (e) {
       console.log("E", e);
-      toastr.error("Ocurrió un error al cargar la data", "Error");
+      notify.error("Ocurrió un error al cargar la data", "Error");
     }
   });
 })();
