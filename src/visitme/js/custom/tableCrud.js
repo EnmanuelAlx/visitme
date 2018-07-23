@@ -59,6 +59,26 @@ function loadTable(items, id, type, template, CONTAINER, TEMPLATE_NAME) {
   return table;
 }
 
+function loadCustomTable(
+  items,
+  columns,
+  format,
+  id,
+  template,
+  CONTAINER,
+  TEMPLATE_NAME
+) {
+  const rows = format(items);
+  const templateStr = template({
+    id,
+    rows,
+    columns
+  });
+  loadTemplate(CONTAINER, TEMPLATE_NAME, templateStr);
+  const table = new Table(id);
+  return table;
+}
+
 const format = items => items.map(formatItem);
 
 const formatItem = item => {
