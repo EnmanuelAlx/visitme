@@ -164,3 +164,10 @@ tbody {
   padding: 0;
   font-size: 1rem;
 }
+
+.dt-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
