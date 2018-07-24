@@ -140,6 +140,11 @@ tbody {
       }
     }
   }
+  table.alerts & {
+    td {
+      text-align: left !important;
+    }
+  }
   td {
     img {
       max-height: 45px;

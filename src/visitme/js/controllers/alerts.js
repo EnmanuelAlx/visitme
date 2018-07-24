@@ -9,12 +9,26 @@
   app.get(ROOT, async () => {
     try {
       const template = HB.templates[TEMPLATE_NAME];
-      startPreload(CONTAINER);
-      const alerts = await getMainApi({}, "/user/me/alerts/info");
-      loadTemplate(CONTAINER, TEMPLATE_NAME, template(alerts));
+      if ($(CONTAINER).exists()) startPreload(CONTAINER);
+      else startPreload("body", "Cargando tu experiencia...");
+      const { communities } = getSessionData();
+      const community = communities.find(comm => comm.selected === true)._id;
+      let information = (await getMainApi({}, "/user/me/alerts/information")).alerts;
+      let incident = (await getMainApi({}, "/user/me/alerts/incident")).alerts;
+      let other = (await getMainApi({}, "/user/me/alerts/other")).alerts;
+      console.log("information", information);
+      information = information.filter(item => filterAlert(item, community));
+      incident = incident.filter(item => filterAlert(item, community));
+      other = other.filter(item => filterAlert(item, community));
+      loadTemplate(CONTAINER, TEMPLATE_NAME, template({
+        information,
+        incident,
+        other
+      }));
     } catch (e) {
       console.log("E", e);
       notify.error("Ocurrió un error al cargar la data", "Error");
     }
   });
+  const filterAlert = (element, community) => element.community._id === community;
 })();

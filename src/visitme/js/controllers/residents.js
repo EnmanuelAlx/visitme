@@ -38,7 +38,8 @@
     try {
       const template = HB.templates[MAIN_TEMPLATE_NAME];
       const templateTable = HB.templates[TABLE_TEMPLATE_NAME];
-      startPreload(MAIN_CONTAINER);
+      if ($(MAIN_CONTAINER).exists()) startPreload(MAIN_CONTAINER);
+      else startPreload("body", "Cargando tu experiencia...");
       const { communities } = getSessionData();
       const community = communities.find(comm => comm.selected === true)._id;
       const items = await getMainApi({}, `communities/${community}/residents`);

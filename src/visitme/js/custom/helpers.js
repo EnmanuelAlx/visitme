@@ -86,3 +86,8 @@ const renderByTypeOfValue = data => {
     ? `<td class="p-1"><img src="${safeNull}" class="img-fluid"></img></td>`
     : `<td>${safeNull}</td>`;
 };
+
+Handlebars.registerHelper("formatTimeAgo", timestamp => {
+  const _moment = moment(timestamp).local();
+  return `${_moment.fromNow()}`;
+});

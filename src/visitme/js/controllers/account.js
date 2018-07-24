@@ -9,7 +9,8 @@
   app.get(ROOT, async context => {
     if (!app.getAccessToken()) return context.redirect("#/login");
     const template = HB.templates[TEMPLATE_NAME];
-    startPreload(CONTAINER);
+    if ($(CONTAINER).exists()) startPreload(CONTAINER);
+    else startPreload("body", "Cargando tu experiencia...");
     const data = await getMainApi({}, "user/me");
     data.address = data.address || {};
     loadTemplate(CONTAINER, TEMPLATE_NAME, template(data));

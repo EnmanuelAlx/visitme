@@ -4,29 +4,29 @@
       <h2 id="title-login" class="text-gray">Alertas</h2>
     </div>
     <div class="col-11 card">
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input class="form-check-input" value="" type="checkbox">
-                  <span class="form-check-sign"></span>
-                </label>
-              </div>
-            </td>
-            <td>Sign contract for "What are conference organizers afraid of?"</td>
-            <td class="td-actions text-right">
-              <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-link" data-original-title="Edit Task">
-                <i class="fa fa-edit"></i>
-              </button>
-              <button type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-link" data-original-title="Remove">
-                <i class="fa fa-times"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info"
+            aria-selected="true">Información</a>
+          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-incident"  role="tab" aria-controls="nav-incident"
+            aria-selected="false">Incidentes</a>
+          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-other"  role="tab" aria-controls="nav-other"
+            aria-selected="false">Otras</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-info" role="tabpanel" data-toggle="tab"  aria-labelledby="nav-info-tab">
+          {{>alertsTable information}}
+        </div>
+        <div class="tab-pane fade" id="nav-incident" role="tabpanel" data-toggle="tab" aria-labelledby="nav-incidents-tab">
+          {{>alertsTable incident}}
+        </div>
+        <div class="tab-pane fade" id="nav-other" role="tabpanel" data-toggle="tab" aria-labelledby="nav-others-tab">
+          {{>alertsTable other}}
+        </div>
+      </div>
+
+
     </div>
   </div>
 </div>

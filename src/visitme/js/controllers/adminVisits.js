@@ -9,7 +9,8 @@
   app.get(ROOT, async () => {
     try {
       const template = HB.templates[TEMPLATE_NAME];
-      startPreload(CONTAINER);
+      if ($(CONTAINER).exists()) startPreload(CONTAINER);
+      else startPreload("body", "Cargando tu experiencia...");
       const { communities } = getSessionData();
       const community = communities.find(comm => comm.selected === true)._id;
       const items = await getMainApi({}, `communities/${community}/visits`);

@@ -19,6 +19,8 @@
 
   app.put(ROOT, async () => {
     try {
+      if ($(CONTAINER).exists()) startPreload(CONTAINER);
+      else startPreload("body", "Cargando tu experiencia...");
       const template = HB.templates[TEMPLATE_NAME];
       loadTemplate(CONTAINER, TEMPLATE_NAME, template());
       await initDashboard();

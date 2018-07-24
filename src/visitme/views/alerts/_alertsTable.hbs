@@ -1,0 +1,23 @@
+<table class="table alerts">
+  {{log this}}
+  <tbody>
+    {{#each this}}
+      <tr>
+        <td>
+          {{#with author}}
+            <img src="{{image}}" class="img-fluid">
+          {{/with}}
+        </td>
+        <td>
+          <h6>{{message}}</h6>
+          <p class="mb-0">{{description}}</p>
+        </td>
+        <td>
+          <p class="mb-0">
+            {{formatTimeAgo created_at}}
+          </p>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
