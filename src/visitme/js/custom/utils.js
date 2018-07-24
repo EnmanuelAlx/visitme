@@ -32,7 +32,7 @@ const loadTemplate = (container, name, template) => {
     .html(template)
     .fadeIn(500);
 
-  $(".nav-item").removeClass("active");
+  $(".nav-item:not(.nav-tabs .nav-item)").removeClass("active");
   $(`.nav-item.${name}`).addClass("active");
 };
 
