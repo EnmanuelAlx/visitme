@@ -143,6 +143,8 @@ tbody {
   table.alerts & {
     td {
       text-align: left !important;
+      vertical-align: top;
+      border-bottom: 1px solid #dee2e6;
     }
   }
   td {
@@ -175,4 +177,10 @@ tbody {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+}
+
+p {
+  &.small {
+    font-size: 14px;
+  }
 }

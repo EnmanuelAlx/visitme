@@ -13,9 +13,9 @@
       else startPreload("body", "Cargando tu experiencia...");
       const { communities } = getSessionData();
       const community = communities.find(comm => comm.selected === true)._id;
-      let information = (await getMainApi({}, "/user/me/alerts/information")).alerts;
-      let incident = (await getMainApi({}, "/user/me/alerts/incident")).alerts;
-      let other = (await getMainApi({}, "/user/me/alerts/other")).alerts;
+      let information = (await getMainApi({}, "user/me/alerts/information")).alerts;
+      let incident = (await getMainApi({}, "user/me/alerts/incident")).alerts;
+      let other = (await getMainApi({}, "user/me/alerts/other")).alerts;
       information = information.filter(item => filterAlert(item, community));
       incident = incident.filter(item => filterAlert(item, community));
       other = other.filter(item => filterAlert(item, community));

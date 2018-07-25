@@ -21,7 +21,7 @@ Handlebars.registerHelper("fillMonths", function() {
     MONTHS_NAMES.map(
       (month, index) =>
         `<option value="${index + 1}" ${
-          currentMonth == index + 1 ? "selected" : ""
+          currentMonth == index ? "selected" : ""
         }>${month}</option>`
     ).join(" ")
   );
@@ -90,4 +90,20 @@ const renderByTypeOfValue = data => {
 Handlebars.registerHelper("formatTimeAgo", timestamp => {
   const _moment = moment(timestamp).local();
   return `${_moment.fromNow()}`;
+});
+
+Handlebars.registerHelper("formatHour", hour => {
+  hour = hour.toString();
+  if(hour.length === 3) hour = `0${hour}`;
+  return moment(hour, "hhmm").format("hh:mm a");
+});
+Handlebars.registerHelper("getWeekName", weekNumber => _.capitalize(moment.weekdays(true)[weekNumber-1]));
+Handlebars.registerHelper("timeOfDay", partOfDay => {
+  const days = {
+    "MORNING": "Mañana",
+    "AFTERNOON": "Tarde",
+    "NIGH": "Noche",
+    "ALL DAY": "Todo el día"
+  };
+  return days[partOfDay];
 });

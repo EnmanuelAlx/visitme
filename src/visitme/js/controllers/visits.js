@@ -7,9 +7,25 @@
   const HB = MyApp; // handlebars;
 
 
-  app.get(ROOT, () => {
+  app.get(ROOT, async context => {
+    if (!app.getAccessToken()) return context.redirect("#/login");
+    if ($(CONTAINER).exists()) startPreload(CONTAINER);
+    else startPreload("body", "Cargando tu experiencia...");
     const template = HB.templates[TEMPLATE_NAME];
-    loadTemplate(CONTAINER, TEMPLATE_NAME, template());
+    const { communities } = getSessionData();
+    const community = communities.find(comm => comm.selected === true)._id;
+    let sporadic = (await getMainApi({}, "user/me/visits/SPORADIC")).visits;
+    let scheduled = (await getMainApi({}, "user/me/visits/SCHEDULED")).visits;
+    let frequent = (await getMainApi({}, "user/me/visits/FREQUENT")).visits;
+    sporadic = sporadic.filter(item => filterAlert(item, community));
+    scheduled = scheduled.filter(item => filterAlert(item, community));
+    frequent = frequent.filter(item => filterAlert(item, community));
+
+    loadTemplate(CONTAINER, TEMPLATE_NAME, template({
+      sporadic,
+      scheduled,
+      frequent
+    }));
     handleVisits();
   });
 
@@ -40,9 +56,12 @@
       });
   });
 
+  const filterAlert = (element, community) => element.community._id === community;
+
   const handleVisits = () => {
-    $("#add-visit").click(()=>{
-      $("div.add-visit").show();
+    $("button.add-visit").click(()=>{
+      $("div.add-visit").toggle();
+      $("div.list-visits").toggle();
     });
 
     $("#visit-type").click(()=>{
@@ -117,6 +136,7 @@
 
       monthSelector.change(function () {
         var selectedMonth = parseInt(this.value);
+        console.log("selected", selectedMonth);
         lastDay = moment(
           `${day.getFullYear()}-${selectedMonth}`,
           "YYYY-M"
