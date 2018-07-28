@@ -1,50 +1,35 @@
 <div class="container-fluid">
-  <div class="row justify-content-center list-visits">
+  <div class="row mt-4 align-items-center justify-content-center">
     <div class="col-4">
-      <h2 id="title-login" class="my-0 text-gray">Visitas</h2>
+      <h2 id="title-login" class="my-0 text-gray">Alertas</h2>
     </div>
     <div class="d-flex col-7 pr-0">
-      <button id="add-visit" class="add-visit ml-auto no-community btn btn-no-style btn-success">
-        <i class="fa fa-plus-circle" aria-hidden="true"></i>Registrar visita
+      <button id="add-alert" class="ml-auto btn btn-no-style btn-success">
+        <i class="fa fa-plus-circle"></i> Añadir alerta
       </button>
     </div>
-        <div class="col-11 card mt-3">
+    <div class="col-11 card mt-3">
       <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
           <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info"
-            aria-selected="true">Esperadas</a>
+            aria-selected="true">Información</a>
           <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-incident"  role="tab" aria-controls="nav-incident"
-            aria-selected="false">Frecuentes</a>
+            aria-selected="false">Incidentes</a>
           <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-other"  role="tab" aria-controls="nav-other"
-            aria-selected="false">Esporádicas</a>
+            aria-selected="false">Otras</a>
         </div>
       </nav>
       <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-info" role="tabpanel" data-toggle="tab"  aria-labelledby="nav-info-tab">
-          {{>visits-table scheduled}}
+          {{>alerts-table information}}
         </div>
         <div class="tab-pane fade" id="nav-incident" role="tabpanel" data-toggle="tab" aria-labelledby="nav-incidents-tab">
-          {{>visits-table frequent}}
+          {{>alerts-table incident}}
         </div>
         <div class="tab-pane fade" id="nav-other" role="tabpanel" data-toggle="tab" aria-labelledby="nav-others-tab">
-          {{>visits-table sporadic}}
+          {{>alerts-table other}}
         </div>
       </div>
     </div>
-  </div>
-  <div class="row justify-content-center add-visit" style="display: none">
-    <div class="col-11 pl-0">
-      <div class="d-flex align-items-center">
-        <div>
-          <button class="add-visit pl-0 btn btn-no-style btn-info">
-            <i class="fa fa-arrow-left fa-2x mr-2"></i>
-          </button>
-        </div>
-        <div class="col">
-          <h2 id="title-login" class="my-0 text-gray">Registro de visita</h2>
-        </div>
-      </div>
-    </div>
-    {{>visit-type}}
   </div>
 </div>

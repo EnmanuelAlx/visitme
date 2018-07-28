@@ -88,9 +88,9 @@ const showAdditionModal = callback => {
         $("#user-select").trigger("change");
         await callback(result);
         $("#addition-modal").modal("hide");
-        toastr.info("Solicitud exitosa", "Éxito");
+        notify.info("Solicitud exitosa", "Éxito");
       }catch (error){
-        toastr.error("Ocurrió un error al agregar", "Error");
+        notify.error("Ocurrió un error al agregar", "Error");
       }finally{
         stopPreload();
       }

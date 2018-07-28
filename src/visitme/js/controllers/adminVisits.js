@@ -44,7 +44,6 @@
       );
       table.init();
     } catch (error) {
-
       toastr.error("Ocurrió un error al cargar la data", "Error");
     }
   });

@@ -9,7 +9,8 @@
   app.get(ROOT, async () => {
     try {
       const template = HB.templates[TEMPLATE_NAME];
-      startPreload(CONTAINER);
+      if ($(CONTAINER).exists()) startPreload(CONTAINER);
+      else startPreload("body", "Cargando tu experiencia...");
       await createCrud(
         "security",
         "SECURITY",
@@ -19,7 +20,7 @@
       );
     } catch (error) {
       console.log("E", error);
-      toastr.error("Ocurrió un error al cargar la data", "Error");
+      notify.error("Ocurrió un error al cargar la data", "Error");
     }
   });
 })();

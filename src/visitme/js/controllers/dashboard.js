@@ -18,9 +18,16 @@
   });
 
   app.put(ROOT, async () => {
-    const template = HB.templates[TEMPLATE_NAME];
-    loadTemplate(CONTAINER, TEMPLATE_NAME, template());
-    await initDashboard();
+    try {
+      if ($(CONTAINER).exists()) startPreload(CONTAINER);
+      else startPreload("body", "Cargando tu experiencia...");
+      const template = HB.templates[TEMPLATE_NAME];
+      loadTemplate(CONTAINER, TEMPLATE_NAME, template());
+      await initDashboard();
+    } catch (error) {
+      console.log("E", error);
+      notify.error("Ocurrió un error al cargar la data", "Error");
+    }
   });
 
   app.post("#/add-community", context => {
@@ -46,13 +53,13 @@
         app.store.set("communities", communities);
         app.store.set("userType", "ADMINISTRATOR");
         stopPreload();
-        toastr.info("La comunidad ha sido añadida exitosamente");
+        notify.info("La comunidad ha sido añadida exitosamente");
         await delay(500);
         location.reload();
       })
       .catch(e => {
         stopPreload();
-        toastr.error(e.responseJSON.error.name, "Error");
+        notify.error(e.responseJSON.error.name, "Error");
       });
   });
 
@@ -76,12 +83,12 @@
           }
         ]);
         app.store.set("userType", "RESIDENT");
-        toastr.info("Te has unido exitosamente a la comunidad");
+        notify.info("Te has unido exitosamente a la comunidad");
         context.redirect("#/unverified");
       })
       .catch(e => {
         stopPreload();
-        toastr.error(e.responseJSON.error.name, "Error");
+        notify.error(e.responseJSON.error.name, "Error");
       });
   });
 

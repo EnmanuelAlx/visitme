@@ -34,12 +34,12 @@
     postMainApi(data, "/forgotPassword/changePassword")
       .then(() => {
         stopPreload();
-        toastr.info("Contraseña cambiada exitosamente");
+        notify.info("Contraseña cambiada exitosamente");
         context.redirect("#/login");
       })
       .catch(() => {
         stopPreload();
-        toastr.error("No se pudo enviar el correo de recuperación", "Error");
+        notify.error("No se pudo enviar el correo de recuperación", "Error");
       });
   });
 
@@ -52,12 +52,12 @@
       .then(() => {
         details.code = data.code;
         stopPreload();
-        toastr.info("Código confirmado exitosamente");
+        notify.info("Código confirmado exitosamente");
         app.runRoute("get", `${ROOT}/password`, details);
       })
       .catch(() => {
         stopPreload();
-        toastr.error("No se pudo enviar el correo de recuperación", "Error");
+        notify.error("No se pudo enviar el correo de recuperación", "Error");
       });
   });
 
@@ -67,12 +67,12 @@
     postMainApi(details, "/forgotPassword")
       .then(()=>{
         stopPreload();
-        toastr.info("Correo enviado satisfactoriamente");
+        notify.info("Correo enviado satisfactoriamente");
         app.runRoute("get", `${ROOT}/code`, details);
       })
       .catch(()=>{
         stopPreload();
-        toastr.error("No se pudo enviar el correo de recuperación", "Error");
+        notify.error("No se pudo enviar el correo de recuperación", "Error");
       });
 
   });

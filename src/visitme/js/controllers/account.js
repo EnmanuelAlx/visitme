@@ -9,7 +9,8 @@
   app.get(ROOT, async context => {
     if (!app.getAccessToken()) return context.redirect("#/login");
     const template = HB.templates[TEMPLATE_NAME];
-    startPreload(CONTAINER);
+    if ($(CONTAINER).exists()) startPreload(CONTAINER);
+    else startPreload("body", "Cargando tu experiencia...");
     const data = await getMainApi({}, "user/me");
     data.address = data.address || {};
     loadTemplate(CONTAINER, TEMPLATE_NAME, template(data));
@@ -21,11 +22,11 @@
     startPreload(CONTAINER);
     putMainApi(data, "user/me")
       .then(()=>{
-        toastr.info("Tus datos fueron modificados exitosamente", "Éxito");
+        notify.info("Tus datos fueron modificados exitosamente", "Éxito");
         app.refresh();
       })
       .catch(()=>{
-        toastr.error("Ocurrió un error al guardar tus datos", "Error");
+        notify.error("Ocurrió un error al guardar tus datos", "Error");
       }).finally(()=>{
         stopPreload();
       });

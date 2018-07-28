@@ -1,4 +1,4 @@
-/*exported delay getSessionData validateForms getQuery loadTemplate*/
+/*exported confirm notify delay getSessionData validateForms getQuery loadTemplate*/
 
 const delay = (t, v) => {
   return new Promise(resolve => {
@@ -32,7 +32,7 @@ const loadTemplate = (container, name, template) => {
     .html(template)
     .fadeIn(500);
 
-  $(".nav-item").removeClass("active");
+  $(".nav-item:not(.nav-tabs .nav-item)").removeClass("active");
   $(`.nav-item.${name}`).addClass("active");
 };
 
@@ -120,3 +120,19 @@ const confirm = (message, callback) => {
 };
 
 $.fn.select2.defaults.set("theme", "bootstrap4");
+
+
+const notify = {
+  info: (message, title = "") => {
+    $.notify({
+      message,
+      title
+    }, NOTIFY_OPTIONS("info"));
+  },
+  error: (message, title = "") => {
+    $.notify({
+      message,
+      title
+    }, NOTIFY_OPTIONS("danger"));
+  }
+};
