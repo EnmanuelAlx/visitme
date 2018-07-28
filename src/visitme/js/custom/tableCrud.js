@@ -69,6 +69,7 @@ function loadCustomTable(
   TEMPLATE_NAME
 ) {
   const rows = format(items);
+  console.log("ROO", rows);
   const templateStr = template({
     id,
     rows,
