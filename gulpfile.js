@@ -91,8 +91,7 @@ gulp.task("js", () => {
       "node_modules/select2/dist/js/select2.js",
       "node_modules/jquery-confirm/dist/jquery-confirm.min.js"
     ])
-    .pipe(gulp.dest("src/visitme/js/lib"))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest("src/visitme/js/lib"));
 });
 
 gulp.task("babel", () => {

@@ -107,3 +107,8 @@ Handlebars.registerHelper("timeOfDay", partOfDay => {
   };
   return days[partOfDay];
 });
+
+Handlebars.registerHelper("fillFrequents", intervals => {
+  const arr = new Array(7-intervals.length).fill("<td></td>");
+  return new Handlebars.SafeString(arr.join(""));
+});

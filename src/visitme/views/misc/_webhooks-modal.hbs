@@ -1,0 +1,48 @@
+<div id="webhooks-modal-container">
+  <div id="webhooks-modal" class="modal" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered initial" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row w-100 justify-content-center">
+            <div class="col-11">
+              <h6 class="modal-title font-weight-bold text-uppercase text-primary">Añadir Integración</h6>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row justify-content-center">
+            <div class="col-11">
+              <h6 class="text-light-gray">Ingresar datos</h6>
+              <form method="post" id="addition-form">
+                <div class="form-row">
+                  <div class="form-group col">
+                    <label for="exampleInputEmail1">Evento a integrar</label>
+                    <select name="eventType" class="w-100" id="webhooks-select">
+                      <option value="ON_NEW_RESIDENT"> Nuevo Residente </option>
+                      <option value="ON_NEW_VISIT"> Nueva Visita </option>
+                      <option value="ON_ACCESS"> Acceso </option>
+                      <option value="ON_INCIDENT"> Alerta de Incidente </option>
+                      <option value="ON_INFORMATION"> Alerta de Informacion </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-12">
+                    <label for="exampleInputEmail1">Dirección del servidor</label>
+                    <input required class="form-control" type="url" name="endpoint" placeholder="http://visitme.com/api">
+                  </div>
+                </div>
+                <div class="row justify-content-end mt-2">
+                  <div class="px-3">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button form="addition-form" type="button" class="btn btn-primary addition-cb">Registrar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

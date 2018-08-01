@@ -31,7 +31,9 @@
         TEMPLATE_NAME
       );
       const onDelete = onDeleteGenerator(community, items, table);
+      const onAdd = addEventGenerator(community, items, table);
       table.addEvent("Eliminar", onDelete);
+      table.addEvent("Add", onAdd);
       table.init();
     } catch (error) {
       console.log("EEE", error);
@@ -51,6 +53,54 @@
       });
     };
   };
+
+  const showWeebhooks = callback => {
+    if (!$("#webhooks-modal").exists()) {
+      const template = Handlebars.partials["webhooks-modal"];
+      $("body").append(template());
+      $("#webhooks-select").select2();
+      $("#addition-form").validate(FORM_VALIDATION_DEFAULTS);
+      validateForms();
+
+      $("#webhooks-modal").modal("show");
+
+      $(".addition-cb").click(async event => {
+        try {
+          startPreload("#webhooks-modal");
+          const form = $(event.target.form);
+          const result = form.serializeJSON();
+          form.trigger("reset");
+          $("#webhooks-select").val("");
+          $("#webhooks-select").trigger("change");
+          await callback(result);
+          $("#webhooks-modal").modal("hide");
+          notify.info("Solicitud exitosa", "Éxito");
+        } catch (error) {
+          console.log("error", error);
+          notify.error("Ocurrió un error al agregar", "Error");
+        } finally {
+          stopPreload();
+        }
+      });
+    }
+  };
+  
+
+  const addEventGenerator = (community, items, table) => {
+    return async () => {
+      showWeebhooks(async data => {
+        try {
+          const added = await postMainApi(data, `communities/${community}/webhooks`);
+          table.add(format([data]));
+          items.push(added);
+        } catch (error) {
+          console.log("error", error);
+          throw error;
+        }
+      });
+    };
+  };
+
 
   const format = items => {
     return items.map(item => ({

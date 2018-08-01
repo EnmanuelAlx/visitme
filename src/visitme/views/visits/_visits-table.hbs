@@ -18,15 +18,16 @@
           </td>
         {{/ifCond}}
         {{#ifCond kind "FREQUENT"}}
-           {{#each (limit intervals 4)}}
+           {{#each (limit intervals 7)}}
             <td> 
               <h6>
                 {{getWeekName day}}
               </h6> 
-                <p class="mb-0 small">Desde {{formatHour from}}</p>
-                <p class="mb-0 small">Hasta {{formatHour to}}</p>
+                <p class="mb-0 xs">{{formatHour from}}</p>
+                <p class="mb-0 xs"> {{formatHour to}}</p>
               </td>
-           {{/each}}
+            {{/each}}
+            {{fillFrequents intervals}}
           <td>
             {{#with author}}
               <p class="mb-0">{{name}}</p>
