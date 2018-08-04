@@ -23,8 +23,15 @@ const removeLine = require("gulp-remove-line");
 const fs = require("fs");
 const replace = require("gulp-replace");
 const rename = require("gulp-rename");
+const cached = require("gulp-cached");
 
 const ENVIRONMENT = process.env.NODE_ENV || "test";
+
+function swallowError(error) {
+  console.log(error.toString());
+  this.emit("end");
+}
+
 
 gulp.task("clean-sammy", () => {
   gulp
@@ -54,7 +61,9 @@ gulp.task("sass", () => {
       "node_modules/select2-bootstrap4-theme/dist/select2-bootstrap4.css",
       "node_modules/jquery-confirm/dist/jquery-confirm.min.css"
     ])
+    .pipe(cached("sass"))
     .pipe(sass())
+    .on("error", swallowError)
     .pipe(gulp.dest("src/visitme/styles/css"))
     .pipe(browserSync.stream());
 });
@@ -99,6 +108,7 @@ gulp.task("babel", () => {
   const mainApi = settings.mainApi[ENVIRONMENT];
   return gulp
     .src(["src/visitme/js/**/*.js", "!src/visitme/js/lib/**/*.js"])
+    .pipe(cached("babel"))
     .pipe(sourcemaps.init())
     .pipe(
       babel({
@@ -106,6 +116,7 @@ gulp.task("babel", () => {
         plugins: ["syntax-async-functions", "transform-regenerator"]
       })
     )
+    .on("error", swallowError)
     .pipe(sourcemaps.write("."))
     .pipe(sourcemaps.write("."))
     .pipe(replace("@@mainApi", mainApi))
@@ -133,6 +144,7 @@ gulp.task("templates", () => {
   gulp
     .src("./src/visitme/views/**/*.hbs")
     .pipe(handlebars())
+    .on("error", swallowError)
     .pipe(wrap("Handlebars.template(<%= contents %>)"))
     .pipe(
       declare({
@@ -148,6 +160,7 @@ gulp.task("partials", () => {
   gulp
     .src(["./src/visitme/views/**/_*.hbs"])
     .pipe(handlebars())
+    .on("error", swallowError)
     .pipe(
       wrap(
         "Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));",
@@ -183,6 +196,22 @@ gulp.task("images", () => {
     .pipe(gulp.dest("dist/visitme/assets"));
 });
 
+
+gulp.task("babel-watch", ["babel"], function (done) {
+  browserSync.reload();
+  done();
+});
+
+gulp.task("templates-watch", ["templates"], function (done) {
+  browserSync.reload();
+  done();
+});
+
+gulp.task("partials-watch", ["partials"], function (done) {
+  browserSync.reload();
+  done();
+});
+
 gulp.task("serve-visitme", () => {
   browserSync.init({
     server: {
@@ -196,17 +225,13 @@ gulp.task("serve-visitme", () => {
     ["src/visitme/styles/scss/*.scss", "src/visitme/styles/scss/**/*.scss"],
     ["sass"]
   );
-  gulp.watch(["src/visitme/js/**/*.js"], ["babel"]);
-  gulp.watch(["src/visitme/views/**/*.hbs"], ["templates"]);
-  gulp.watch(["src/visitme/views/**/_*.hbs"], ["partials"]);
+  gulp.watch(["src/visitme/js/**/*.js"], ["babel-watch"]);
+  gulp.watch(["src/visitme/views/**/*.hbs"], ["templates-watch"]);
+  gulp.watch(["src/visitme/views/**/_*.hbs"], ["partials-watch"]);
   gulp
     .watch([
       "src/visitme/main.html",
       "src/visitme/views/**/*.html",
-      "src/visitme/js/**/*.js",
-      "src/visitme/views/**/*.hbs",
-      "src/visitme/views/**/_*.hbs",
-      "src/visitme/styles/scss/*.scss"
     ])
     .on("change", browserSync.reload);
 });
