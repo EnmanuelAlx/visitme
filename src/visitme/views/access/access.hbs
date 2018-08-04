@@ -6,7 +6,7 @@
   </div>
   <div class="row justify-content-around">
     <div class="col-8 card">
-      <form novalidate id="account-form" class="px-1 mt-1" action="#/account" method="POST">
+      <form novalidate id="expected-form" class="px-1 mt-1" action="#/access" method="POST">
         <h4 id="title-login" class="text-gray px-2">Información del visistante</h4>
         <div class="form-row">
           <div class="form-group col-12">
@@ -27,8 +27,8 @@
         </div>
       </form>
     </div>
-    <div class="col-8 card d-none">
-      <form novalidate id="account-form" class="px-1 mt-1" action="#/account" method="POST">
+    <div style="display-none" class="col-8 card">
+      <form novalidate id="unexpected-form" class="px-1 mt-1" action="#/access" method="POST">
         <h4 id="title-login" class="text-gray px-2">Información del visistante</h4>
         <div class="form-row">
           <div class="form-group col-6">
