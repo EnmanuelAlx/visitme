@@ -1,9 +1,11 @@
 <div class="container-fluid">
-  <div class="row justify-content-center">
-    <div class="col-11">
+  <div class="row justify-content-around">
+    <div class="col-11 pl-0">
       <h2 id="title-login" class="text-gray">Mi cuenta</h2>
     </div>
-    <div class="col-11 card">
+  </div>
+  <div class="row justify-content-around">
+    <div class="col-8 card">
       <form novalidate id="account-form" class="px-1 mt-1" action="#/account" method="POST">
         <h4 id="title-login" class="text-gray px-2">Información personal</h4>
         <div class="form-row">
@@ -61,12 +63,35 @@
 
         <input type="hidden" name="address[country]" value="Venezuela" />
 
-        <div class="row justify-content-end mb-3">
-          <div class="col-3">
+        <div class="d-flex justify-content-end mb-3">
+          <div class="col-4">
             <button class="btn-primary btn white-text px-5">Guardar detalles</button>
           </div>
         </div>
       </form>
+      </div>
+    <div class="col-3">
+      <div class="card card-user">
+        <div class="card-image">
+          <img src="../../assets/img/login-bg.jpg">
+        </div>
+        <div class="card-body">
+          <div class="author">
+            <a id="img-selection" clickable>
+              <img class="avatar border-clear-gray" src="{{image}}" alt="...">
+              <h5 class="title text-primary">{{name}}</h5>
+            </a>
+            <input id="account-profile" type="file" form="account-form" style="display: none" name="image">
+            <p class="description text-center">
+              <i class="fa fa-hashtag text-primary"></i>
+              <span class="font-weight-bold text-light-gray"> Visitas en el mes: </span> 15
+            </p>
+            <p class="description text-center">
+              <i class="fa fa-calendar text-primary"></i>
+              <span class="font-weight-bold text-light-gray"> Última visita: </span> 6 Jun de 2018
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
