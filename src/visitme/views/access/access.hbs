@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row justify-content-around">
-    <div class="col-8 card">
+    <div id="expected-div" class="col-8 card">
       <form novalidate id="expected-form" class="px-1 mt-1" action="#/access" method="POST">
         <h4 id="title-login" class="text-gray px-2">Información del visistante</h4>
         <div class="form-row">
@@ -15,11 +15,11 @@
           </div>
         </div>
         <div class="form-row">
-         <div class="form-group col-12">
+          <div class="form-group col-12">
             <label for="exampleInputEmail1">Buscar por nombre</label>
             <input required class="form-control" type="text" name="name" placeholder="Joan Gil">
           </div>
-        </div>  
+        </div>
         <div class="d-flex justify-content-end mb-3">
           <div class="col-4">
             <button class="btn-primary btn white-text px-5">Confirmar datos</button>
@@ -27,8 +27,8 @@
         </div>
       </form>
     </div>
-    <div style="display: none" class="col-8 card">
-      <form novalidate id="unexpected-form" class="px-1 mt-1" action="#/access" method="POST">
+    <div id="unexpected-div" style="display: none" class="col-8 card">
+      <form novalidate id="unexpected-form" class="px-1 mt-1" action="#/access/unexpected" method="POST">
         <h4 id="title-login" class="text-gray px-2">Información del visistante</h4>
         <div class="form-row">
           <div class="form-group col-6">
@@ -45,13 +45,25 @@
             <label for="exampleInputEmail1">Localidad</label>
             <input required class="form-control" type="text" name="locality" placeholder="Número de casa / Apto / Ofic">
           </div>
+
           <div id="dropzone" class="dropzone needsclick dz-clickable">
             <div class="dz-message needsclick">
-              <p class="font-xsm">Drag and drop a file or <span class="text-primary">click here</span>  to upload a document.</p>
+              <p class="font-xsm">Drag and drop a file or
+                <span class="text-primary">click here</span> to upload a document.</p>
             </div>
           </div>
         </div>
-
+        <h4 id="title-login" class="text-gray px-2">Información del Residente</h4>
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label for="exampleInputEmail1">Cédula</label>
+            <input required class="form-control" type="text" name="identification" placeholder="Cédula">
+          </div>
+          <div class="form-group col-6">
+            <label for="exampleInputEmail1">Nombre Completo</label>
+            <input required class="form-control" type="text" name="name" placeholder="Joan Gil">
+          </div>
+        </div>
         <div class="d-flex justify-content-end mb-3">
           <div class="col-4">
             <button class="btn-primary btn white-text px-5">Confirmar datos</button>
@@ -97,9 +109,11 @@
                 </tr>
               </tbody>
             </table>
-        
+
           </div>
         </div>
       </div>
     </div>
   </div>
+
+</div>

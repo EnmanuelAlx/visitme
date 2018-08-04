@@ -19,25 +19,27 @@
     try {
       if (!app.getAccessToken()) return context.redirect("#/login");
       const data = $(context.target).serializeJSON();
-      startPreload(CONTAINER);
-      const image = $("#access-profile")[0].files[0];
-      if (image) data.image = image;
-      const formData = new FormData();
-      Object.keys(data).map(key => {
-        const value = key === "address" ? JSON.stringify(data[key]) : data[key];
-        formData.append(key, value);
-      });
-      await multipartApi(formData, "user/me", "PUT");
-      notify.info("Tus datos fueron modificados exitosamente", "Éxito");
-      app.refresh();
+      startPreload("#unexpected-form");
+      await postMainApi(data, "community/shoudlEnter", "PUT");
+      notify.info("Visita verificada", "Éxito");
+      stopPreload();
     } catch (e) {
       stopPreload();
-      notify.error("Ocurrió un error al guardar tus datos", "Error");
+      notify.error("Visita no encontrada", "Error");
+      $("#expected-div").hide();
+      $("#unexpected-div").show();
+    }
+  });
+
+  app.post(`${ROOT}/unexpected`, async context => {
+    try {
+      if (!app.getAccessToken()) return context.redirect("#/login");
+    } catch (e) {
+      stopPreload();
     }
   });
 
   const initListeners = () => {
-
-    $("#access-form").submit(e => e.preventDefault());
+    $("#unexpected-form,#expected-form").submit(e => e.preventDefault());
   };
 })();
