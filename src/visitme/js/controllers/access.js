@@ -20,10 +20,18 @@
       if (!app.getAccessToken()) return context.redirect("#/login");
       const data = $(context.target).serializeJSON();
       startPreload("#unexpected-form");
-      await postMainApi(data, "community/shoudlEnter", "PUT");
+      const { communities } = getSessionData();
+      const community = communities.find(comm => comm.selected === true)._id;
+      const visit = await postMainApi(
+        data,
+        `communities/${community}/shouldEnter`,
+        "PUT"
+      );
+      const check = await postMainApi({}, `visits/${visit.id}/checkIn`, "PUT");
       notify.info("Visita verificada", "Éxito");
       stopPreload();
     } catch (e) {
+      console.log("ERROR", e);
       stopPreload();
       notify.error("Visita no encontrada", "Error");
       $("#expected-div").hide();
