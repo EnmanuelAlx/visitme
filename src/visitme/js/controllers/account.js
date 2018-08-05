@@ -22,6 +22,7 @@
       if (!app.getAccessToken()) return context.redirect("#/login");
       const data = $(context.target).serializeJSON();
       startPreload(CONTAINER);
+      data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const image = $("#account-profile")[0].files[0];
       if (image) data.image=image;
       const formData = new FormData();

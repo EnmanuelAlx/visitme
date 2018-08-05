@@ -45,6 +45,7 @@
       table.removeButton("Añadir");
       table.removeButton("Eliminar");
       table.init();
+      initListeners(table, items);
     } catch (error) {
       toastr.error("Ocurrió un error al cargar la data", "Error");
     }
@@ -70,4 +71,32 @@
     }
     return moment(maxDate).fromNow();
   };
+
+  const triggerVisitDetail = (data) => {
+    if ($("#visit-detail-modal").exists()){
+      $("#visit-detail-modal").modal("dispose");
+      $("#visit-detail-modal-container").remove();
+    } 
+ 
+    const template = Handlebars.partials["visit-detail"];
+    $("body").append(template(data));
+    $("#visit-detail-modal").modal("show");
+  
+  };
+
+  const initListeners = (table, items) => {
+    let longpress = 200;
+    let start;
+
+    $("tr").on("mousedown", () => start = new Date().getTime());
+    $("tr").on("mouseleave", () => start = 0);
+    $("tr").on("mouseup", event => {
+      if (new Date().getTime() >= (start + longpress)) {
+        $(event.currentTarget).addClass("selected");
+        const selected = table.tableInstance.rows(".selected")[0];
+        triggerVisitDetail(items[selected]);
+      }
+    });
+  };
+
 })();
