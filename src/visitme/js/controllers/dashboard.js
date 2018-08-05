@@ -13,7 +13,7 @@
     if (userType === "RESIDENT") return context.redirect("#/visits");
 
     if (userType === "SECURITY") return context.redirect("#/security");
-
+    initOneSignal();
     app.runRoute("put", "#/dashboard");
   });
 
@@ -260,6 +260,33 @@
             }
           }
         }
+      }
+    });
+  };
+
+  const initOneSignal = () => {
+    var OneSignal = window.OneSignal || [];
+    console.log("ONE SIGNAL", OneSignal);
+    OneSignal.push([
+      "init",
+      {
+        appId: "3448c128-41d1-4813-a70f-14cb2ea55e9f",
+        autoRegister: false /* Set to true to automatically prompt visitors */,
+        notifyButton: {
+          enable: false /* Set to false to hide */
+        }
+      }
+    ]);
+    OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      if (isEnabled) {
+        OneSignal.getUserId(device => {
+          const deviceSaved = app.store.get("device");
+          if (!deviceSaved || device != deviceSaved) {
+            postMainApi({ device }, "user/me/devices", "PUT").then(res =>
+              app.store.set("device", device)
+            );
+          }
+        });
       }
     });
   };

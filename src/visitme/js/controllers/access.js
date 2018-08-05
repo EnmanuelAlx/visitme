@@ -31,19 +31,32 @@
       notify.info("Visita verificada", "Éxito");
       stopPreload();
     } catch (e) {
-      console.log("ERROR", e);
-      stopPreload();
-      notify.error("Visita no encontrada", "Error");
-      $("#expected-div").hide();
-      $("#unexpected-div").show();
+      if (e.status) {
+        stopPreload();
+        notify.error("Visita no encontrada", "Error");
+        $("#expected-div").hide();
+        $("#unexpected-div").show();
+      } else {
+        notify.error("Hubo un error, intente de nuevo mas tarde", "Error");
+      }
     }
   });
 
   app.post(`${ROOT}/unexpected`, async context => {
     try {
       if (!app.getAccessToken()) return context.redirect("#/login");
+      const data = $(context.target).serializeJSON();
+      const { communities } = getSessionData();
+      const community = communities.find(comm => comm.selected === true)._id;
+      const accessRequest = await postMainApi(
+        data,
+        `communities/${community}/requestAccess`,
+        "PUT"
+      );
+      console.log("DATA", accessRequest);
     } catch (e) {
       stopPreload();
+      if (e.status == 404) notify.error("Residente no encontrado", "Error");
     }
   });
 

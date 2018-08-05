@@ -1,19 +1,17 @@
 /*global*/
 (() => {
-
   const app = Sammy.apps.body;
   const HB = MyApp; // handlebars;
+
   app.get("#/", context => {
     if (!app.getAccessToken()) return context.redirect("#/login");
     const { communities, allCommunities } = getSessionData();
     stopPreload();
-    const hasSelected = communities.filter(comm => comm.selected === true).length > 0;
-    if (!hasSelected)
-      return communitySelection(communities, allCommunities);
-
+    const hasSelected =
+      communities.filter(comm => comm.selected === true).length > 0;
+    if (!hasSelected) return communitySelection(communities, allCommunities);
     return context.redirect("#/dashboard");
   });
-
 
   app.get("#/unverified", () => {
     const template = HB.templates["unverified"];
@@ -33,12 +31,10 @@
     $("#community-modal").modal("show");
 
     $("#community-modal").on("hidden.bs.modal", () => {
-      const {
-        communities
-      } = getSessionData();
-      const hasSelected = communities.filter(comm => comm.selected === true).length > 0;
-      if (!hasSelected)
-        $("#community-modal").modal("show");
+      const { communities } = getSessionData();
+      const hasSelected =
+        communities.filter(comm => comm.selected === true).length > 0;
+      if (!hasSelected) $("#community-modal").modal("show");
     });
 
     $("#community-logo").change(event => {
@@ -48,9 +44,7 @@
       reader.onload = e => $(".input-img").attr("src", e.target.result);
       reader.readAsDataURL(input.files[0]);
     });
-
   };
-
 
   $(document).on("click", ".community-option img", event => {
     const target = $(event.currentTarget);
@@ -59,9 +53,6 @@
     $("img").removeClass("checked");
     target.addClass("checked");
   });
-
-  
-
 
   $(document).on("click", ".no-community", event => {
     $(".form-div").hide();
