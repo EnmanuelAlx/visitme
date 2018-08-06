@@ -62,7 +62,8 @@
     "renderByTypeOfValue": false,
     "showAdditionModal": false,
     "notify": false,
-    "NOTIFY_OPTIONS": false
+    "NOTIFY_OPTIONS": false,
+    "loadCustomTable": false
   },
   "extends": [
     "eslint:recommended",

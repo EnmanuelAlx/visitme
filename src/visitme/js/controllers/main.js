@@ -26,6 +26,7 @@
       communities,
       allCommunities
     };
+    console.log("data", data);
 
     $("body").append(template(data));
     $("#community-modal").modal("show");

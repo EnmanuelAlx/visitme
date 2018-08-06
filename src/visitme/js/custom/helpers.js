@@ -97,6 +97,9 @@ Handlebars.registerHelper("formatHour", hour => {
   if(hour.length === 3) hour = `0${hour}`;
   return moment(hour, "hhmm").format("hh:mm a");
 });
+
+Handlebars.registerHelper("momentDateFormat", (timestamp, format) => moment(timestamp).format(format));
+
 Handlebars.registerHelper("getWeekName", weekNumber => _.capitalize(moment.weekdays(true)[weekNumber-1]));
 Handlebars.registerHelper("timeOfDay", partOfDay => {
   const days = {

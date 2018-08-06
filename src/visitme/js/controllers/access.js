@@ -19,7 +19,7 @@
     try {
       if (!app.getAccessToken()) return context.redirect("#/login");
       const data = $(context.target).serializeJSON();
-      startPreload("#unexpected-form");
+      startPreload("#expected-form");
       const { communities } = getSessionData();
       const community = communities.find(comm => comm.selected === true)._id;
       const visit = await postMainApi(
@@ -27,7 +27,7 @@
         `communities/${community}/shouldEnter`,
         "PUT"
       );
-      const check = await postMainApi({}, `visits/${visit.id}/checkIn`, "PUT");
+      const check = await postMainApi({}, `visits/${visit.id}/checkIn`);
       notify.info("Visita verificada", "Éxito");
       stopPreload();
     } catch (e) {

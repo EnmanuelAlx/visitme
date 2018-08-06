@@ -45,7 +45,7 @@
 
   app.post(ROOT, context => {
     const data = $(context.target).serializeJSON();
-
+    data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     startPreload("body");
     const login = postMainApi(data, "user");
     login

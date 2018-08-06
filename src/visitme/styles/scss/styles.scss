@@ -139,6 +139,9 @@ tbody {
         background-color: lighten($color-primary-0, 50%);
       }
     }
+    &:hover {
+      cursor: pointer;
+    }
   }
   table.alerts & {
     td {
@@ -185,5 +188,20 @@ p {
   }
   &.xs {
     font-size: 12px;
+  }
+}
+
+#visit-detail-modal {
+  label {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  p+.avatar {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 5px;
   }
 }
