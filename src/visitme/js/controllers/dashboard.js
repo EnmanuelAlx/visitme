@@ -266,7 +266,7 @@
 
   const initOneSignal = () => {
     var OneSignal = window.OneSignal || [];
-    console.log("ONE SIGNAL", OneSignal);
+
     OneSignal.push([
       "init",
       {
@@ -274,10 +274,15 @@
         autoRegister: false /* Set to true to automatically prompt visitors */,
         notifyButton: {
           enable: false /* Set to false to hide */
+        },
+        welcomeNotification: {
+          disable: true
         }
       }
     ]);
+
     OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+      console.log("ONE SIGNAL!", isEnabled);
       if (isEnabled) {
         OneSignal.getUserId(device => {
           const deviceSaved = app.store.get("device");
@@ -286,6 +291,10 @@
               app.store.set("device", device)
             );
           }
+        });
+        OneSignal.on("notificationDisplay", function(notification) {
+          console.log("OneSignal notification displayed:", notification);
+          handleNotification(notification);
         });
       }
     });

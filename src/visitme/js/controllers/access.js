@@ -53,7 +53,9 @@
         `communities/${community}/requestAccess`,
         "PUT"
       );
-      console.log("DATA", accessRequest);
+      notify.info("Enviada la Solicitud de Acceso", "Éxito");
+      $("#expected-div").show();
+      $("#unexpected-div").hide();
     } catch (e) {
       stopPreload();
       if (e.status == 404) notify.error("Residente no encontrado", "Error");
