@@ -273,6 +273,5 @@ gulp.task("index", () => {
 gulp.task("onesignal", () => {
   return gulp
     .src(["src/visitme/manifest.json", "src/visitme/OneSignalSDKUpdaterWorker.js", "src/visitme/OneSignalSDKWorker.js"])
-    .pipe(rename("index.html"))
     .pipe(gulp.dest("src/visitme/"));
 });
