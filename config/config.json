@@ -1,6 +1,6 @@
 {
   "mainApi": {
-    "test": "http://61d0c266.ngrok.io/api",
+    "test": "https://visitme1.herokuapp.com/api",
     "production": "https://visitme1.herokuapp.com/api"
   }
 }
