@@ -8,6 +8,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+
+    OneSignal.push(function () {
+      OneSignal.init({
+        appId: "3448c128-41d1-4813-a70f-14cb2ea55e9f",
+        autoRegister: false /* Set to true to automatically prompt visitors */,
+        notifyButton: {
+          enable: false /* Set to false to hide */
+        },
+        promptOptions: {
+          /* actionMessage limited to 90 characters */
+          actionMessage: "Nos gustaria mostrarte notificaciones",
+          /* acceptButtonText limited to 15 characters */
+          acceptButtonText: "Permitir",
+          /* cancelButtonText limited to 15 characters */
+          cancelButtonText: "No permitir"
+        },
+        httpPermissionRequest: {
+          enable: true
+        },
+        welcomeNotification: {
+          disable: true
+        },
+        persistNotification: false
+      });
+    });
+  </script>
   <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
