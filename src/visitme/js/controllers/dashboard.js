@@ -267,9 +267,8 @@
   const initOneSignal = () => {
     var OneSignal = window.OneSignal || [];
 
-    OneSignal.push([
-      "init",
-      {
+    OneSignal.push(function() {
+      OneSignal.init({
         appId: "3448c128-41d1-4813-a70f-14cb2ea55e9f",
         requiresUserPrivacyConsent: true,
         autoRegister: true /* Set to true to automatically prompt visitors */,
@@ -279,8 +278,8 @@
         welcomeNotification: {
           disable: true
         }
-      }
-    ]);
+      });
+    });
 
     OneSignal.isPushNotificationsEnabled(function(isEnabled) {
       console.log("ONE SIGNAL!", isEnabled);
