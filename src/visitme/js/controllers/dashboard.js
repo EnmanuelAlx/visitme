@@ -271,13 +271,17 @@
       OneSignal.init({
         appId: "3448c128-41d1-4813-a70f-14cb2ea55e9f",
         requiresUserPrivacyConsent: true,
-        autoRegister: true /* Set to true to automatically prompt visitors */,
+        autoRegister: false /* Set to true to automatically prompt visitors */,
         notifyButton: {
           enable: false /* Set to false to hide */
         },
+        httpPermissionRequest: {
+          enable: true
+        },
         welcomeNotification: {
           disable: true
-        }
+        },
+        persistNotification: false
       });
     });
 
