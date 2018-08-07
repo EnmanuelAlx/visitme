@@ -256,6 +256,7 @@ gulp.task("build-visitme", callback => {
     "partials",
     "index",
     "js",
+    "onesignal",
     "useref-main",
     callback
   );
@@ -264,6 +265,14 @@ gulp.task("build-visitme", callback => {
 gulp.task("index", () => {
   return gulp
     .src("src/visitme/main.html")
+    .pipe(rename("index.html"))
+    .pipe(gulp.dest("src/visitme/"));
+});
+
+
+gulp.task("onesignal", () => {
+  return gulp
+    .src(["src/visitme/manifest.json", "src/visitme/OneSignalSDKUpdaterWorker.js", "src/visitme/OneSignalSDKWorker.js"])
     .pipe(rename("index.html"))
     .pipe(gulp.dest("src/visitme/"));
 });
