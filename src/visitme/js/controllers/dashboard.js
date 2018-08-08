@@ -280,7 +280,16 @@
           console.log("OneSignal notification displayed:", notification);
           handleNotification(notification);
         });
+      } else {
+        window.OneSignal.showHttpPrompt();
       }
+    });
+
+    OneSignal.push(function() {
+      OneSignal.on("notificationPermissionChange", function(permissionChange) {
+        var currentPermission = permissionChange.to;
+        console.log("New permission state:", currentPermission);
+      });
     });
   };
 })();
