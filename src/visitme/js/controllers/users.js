@@ -11,7 +11,4 @@
     const template = HB.templates[TEMPLATE_NAME];
     loadTemplate(CONTAINER, TEMPLATE_NAME, template());
   });
-
-  
-
 })();

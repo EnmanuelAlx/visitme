@@ -1,5 +1,5 @@
 /*global*/
-(async () => {
+(() => {
   const app = Sammy.apps.body;
   const store = app.store;
   const BODY = "body";
@@ -10,16 +10,21 @@
   const SESSION_CONNECTED = "oauth.connected";
   const SESSION_ENDED = "oauth.disconnected";
 
-
-  /* ================  SAMPLE CODE   ============================ */
-
   app.get(ROOT, async context => {
     if (app.getAccessToken()) return context.redirect("#/dashboard");
     const template = HB.templates[TEMPLATE_NAME];
     loadTemplate(BODY, TEMPLATE_NAME, template());
+    handleLogin();
   });
 
-  app.get("#/logout", context => {
+  const handleLogin = () => {
+    $("#login-form").validate(FORM_VALIDATION_DEFAULTS);
+    validateForms();
+  };
+
+  app.get("#/logout", async context => {
+    const device = store.get("device");
+    await deleteMainApi("user/me/devices/" + device);
     context.loseAccessToken();
     context.redirect("#/login");
   });
@@ -30,24 +35,35 @@
     let startUrl = unescape(getQuery(app.getLocation(), "state"));
     if (startUrl === "false") startUrl = "#/";
     startPreload(BODY);
-    const login = postMainApi(data, "/login");
+    const login = postMainApi(data, "user/auth");
     login
-      .then(res => {
+      .then(async res => {
+        initSession(res);
+        const { communities } = await getMainApi({}, "user/me/communities");
+        const allCommunities = await getMainApi({}, "communities");
+        res.communities = communities;
+        res.allCommunities = allCommunities;
         initSession(res);
         return context.redirect(startUrl);
       })
       .catch(e => {
         stopPreload();
-        app.trigger(SESSION_DENIED, e.responseJSON.message);
+        app.trigger(SESSION_DENIED, e.responseText);
       });
   });
 
   app.bind(SESSION_CONNECTED, () => {});
 
-  app.bind(SESSION_ENDED, () => {
+  app.bind(SESSION_ENDED, async () => {
     store.clearAll();
   });
 
-  app.bind(SESSION_DENIED, (evt, error) => toastr.error(error, ERROR_HEADER));
-  
+  app.bind(SESSION_DENIED, (evt, error) => notify.error(error, ERROR_HEADER));
+
+  const initSession = session => {
+    const app = Sammy.apps.body;
+    const store = app.store;
+    Object.keys(session).forEach(key => store.set(key, session[key]));
+    app.setAccessToken(session.token);
+  };
 })();

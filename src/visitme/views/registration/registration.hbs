@@ -1,0 +1,60 @@
+<nav class="app-nav navbar" id="client-app-nav">
+  <div class="row w-100 no-gutters">
+    <div class="ml-2 col-lg-2 col-sm-3 col-7 d-flex align-items-center">
+      <a href="#/">
+        <img src="../../assets/img/visitme.png" alt="" class="logo w-25 img-fluid">
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <h2 id="title-login" class="text-gray">Regístrate</h2>
+      <p id="subtitle-login" class="text-light-gray">Ingresa tus datos</p>
+      <form novalidate id="registration-form" class="px-1 mt-4" action="#/registration" method="POST">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nombre completo</label>
+           <input required class="form-control" type="text" name="name" placeholder="Nombre completo">
+         </div> 
+        <div class="form-group">
+          <label for="exampleInputEmail1">Correo electrónico</label>
+           <input required class="form-control" type="text" name="email" placeholder="joan@visitme.com">
+         </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Cédula</label>
+          <input required class="form-control" type="text" name="identification" placeholder="Cédula">
+         </div> 
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Teléfono de casa</label>
+            <input required class="form-control required" type="text" name="homePhone" placeholder="Teléfono Casa">
+          </div>
+          <div class="form-group col-md-6 order-1">
+            <label for="inputEmail4">Teléfono personal</label>
+            <input required class="form-control" type="text" name="cellPhone" placeholder="Teléfono Personal">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Contraseña</label>
+          <input required id="password" class="form-control mb-2" type="password" name="password" placeholder="Contraseña">
+          <input required class="form-control mb-2" type="password" name="repeat-password" placeholder="Repetir Contraseña">
+         </div>  
+       
+
+      
+        <div class="row justify-content-center mt-5">
+          <div class="col-6">
+            <button class="btn-primary btn white-text px-5">Registrarme</button>
+          </div>
+        </div>
+        <div id="login-alert" class="text-center" style="margin-top: 1.625em"></div>
+      </form>
+    </div>
+
+  </div>
+</div>

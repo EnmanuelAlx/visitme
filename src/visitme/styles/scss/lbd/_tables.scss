@@ -1,7 +1,6 @@
-.table{
-
-   .radio,
-   .checkbox{
+.table {
+    .radio,
+    .checkbox {
         position: relative;
         height: 20px;
         display: block;
@@ -9,22 +8,20 @@
         padding: 0px 0px;
         margin: 0px 5px;
         text-align: center;
-
-        .icons{
+        .icons {
             left: 5px;
         }
-   }
-   > thead > tr > th,
-   > tbody > tr > th,
-   > tfoot > tr > th,
-   > thead > tr > td,
-   > tbody > tr > td,
-   > tfoot > tr > td{
-       padding: 12px 8px;
-       vertical-align: middle;
-   }
-
-    > thead > tr > th{
+    }
+    >thead>tr>th,
+    >tbody>tr>th,
+    >tfoot>tr>th,
+    >thead>tr>td,
+    >tbody>tr>td,
+    >tfoot>tr>td {
+        padding: 12px 8px;
+        vertical-align: middle;
+    }
+    >thead>tr>th {
         border-bottom-width: 1px;
         font-size: $font-size-small;
         text-transform: uppercase;
@@ -33,39 +30,35 @@
         padding-bottom: 5px;
         border-top: none !important;
         border-bottom: none;
-        text-align: left !important;
+        text-align: center !important;
     }
-
-   .td-actions .btn{
+    .td-actions .btn {
         @include opacity(0.36);
-
-        &.btn-xs{
+        &.btn-xs {
             padding-left: 3px;
             padding-right: 3px;
         }
     }
-    .td-actions{
+    .td-actions {
         min-width: 90px;
     }
-
-    > tbody > tr{
+    >tbody>tr {
         position: relative;
-
-        &:hover{
-            .td-actions .btn{
+        &:hover {
+            .td-actions .btn {
                 @include opacity(1);
             }
         }
     }
-
-    .btn:focus{
+    .btn:focus {
         box-shadow: none !important;
     }
 }
-.table-upgrade{
-    .table{
-        tr{
-            td{
+
+.table-upgrade {
+    .table {
+        tr {
+            td {
                 width: 100%
             }
         }

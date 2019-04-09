@@ -23,22 +23,31 @@ const removeLine = require("gulp-remove-line");
 const fs = require("fs");
 const replace = require("gulp-replace");
 const rename = require("gulp-rename");
+const cached = require("gulp-cached");
 
 const ENVIRONMENT = process.env.NODE_ENV || "test";
 
-gulp.task("clean-sammy", () => {
+function swallowError(error) {
+  console.log(error.toString());
+  this.emit("end");
+}
 
-  gulp.src(["node_modules/sammy/lib/plugins/sammy.oauth2.js"])
-    .pipe(removeLine({
-      "sammy.oauth2.js": ["103-108"]
-    }))
+
+gulp.task("clean-sammy", () => {
+  gulp
+    .src(["node_modules/sammy/lib/plugins/sammy.oauth2.js"])
+    .pipe(
+      removeLine({
+        "sammy.oauth2.js": ["103-108"]
+      })
+    )
     .pipe(gulp.dest("node_modules/sammy/lib/plugins/"));
 });
 
 gulp.task("sass", () => {
   return gulp
     .src([
-      "src/visitme/styles/scss/*.scss",
+      "src/visitme/styles/scss/**/*.scss",
       "node_modules/bootstrap/dist/css/bootstrap.css",
       "node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css",
       "node_modules/toastr/build/toastr.min.css",
@@ -47,9 +56,14 @@ gulp.task("sass", () => {
       "node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css",
       "node_modules/bootstrap4c-dropzone/dist/css/component-dropzone.min.css",
       "node_modules/easy-autocomplete/dist/easy-autocomplete.min.css",
-      "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css"
+      "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",
+      "node_modules/select2/dist/css/select2.css",
+      "node_modules/select2-bootstrap4-theme/dist/select2-bootstrap4.css",
+      "node_modules/jquery-confirm/dist/jquery-confirm.min.css"
     ])
+    .pipe(cached("sass"))
     .pipe(sass())
+    .on("error", swallowError)
     .pipe(gulp.dest("src/visitme/styles/css"))
     .pipe(browserSync.stream());
 });
@@ -67,6 +81,7 @@ gulp.task("js", () => {
       "node_modules/jquery-validation/dist/jquery.validate.min.js",
       "node_modules/toastr/build/toastr.min.js",
       "node_modules/jquery-validation/dist/additional-methods.js",
+      "node_modules/jquery-validation/dist/localization/messages_es.js",
       "node_modules/jquery-serializejson/jquery.serializejson.min.js",
       "node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
       "node_modules/bluebird/js/browser/bluebird.core.min.js",
@@ -75,15 +90,17 @@ gulp.task("js", () => {
       "node_modules/handlebars/dist/handlebars.runtime.js",
       "node_modules/dropzone/dist/dropzone.js",
       "node_modules/moment/moment.js",
+      "node_modules/moment/locale/es.js",
       "node_modules/lodash/lodash.js",
       "node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.min.js",
       "node_modules/datatables.net/js/jquery.dataTables.js",
       "node_modules/clipboard/dist/clipboard.min.js",
       "node_modules/chart.js/dist/Chart.min.js",
       "node_modules/chart.piecelabel.js/build/Chart.PieceLabel.min.js",
+      "node_modules/select2/dist/js/select2.js",
+      "node_modules/jquery-confirm/dist/jquery-confirm.min.js"
     ])
-    .pipe(gulp.dest("src/visitme/js/lib"))
-    .pipe(browserSync.stream());
+    .pipe(gulp.dest("src/visitme/js/lib"));
 });
 
 gulp.task("babel", () => {
@@ -91,6 +108,7 @@ gulp.task("babel", () => {
   const mainApi = settings.mainApi[ENVIRONMENT];
   return gulp
     .src(["src/visitme/js/**/*.js", "!src/visitme/js/lib/**/*.js"])
+    .pipe(cached("babel"))
     .pipe(sourcemaps.init())
     .pipe(
       babel({
@@ -98,6 +116,7 @@ gulp.task("babel", () => {
         plugins: ["syntax-async-functions", "transform-regenerator"]
       })
     )
+    .on("error", swallowError)
     .pipe(sourcemaps.write("."))
     .pipe(sourcemaps.write("."))
     .pipe(replace("@@mainApi", mainApi))
@@ -125,11 +144,14 @@ gulp.task("templates", () => {
   gulp
     .src("./src/visitme/views/**/*.hbs")
     .pipe(handlebars())
+    .on("error", swallowError)
     .pipe(wrap("Handlebars.template(<%= contents %>)"))
-    .pipe(declare({
-      namespace: "MyApp.templates",
-      noRedeclare: true
-    })) // Avoid duplicate declarations
+    .pipe(
+      declare({
+        namespace: "MyApp.templates",
+        noRedeclare: true
+      })
+    ) // Avoid duplicate declarations
     .pipe(concat("templates.js"))
     .pipe(gulp.dest("src/visitme/dist/templates"));
 });
@@ -138,11 +160,14 @@ gulp.task("partials", () => {
   gulp
     .src(["./src/visitme/views/**/_*.hbs"])
     .pipe(handlebars())
+    .on("error", swallowError)
     .pipe(
       wrap(
-        "Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));", {}, {
+        "Handlebars.registerPartial(<%= processPartialName(file.relative) %>, Handlebars.template(<%= contents %>));",
+        {},
+        {
           imports: {
-            processPartialName: function (fileName) {
+            processPartialName: function(fileName) {
               // Strip the extension and the underscore
               // Escape the output with JSON.stringify
               return JSON.stringify(path.basename(fileName, ".js").substr(1));
@@ -155,7 +180,6 @@ gulp.task("partials", () => {
     .pipe(gulp.dest("src/visitme/dist/templates"));
 });
 
-
 gulp.task("useref-main", () => {
   return gulp
     .src("src/visitme/*.html")
@@ -165,12 +189,27 @@ gulp.task("useref-main", () => {
     .pipe(gulp.dest("dist/visitme"));
 });
 
-
 gulp.task("images", () => {
   return gulp
     .src("src/visitme/assets/**/*.+(png|jpg|gif|svg)")
     .pipe(cache(imagemin()))
     .pipe(gulp.dest("dist/visitme/assets"));
+});
+
+
+gulp.task("babel-watch", ["babel"], function (done) {
+  browserSync.reload();
+  done();
+});
+
+gulp.task("templates-watch", ["templates"], function (done) {
+  browserSync.reload();
+  done();
+});
+
+gulp.task("partials-watch", ["partials"], function (done) {
+  browserSync.reload();
+  done();
 });
 
 gulp.task("serve-visitme", () => {
@@ -179,24 +218,23 @@ gulp.task("serve-visitme", () => {
       baseDir: ["./src/visitme", "./src"]
     },
     middleware: [historyApiFallback()],
-    open: false
+    open: false,
+    port: 3010
   });
-  gulp.watch(["src/visitme/styles/scss/*.scss"], ["sass"]);
-  gulp.watch(["src/visitme/js/**/*.js"], ["babel"]);
-  gulp.watch(["src/visitme/views/**/*.hbs"], ["templates"]);
-  gulp.watch(["src/visitme/views/**/_*.hbs"], ["partials"]);
+  gulp.watch(
+    ["src/visitme/styles/scss/*.scss", "src/visitme/styles/scss/**/*.scss"],
+    ["sass"]
+  );
+  gulp.watch(["src/visitme/js/**/*.js"], ["babel-watch"]);
+  gulp.watch(["src/visitme/views/**/*.hbs"], ["templates-watch"]);
+  gulp.watch(["src/visitme/views/**/_*.hbs"], ["partials-watch"]);
   gulp
     .watch([
       "src/visitme/main.html",
       "src/visitme/views/**/*.html",
-      "src/visitme/js/**/*.js",
-      "src/visitme/views/**/*.hbs",
-      "src/visitme/views/**/_*.hbs",
-      "src/visitme/styles/scss/*.scss"
     ])
     .on("change", browserSync.reload);
 });
-
 
 gulp.task("start-visitme", [
   "serve-visitme",
@@ -205,20 +243,21 @@ gulp.task("start-visitme", [
   "babel",
   "js",
   "templates",
-  "partials",
+  "partials"
 ]);
-
 gulp.task("build-visitme", callback => {
   runSequence(
-    "clean:dist-broker", [
-      "sassr",
-      "babel",
-      "useref",
-      "images",
-      "screens",
-      "templates",
-      "partials",
-    ],
+    "clean:dist",
+    "sass",
+    "babel",
+    "images",
+    "screens-visitme",
+    "templates",
+    "partials",
+    "index",
+    "js",
+    "onesignal",
+    "useref-main",
     callback
   );
 });
@@ -228,4 +267,11 @@ gulp.task("index", () => {
     .src("src/visitme/main.html")
     .pipe(rename("index.html"))
     .pipe(gulp.dest("src/visitme/"));
+});
+
+
+gulp.task("onesignal", () => {
+  return gulp
+    .src(["src/visitme/manifest.json", "src/visitme/OneSignalSDKUpdaterWorker.js", "src/visitme/OneSignalSDKWorker.js"])
+    .pipe(gulp.dest("dist/visitme/"));
 });
