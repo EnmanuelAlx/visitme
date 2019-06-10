@@ -13,10 +13,9 @@
   });
 
   const handleRegistration = () => {
-
     $("#registration-form").validate({
       focusCleanup: true,
-      errorPlacement: function (label, element) {
+      errorPlacement: function(label, element) {
         label.addClass("invalid-feedback");
         label.insertAfter(element);
       },
@@ -24,24 +23,24 @@
       wrapper: "div",
       rules: {
         password: {
-          pattern: /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,24}$/
+          pattern: /^(?=.*[A-Z])(?=.*[!@#$&*.])(?=.*[0-9])(?=.*[a-z]).{8,24}$/
         },
         "repeat-password": {
           equalTo: "#password"
         },
-        "email": {
+        email: {
           email: true
         }
       },
       messages: {
         password: {
-          pattern: "La contraseña debe contener al menos 8 letras, 1 mayúscula, 1 número y un caracter especial (! @ # $ & *)"
+          pattern:
+            "La contraseña debe contener al menos 8 letras, 1 mayúscula, 1 número y un caracter especial (! @ # $ & *)"
         }
       }
     });
     validateForms();
   };
-
 
   app.post(ROOT, context => {
     const data = $(context.target).serializeJSON();
@@ -50,7 +49,10 @@
     const login = postMainApi(data, "user");
     login
       .then(() => {
-        notify.info("Usuario registrado satisfactoriamente", "Petición exitosa");
+        notify.info(
+          "Usuario registrado satisfactoriamente",
+          "Petición exitosa"
+        );
         context.redirect("#/login");
       })
       .catch(e => {
@@ -58,5 +60,4 @@
         stopPreload();
       });
   });
-
 })();
