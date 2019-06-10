@@ -23,25 +23,31 @@
                 <div class="form-row">
                   <div class="form-group col-6">
                     <label for="exampleInputEmail1">Nombre completo</label>
-                    <input required class="form-control" type="text" name="name" value="{{name}}" placeholder="Nombre completo">
+                    <input required class="form-control" type="text" name="name" value="{{name}}"
+                      placeholder="Nombre completo">
                   </div>
                   <div class="form-group col-6">
                     <label for="exampleInputEmail1">Correo electrónico</label>
-                    <input required class="form-control" type="text" name="email" value="{{email}}" placeholder="joan@visitme.com">
+                    <input required class="form-control" type="text" name="email" value="{{email}}"
+                      placeholder="joan@visitme.com">
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-12">
                     <label for="exampleInputEmail1">Cédula</label>
-                    <input required class="form-control" type="text" name="identification" value="{{identification}}" placeholder="Cédula">
+                    <input required class="form-control" type="text" name="identification" value="{{identification}}"
+                      placeholder="Cédula">
                   </div>
                 </div>
+                {{#unless isSecurity}}
                 <div class="form-row">
                   <div class="form-group col">
                     <label for="exampleInputEmail1">Localidad</label>
-                    <input required class="form-control" type="text" name="reference" placeholder="Nro. Casa / Apto / Ofic.">
+                    <input required class="form-control" type="text" name="reference"
+                      placeholder="Nro. Casa / Apto / Ofic.">
                   </div>
                 </div>
+                {{/unless}}
                 <div class="row justify-content-end mt-2">
                   <div class="px-3">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

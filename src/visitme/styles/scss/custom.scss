@@ -1,4 +1,17 @@
-$theme-colors: ( "primary": #20a0ce, "primary-1": #6EC1E1, "primary-2": #44AED7, "primary-3": #0691C6, "primary-4": #046589, "secondary": #0097a7, "clear-gray": #d3d4db, "gray": #555555, "dark-gray": #434343, "light-gray": #777777, "regular-gray": #b7b7b7, "black": #000000);
+$theme-colors: (
+  "primary": #20a0ce,
+  "primary-1": #6ec1e1,
+  "primary-2": #44aed7,
+  "primary-3": #0691c6,
+  "primary-4": #046589,
+  "secondary": #0097a7,
+  "clear-gray": #d3d4db,
+  "gray": #555555,
+  "dark-gray": #434343,
+  "light-gray": #777777,
+  "regular-gray": #b7b7b7,
+  "black": #000000
+);
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 .btn-primary.disabled,
 .btn-primary:disabled {
@@ -30,4 +43,12 @@ $nav-tabs-link-color: #6b6b6b;
     background-color: $nav-tabs-link-active-bg;
     border-bottom: 3px solid $nav-tabs-link-active-color;
   }
+}
+
+.btn-danger.disabled,
+.btn-danger:disabled {
+  color: #dc3545;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  cursor: initial;
 }

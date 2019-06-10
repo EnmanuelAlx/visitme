@@ -9,10 +9,10 @@ $text_color-3: #aaaaaa;
 $text_color-4: #6b6b6b;
 $text_color-5: #555555;
 $text_color-6: #3e3e3e;
-$color-primary-0: #209ECE; // Main Primary color */
-$color-primary-1: #6EC1E1;
-$color-primary-2: #44AED7;
-$color-primary-3: #0691C6;
+$color-primary-0: #209ece; // Main Primary color */
+$color-primary-1: #6ec1e1;
+$color-primary-2: #44aed7;
+$color-primary-3: #0691c6;
 $color-primary-4: #046589;
 $color-alt: #234d62;
 $light: 300;
@@ -43,7 +43,7 @@ $black: 900;
 }
 
 .form-control:focus {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border: 1px solid $color-primary-0;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -92,7 +92,7 @@ $black: 900;
       transition: transform 0.5s;
     }
   }
-  input[type='file'] {
+  input[type="file"] {
     cursor: pointer;
   }
   img:hover {
@@ -111,8 +111,8 @@ $black: 900;
 }
 
 a[clickable],
-input[type='submit'],
-input[type='image'],
+input[type="submit"],
+input[type="image"],
 select,
 button,
 .pointer {
@@ -136,7 +136,8 @@ tbody {
     &.odd,
     &.even {
       &.selected {
-        background-color: lighten($color-primary-0, 50%);
+        background-color: lighten($color-primary-0, 40%);
+        border: 2px dotted lighten($color-primary-0, 30%);
       }
     }
     &:hover {
@@ -162,7 +163,8 @@ tbody {
   font-size: 14px;
 }
 
-.select2-container--bootstrap4 .select2-results__option--highlighted[aria-selected] {
+.select2-container--bootstrap4
+  .select2-results__option--highlighted[aria-selected] {
   background-color: $color-primary-0 !important;
 }
 
@@ -197,11 +199,22 @@ p {
     text-transform: uppercase;
     font-size: 12px;
   }
-  p+.avatar {
+  p + .avatar {
     width: 30px;
     height: 30px;
     overflow: hidden;
     border-radius: 50%;
     margin-right: 5px;
+  }
+}
+.list-visits {
+  tr {
+    th:first-child {
+      cursor: inherit;
+      &::before,
+      &::after {
+        content: "";
+      }
+    }
   }
 }

@@ -59,12 +59,10 @@ Handlebars.registerHelper("limit", function(arr, limit) {
 });
 
 Handlebars.registerHelper("tableColumns", columns => {
-  const htmlStr = 
-  columns
-    .map((column, idx) => 
-      idx === 0 
-        ? `<th width="5%">${column}</th>` 
-        : `<th>${column}</th>`)
+  const htmlStr = columns
+    .map((column, idx) =>
+      idx === 0 ? `<th width="5%">${column}</th>` : `<th>${column}</th>`
+    )
     .join(" ");
   return new Handlebars.SafeString(htmlStr);
 });
@@ -94,24 +92,44 @@ Handlebars.registerHelper("formatTimeAgo", timestamp => {
 
 Handlebars.registerHelper("formatHour", hour => {
   hour = hour.toString();
-  if(hour.length === 3) hour = `0${hour}`;
+  if (hour.length === 3) hour = `0${hour}`;
   return moment(hour, "hhmm").format("hh:mm a");
 });
 
-Handlebars.registerHelper("momentDateFormat", (timestamp, format) => moment(timestamp).format(format));
+Handlebars.registerHelper("momentDateFormat", (timestamp, format) =>
+  moment(timestamp).format(format)
+);
 
-Handlebars.registerHelper("getWeekName", weekNumber => _.capitalize(moment.weekdays(true)[weekNumber-1]));
+Handlebars.registerHelper("getWeekName", weekNumber =>
+  _.capitalize(moment.weekdays(true)[weekNumber - 1])
+);
 Handlebars.registerHelper("timeOfDay", partOfDay => {
   const days = {
-    "MORNING": "Mañana",
-    "AFTERNOON": "Tarde",
-    "NIGH": "Noche",
+    MORNING: "Mañana",
+    AFTERNOON: "Tarde",
+    NIGH: "Noche",
     "ALL DAY": "Todo el día"
   };
   return days[partOfDay];
 });
 
+Handlebars.registerHelper("timeOfDay", partOfDay => {
+  const days = {
+    MORNING: "Mañana",
+    AFTERNOON: "Tarde",
+    NIGH: "Noche",
+    "ALL DAY": "Todo el día"
+  };
+  return days[partOfDay];
+});
+
+Handlebars.registerHelper("activeVisit", (dayOfVisit, timezone) => {
+  return moment(dayOfVisit)
+    .tz(timezone)
+    .isSameOrAfter(moment());
+});
+
 Handlebars.registerHelper("fillFrequents", intervals => {
-  const arr = new Array(7-intervals.length).fill("<td></td>");
+  const arr = new Array(7 - intervals.length).fill("<td></td>");
   return new Handlebars.SafeString(arr.join(""));
 });

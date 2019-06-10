@@ -77,9 +77,41 @@
       pendingTable.addButton("Aprobar");
       pendingTable.addEvent("Aprobar", onApprove);
       pendingTable.init();
+      initListeners(pendingTable, pending);
+      initListeners(approveTable, approved);
     } catch (e) {
       console.log("E", e);
       notify.error("Ocurrió un error al cargar la data", "Error");
     }
   });
+
+  const triggerResidentDetail = data => {
+    if ($("#user-detail-modal").exists()) {
+      $("#user-detail-modal").modal("dispose");
+      $("#user-detail-modal-container").remove();
+    }
+
+    const template = Handlebars.partials["user-detail"];
+    $("body").append(template(data));
+    $("#user-detail-modal").modal("show");
+  };
+
+  const initListeners = (table, items) => {
+    let longpress = 200;
+    let start;
+
+    $(`#${table.id}`).on(
+      "mousedown",
+      "tr",
+      () => (start = new Date().getTime())
+    );
+    $(`#${table.id}`).on("mouseleave", "tr", () => (start = 0));
+    $(`#${table.id}`).on("mouseup", "tr", event => {
+      if (new Date().getTime() >= start + longpress) {
+        $(event.currentTarget).addClass("selected");
+        const selected = table.tableInstance.rows(".selected")[0];
+        triggerResidentDetail(items[selected]);
+      }
+    });
+  };
 })();

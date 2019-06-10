@@ -2,18 +2,19 @@
 // TODO
 //cancel on callback success
 // CLEAN FIELD
-const showAdditionModal = callback => {
-  if (!$("#addition-modal").exists()) {
-    const template = Handlebars.partials["addition-modal"];
-    $("body").append(template());
-    listenClick();
-    listenSelect();
-    $("#addition-form").validate(FORM_VALIDATION_DEFAULTS);
-    validateForms();
+const showAdditionModal = (type, callback) => {
+  if ($("#addition-modal").exists()) {
+    $("#addition-modal").remove();
   }
 
-  $("#addition-modal").modal("show");
+  const template = Handlebars.partials["addition-modal"];
+  $("body").append(template({ isSecurity: type === "SECURITY" }));
+  listenClick();
+  listenSelect();
+  $("#addition-form").validate(FORM_VALIDATION_DEFAULTS);
+  validateForms();
 
+  $("#addition-modal").modal("show");
 
   function listenSelect() {
     const token = Sammy.apps.body.getAccessToken();
@@ -31,7 +32,7 @@ const showAdditionModal = callback => {
           Authorization: `Bearer ${token}`
         }
       },
-      results: function (data, params) {
+      results: function(data, params) {
         params.page = params.page || 1;
         return {
           results: data,
@@ -41,7 +42,7 @@ const showAdditionModal = callback => {
         };
       },
       placeholder: "Buscar un usuario",
-      escapeMarkup: function (markup) {
+      escapeMarkup: function(markup) {
         return markup;
       },
       minimumInputLength: 3,
@@ -57,8 +58,7 @@ const showAdditionModal = callback => {
         $(`input[name='${element.name}'`).val(user[element.name])
       );
     });
-  };
-
+  }
 
   function formatRepo(user) {
     if (user.loading) {
@@ -73,14 +73,14 @@ const showAdditionModal = callback => {
 
   function listenClick() {
     $(".addition-cb").click(async event => {
-      try{
+      try {
         startPreload("#addition-modal");
         const form = $(event.target.form);
         const result = form.serializeJSON();
         let user = $("#user-select").select2("data")[0];
         if (!user) {
           user = (await postMainApi(result, "user")).user;
-        };
+        }
 
         result.user = user;
         form.trigger("reset");
@@ -89,11 +89,11 @@ const showAdditionModal = callback => {
         await callback(result);
         $("#addition-modal").modal("hide");
         notify.info("Solicitud exitosa", "Éxito");
-      }catch (error){
+      } catch (error) {
         notify.error("Ocurrió un error al agregar", "Error");
-      }finally{
+      } finally {
         stopPreload();
       }
     });
-  };
+  }
 };

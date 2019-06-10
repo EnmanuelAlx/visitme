@@ -1,5 +1,4 @@
-{{log this}}
-<div id="community-modal-container"> 
+<div id="community-modal-container">
   <div id="community-modal" class="modal" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered initial" role="document">
       <div class="modal-content">
@@ -14,41 +13,43 @@
           <div class="row justify-content-center">
             <div class="col-11">
               <h6 class="text-light-gray">Comunidades</h6>
-                {{#each communities}}
-                  {{#if @first}}
-                    {{>community-choice}}
-                  {{/if}}
-                {{/each}}
+              {{#each communities}}
+              {{#if @first}}
+              {{>community-choice}}
+              {{/if}}
+              {{/each}}
 
-                {{#each communities}}
-                  {{#if @first}}
-                    <form novalidate id="select-community-form" action="#/select-community" method="POST">
-                      <div class="row">
+              {{#each communities}}
+              {{#if @first}}
+              <form novalidate id="select-community-form" action="#/select-community" method="POST">
+                <div class="row">
                   {{/if}}
                   <div class="community-option col-xl-3 col-sm-4 col-6 d-flex align-items-center flex-column">
-                    <input type="radio" required name="community" id="prop_option_detached" class="square-option" value="{{_id}}">
-                    <img class="img-property img-fluid w-100" src="{{#if image}} {{image}} {{else}} ../../assets/img/house.png {{/if}}" alt="{{name}}">
+                    <input type="radio" required name="community" id="prop_option_detached" class="square-option"
+                      value="{{_id}}">
+                    <img class="img-property img-fluid w-100"
+                      src="{{#if image}} {{image}} {{else}} ../../assets/img/house.png {{/if}}" alt="{{name}}">
                     <label for="community">{{name}}</label>
                   </div>
                   {{#if @last}}
-                      </div>
-                      <div class="row justify-content-end">
-                        <button type="submit" class="btn btn-primary">Seleccionar comunidad</button>
-                      </div>                      
-                    </form>
-                  {{>create-community-form}}
-                  {{>join-community-form ../allCommunities}}
-                  {{/if}}
-                  
-                {{else}}
-                  <p>
-                    Actualmente, no te encuentras registrado a ninguna comunidad. Selecciona una opción para continuar:
-                    Si aún no has sido aprobado por tu administrador, ponte en contacto con éste.
-                  </p>
-                  {{>community-choice}}
-                  {{>create-community-form self-submit="true"}}
-                  {{>join-community-form allCommunities self-submit="true"}}
-                {{/each}}
+                </div>
+                <div class="row justify-content-end">
+                  <button type="submit" class="btn btn-primary">Seleccionar comunidad</button>
+                </div>
+              </form>
+              {{>create-community-form}}
+              {{>join-community-form ../allCommunities}}
+              {{/if}}
+
+              {{else}}
+              <p>
+                Actualmente, no te encuentras registrado a ninguna comunidad. Selecciona una opción para continuar:
+                Si aún no has sido aprobado por tu administrador, ponte en contacto con éste.
+              </p>
+              {{>community-choice}}
+              {{>create-community-form self-submit="true"}}
+              {{>join-community-form allCommunities self-submit="true"}}
+              {{/each}}
             </div>
           </div>
         </div>

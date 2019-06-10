@@ -55,6 +55,20 @@
     target.addClass("checked");
   });
 
+  $(document).on("hidden.bs.modal", () => {
+    $(".modal-backdrop").remove();
+  });
+
+  $(document).on("click", "tr", () => {
+    const deleteButton = $(".delete-button");
+    const atLeastOneSelected = $("tr.selected").exists();
+    if (atLeastOneSelected) {
+      deleteButton.removeClass("disabled");
+    } else {
+      deleteButton.addClass("disabled");
+    }
+  });
+
   $(document).on("click", ".no-community", event => {
     $(".form-div").hide();
     $("#select-community-form").hide();

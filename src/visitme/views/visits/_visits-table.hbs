@@ -1,50 +1,60 @@
 <table class="table alerts">
   <tbody>
     {{#each (limit this 10)}}
-      {{#if @first}}
-        <div class="mt-3"></div>
-      {{/if}}
-      <tr>
-        <td>
-          {{#with guest}}
-            <h6> {{name}} </h6>
-            <p class="mb-0"> {{identification}} </p>
-          {{/with}}
-        </td>
-        {{#ifCond kind "SCHEDULED"}}
-          <td>
-            <h6>Horario</h6>
-            {{timeOfDay partOfDay}}
-          </td>
-        {{/ifCond}}
-        {{#ifCond kind "FREQUENT"}}
-           {{#each (limit intervals 7)}}
-            <td> 
-              <h6>
-                {{getWeekName day}}
-              </h6> 
-                <p class="mb-0 xs">{{formatHour from}}</p>
-                <p class="mb-0 xs"> {{formatHour to}}</p>
-              </td>
-            {{/each}}
-            {{fillFrequents intervals}}
-          <td>
-            {{#with author}}
-              <p class="mb-0">{{name}}</p>
-            {{/with}}
-          </td>
-        {{/ifCond}}
-        <td>
-          <p class="mb-0 small">
-            Registrada {{formatTimeAgo created_at}}
-          </p>
-        </td>
-      </tr>
+    {{#if @first}}
+    <div class="mt-3"></div>
+    {{/if}}
+    <tr>
+      <td>
+        {{#with guest}}
+        <h6> {{name}} </h6>
+        <p class="mb-0"> {{identification}} </p>
+        {{/with}}
+      </td>
+      {{#ifCond kind "SCHEDULED"}}
+      <td>
+        <h6>Horario</h6>
+        {{timeOfDay partOfDay}}
+      </td>
+      <td>
+        <h6>Fecha</h6>
+        {{#if (activeVisit dayOfVisit timezone)}}
+        {{momentDateFormat dayOfVisit "LL"}}
+        {{else}}
+        <del class="text-danger ">
+          {{momentDateFormat dayOfVisit "LL"}}
+        </del>
+        {{/if}}
+      </td>
+      {{/ifCond}}
+      {{#ifCond kind "FREQUENT"}}
+      {{#each (limit intervals 7)}}
+      <td>
+        <h6>
+          {{getWeekName day}}
+        </h6>
+        <p class="mb-0 xs">{{formatHour from}}</p>
+        <p class="mb-0 xs"> {{formatHour to}}</p>
+      </td>
+      {{/each}}
+      {{fillFrequents intervals}}
+      <td>
+        {{#with author}}
+        <p class="mb-0">{{name}}</p>
+        {{/with}}
+      </td>
+      {{/ifCond}}
+      <td>
+        <p class="mb-0 small">
+          Registrada {{formatTimeAgo created_at}}
+        </p>
+      </td>
+    </tr>
     {{else}}
     <td>
       <p class="mb-0 mt-3">No tienes visitas de este tipo registradas</p>
     </td>
-   
+
     {{/each}}
   </tbody>
 </table>

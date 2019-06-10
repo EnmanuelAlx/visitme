@@ -98,7 +98,9 @@ gulp.task("js", () => {
       "node_modules/chart.js/dist/Chart.min.js",
       "node_modules/chart.piecelabel.js/build/Chart.PieceLabel.min.js",
       "node_modules/select2/dist/js/select2.js",
-      "node_modules/jquery-confirm/dist/jquery-confirm.min.js"
+      "node_modules/jquery-confirm/dist/jquery-confirm.min.js",
+      "node_modules/moment-timezone/moment-timezone.js",
+      "node_modules/moment-timezone/builds/moment-timezone-with-data.min.js",
     ])
     .pipe(gulp.dest("src/visitme/js/lib"));
 });

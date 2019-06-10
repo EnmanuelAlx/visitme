@@ -35,7 +35,8 @@ class Table {
       },
       {
         text: "Eliminar",
-        className: "btn-table btn-sm btn-danger btn-no-style",
+        className:
+          "btn-table btn-sm btn-danger delete-button btn-no-style disabled",
         action: () => {
           const data = this.tableInstance.rows(".selected")[0];
           this.events["Eliminar"](data);

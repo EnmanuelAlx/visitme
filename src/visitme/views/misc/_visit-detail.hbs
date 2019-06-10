@@ -1,4 +1,3 @@
-{{log this}}
 <div id="visit-detail-modal-container">
   <div id="visit-detail-modal" class="modal" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-centered initial" role="document">
@@ -15,78 +14,78 @@
             <div class="col-11">
               <h6 class="text-light-gray">Datos de la visita</h6>
               {{#each images}}
-                {{#if @first}}
-                  <label for="exampleInputEmail1">Imagenes</label>
-                {{/if}}
-                 <div class="community-option col-xl-3 col-sm-4 col-6 d-flex align-items-center flex-column">
-                  <img class="img-property img-fluid w-100" src="{{src}}" alt="{{name}}">
-                </div>
+              {{#if @first}}
+              <label for="exampleInputEmail1">Imagenes</label>
+              {{/if}}
+              <div class="community-option col-xl-3 col-sm-4 col-6 d-flex align-items-center flex-column">
+                <img class="img-property img-fluid w-100" src="{{src}}" alt="{{name}}">
+              </div>
               {{/each}}
-                <div class="form-row">
-                  <div class="form-group col">
-                    <label for="exampleInputEmail1">Creada</label>
-                    <p>{{momentDateFormat created_at "lll"}}</p>
-                  </div>
-                  <div class="form-group col">
-                    <label for="exampleInputEmail1">Tipo</label>
-                    <p>{{guestType}}</p>
-                  </div>
-                  <div class="form-group col">
-                    <label for="exampleInputEmail1">Horario</label>
-                    <p>{{partOfDay}}</p>
-                  </div>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Creada</label>
+                  <p>{{momentDateFormat created_at "lll"}}</p>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col">
-                    <label for="exampleInputEmail1">Día de la visita</label>
-                    <p>{{momentDateFormat dayOfVisit "lll"}}</p>
-                  </div>
-                  <div class="form-group col">
-                    <label for="exampleInputEmail1">Tipo</label>
-                    <p>{{kind}}</p>
-                  </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Tipo</label>
+                  <p>{{guestType}}</p>
                 </div>
-                <h6 class="text-light-gray">Datos del residente</h6>
-                {{#with resident}}
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="exampleInputEmail1">Nombre</label>
-                      <div class="d-flex">
-                        <p>{{name}}</p>
-                       <img class="avatar" src="{{image}}">
-                      </div>
-                    
-                    </div>
-                    <div class="form-group col">
-                      <label for="exampleInputEmail1">Cédula</label>
-                      <p>{{identification}}</p>
-                    </div>
-                    <div class="form-group col">
-                      <label for="exampleInputEmail1">Correo</label>
-                      <p>{{email}}</p>
-                    </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Horario</label>
+                  <p>{{partOfDay}}</p>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Día de la visita</label>
+                  <p>{{momentDateFormat dayOfVisit "lll"}}</p>
+                </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Tipo</label>
+                  <p>{{kind}}</p>
+                </div>
+              </div>
+              <h6 class="text-light-gray">Datos del residente</h6>
+              {{#with resident}}
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Nombre</label>
+                  <div class="d-flex">
+                    <p>{{name}}</p>
+                    <img class="avatar" src="{{image}}">
                   </div>
-                  <div class="form-row">
-                    <div class="form-group col">
-                      <label for="exampleInputEmail1">Telf</label>
-                      <p>{{cellPhone}}</p>
-                    </div>
-                    <div class="form-group col">
-                      <label for="exampleInputEmail1">Telf casa</label>
-                      <p>{{homePhone}}</p>
-                    </div>
-                    <div class="form-group col">
-                      <label for="exampleInputEmail1">Telf. Ofic.</label>
-                      <p>{{workPhone}}</p>
-                    </div>
-                  </div>
-                {{/with}}
 
-                <div class="row justify-content-end mt-2">
-                  <div class="px-3">
-                    <button data-dismiss="modal" type="button" class="btn btn-primary visit-detail-cb">Aceptar</button>
-                  </div>
                 </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Cédula</label>
+                  <p>{{identification}}</p>
+                </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Correo</label>
+                  <p>{{email}}</p>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Telf</label>
+                  <p>{{cellPhone}}</p>
+                </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Telf casa</label>
+                  <p>{{homePhone}}</p>
+                </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Telf. Ofic.</label>
+                  <p>{{workPhone}}</p>
+                </div>
+              </div>
+              {{/with}}
+
+              <div class="row justify-content-end mt-2">
+                <div class="px-3">
+                  <button data-dismiss="modal" type="button" class="btn btn-primary visit-detail-cb">Aceptar</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

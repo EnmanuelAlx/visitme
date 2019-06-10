@@ -15,7 +15,7 @@ const deleteEventGenerator = (table, items) => {
 
 const addEventGenerator = (table, community, type) => {
   return async () => {
-    showAdditionModal(async data => {
+    showAdditionModal(type, async data => {
       try {
         await postMainApi(
           {
@@ -37,7 +37,16 @@ async function createCrud(resource, type, template, CONTAINER, TEMPLATE_NAME) {
   const community = communities.find(comm => comm.selected === true)._id;
   const tableId = `${resource}Table`;
   const items = await getMainApi({}, `communities/${community}/${resource}`);
-  loadTable(items, tableId, type, template, CONTAINER, TEMPLATE_NAME).init();
+  const table = loadTable(
+    items,
+    tableId,
+    type,
+    template,
+    CONTAINER,
+    TEMPLATE_NAME
+  );
+  table.init();
+  return { table, items };
 }
 
 function loadTable(items, id, type, template, CONTAINER, TEMPLATE_NAME) {

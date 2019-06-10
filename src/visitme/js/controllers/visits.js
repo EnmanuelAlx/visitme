@@ -6,7 +6,6 @@
   const TEMPLATE_NAME = "visits";
   const HB = MyApp; // handlebars;
 
-
   app.get(ROOT, async context => {
     if (!app.getAccessToken()) return context.redirect("#/login");
     if ($(CONTAINER).exists()) startPreload(CONTAINER);
@@ -21,31 +20,35 @@
     scheduled = scheduled.filter(item => filterAlert(item, community));
     frequent = frequent.filter(item => filterAlert(item, community));
 
-    loadTemplate(CONTAINER, TEMPLATE_NAME, template({
-      sporadic,
-      scheduled,
-      frequent
-    }));
+    loadTemplate(
+      CONTAINER,
+      TEMPLATE_NAME,
+      template({
+        sporadic,
+        scheduled,
+        frequent
+      })
+    );
     handleVisits();
   });
 
   app.post(ROOT, context => {
     startPreload(CONTAINER);
     const data = $(context.target).serializeJSON();
-    if(data.intervals)
+    if (data.intervals)
       data.intervals = data.intervals.map(item => {
-        item.from = item.from.replace(":","");
-        item.to = item.to.replace(":","");
+        item.from = item.from.replace(":", "");
+        item.to = item.to.replace(":", "");
         return item;
       });
-    if (data.visit){
+    if (data.visit) {
       const { year, month, day } = data.visit;
       data.dayOfVisit = `${year}-${month}-${day}`;
     }
     const { communities } = getSessionData();
     data.community = communities.find(comm => comm.selected === true)._id;
-    postMainApi(data,"visits")
-      .then(()=> {
+    postMainApi(data, "visits")
+      .then(() => {
         stopPreload();
         notify.info("Visita creada exitosamente", "Éxito");
         app.refresh();
@@ -56,34 +59,37 @@
       });
   });
 
-  const filterAlert = (element, community) => element.community._id === community;
+  const filterAlert = (element, community) =>
+    element.community._id === community;
 
   const handleVisits = () => {
-    $("button.add-visit").click(()=>{
+    $("button.add-visit").click(() => {
       $("div.add-visit").toggle();
       $("div.list-visits").toggle();
     });
 
-    $("#visit-type").click(()=>{
+    $("#visit-type").click(() => {
       const type = $("input[name='visit-type']:checked").val();
-      $("div.visit-container").html(Handlebars.partials["visit-data"]({
-        type
-      }));
+      $("div.visit-container").html(
+        Handlebars.partials["visit-data"]({
+          type
+        })
+      );
       listenDates();
       listenIntervals();
     });
   };
 
   const listenIntervals = () => {
-    $(".add-interval").click(()=>{
+    $(".add-interval").click(() => {
       $("div.intervals").append(Handlebars.partials["interval"]("Lunes"));
       bindRemove();
     });
 
-    const bindRemove = () => 
+    const bindRemove = () =>
       $(".remove-interval").click(async event => {
         const row = $(event.currentTarget).closest(".form-row");
-        row.hide(()=>{
+        row.hide(() => {
           row.remove();
         });
       });
@@ -116,7 +122,7 @@
 
       if (!$("#visit-year :selected:not(:disabled)").exists()) {
         let yearOptions = "";
-        for (let i = currentYear; i <= currentYear+1; i++) {
+        for (let i = currentYear; i <= currentYear + 1; i++) {
           yearOptions += `<option value="${i}">${i}</option>`;
         }
         yearSelector
@@ -134,7 +140,7 @@
           .prepend("<option value='' disabled selected>Month</option>");
       }
 
-      monthSelector.change(function () {
+      monthSelector.change(function() {
         var selectedMonth = parseInt(this.value);
         console.log("selected", selectedMonth);
         lastDay = moment(
@@ -147,8 +153,5 @@
       daySelector.val(moment().date());
       yearSelector.val(moment().year());
     }
-
-
   };
-
 })();

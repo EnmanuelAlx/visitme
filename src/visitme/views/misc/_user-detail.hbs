@@ -1,0 +1,63 @@
+{{log this}}
+<div id="user-detail-modal-container">
+  <div id="user-detail-modal" class="modal" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-centered initial" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="row w-100 justify-content-center">
+            <div class="col-11">
+              <h6 class="modal-title font-weight-bold text-uppercase text-primary">Usuario</h6>
+            </div>
+          </div>
+        </div>
+        {{#with user}}
+        <div class="modal-body">
+          <div class="row justify-content-center">
+            <div class="col-11">
+              <h6 class="text-light-gray">Datos del usuario</h6>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Nombre</label>
+                  <div class="d-flex flex-column">
+                    <p>{{name}}</p>
+                    <img class="avatar w-50" src="{{image}}">
+                  </div>
+
+                </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Cédula</label>
+                  <p>{{identification}}</p>
+                </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Correo</label>
+                  <p>{{email}}</p>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Telf</label>
+                  <p>{{cellPhone}}</p>
+                </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Telf casa</label>
+                  <p>{{homePhone}}</p>
+                </div>
+                <div class="form-group col">
+                  <label for="exampleInputEmail1">Telf. Ofic.</label>
+                  <p>{{workPhone}}</p>
+                </div>
+              </div>
+
+              <div class="row justify-content-end mt-2">
+                <div class="px-3">
+                  <button data-dismiss="modal" type="button" class="btn btn-primary user-detail-cb">Aceptar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/with}}
+      </div>
+    </div>
+  </div>
+</div>
