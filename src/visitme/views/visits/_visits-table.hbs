@@ -18,13 +18,7 @@
       </td>
       <td>
         <h6>Fecha</h6>
-        {{#if (activeVisit dayOfVisit timezone)}}
         {{momentDateFormat dayOfVisit "LL"}}
-        {{else}}
-        <del class="text-danger ">
-          {{momentDateFormat dayOfVisit "LL"}}
-        </del>
-        {{/if}}
       </td>
       {{/ifCond}}
       {{#ifCond kind "FREQUENT"}}
