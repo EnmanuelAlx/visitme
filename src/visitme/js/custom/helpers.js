@@ -73,13 +73,21 @@ Handlebars.registerHelper("tableRows", rows => {
 });
 
 const renderRow = row => {
-  return Object.keys(row)
-    .map(key => renderByTypeOfValue(row[key]))
+  const keys = Object.keys(row).filter(r => r !== "timestamp");
+  return keys
+    .map(key => renderByTypeOfValue(row[key], key, row["timestamp"]))
     .join(" ");
 };
 
-const renderByTypeOfValue = data => {
+const renderByTypeOfValue = (data, key, timestamp) => {
   const safeNull = data ? data : "N/A";
+  if (key === "lastIn" && timestamp) {
+    const unixTimestamp =
+      moment(timestamp)
+        .local()
+        .valueOf() || 0;
+    return `<td data-order='${unixTimestamp}'>${safeNull}</td>`;
+  }
   return safeNull.match(/\.(jpeg|jpg|gif|png)$/) != null
     ? `<td class="p-1"><img src="${safeNull}" class="img-fluid"></img></td>`
     : `<td>${safeNull}</td>`;

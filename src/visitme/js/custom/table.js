@@ -62,12 +62,16 @@ class Table {
     this.id = id;
   }
 
-  init() {
-    this.tableInstance = $("#" + this.id).DataTable({
-      dom: "Bfrtrip",
-      buttons: this.buttons,
-      language: DATATABLES_SPANISH
-    });
+  init(options = {}) {
+    options = Object.assign(
+      {
+        dom: "Bfrtrip",
+        buttons: this.buttons,
+        language: DATATABLES_SPANISH
+      },
+      options
+    );
+    this.tableInstance = $("#" + this.id).DataTable(options);
     this.tableInstance.columns.adjust().draw();
     $("#" + this.id + " tbody").on("click", "tr", function() {
       $(this).toggleClass("selected");
