@@ -31,6 +31,7 @@
         "Horario",
         "Residente",
         "Invitado",
+        "Localidad",
         "Ultima entrada"
       ];
       const table = loadCustomTable(
@@ -44,7 +45,7 @@
       );
       table.removeButton("Añadir");
       table.removeButton("Eliminar");
-      table.init({ order: [[4, "desc"]] });
+      table.init({ order: [[5, "desc"]] });
       initListeners(table, items);
     } catch (error) {
       toastr.error("Ocurrió un error al cargar la data", "Error");
@@ -59,6 +60,10 @@
       partDay: partOfDayTranslation[item.partOfDay],
       resident: item.resident.name,
       guest: item.guest.name,
+      locality: item.community_user.find(
+        ({ community, user }) =>
+          community === item.community && user === item.resident.id
+      ).reference,
       lastIn: findLastIn(item.checks),
       timestamp: item.checks[0] && item.checks[0].created_at
     };
