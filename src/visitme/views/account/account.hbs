@@ -11,18 +11,18 @@
         <div class="form-row">
           <div class="form-group col-6">
             <label for="exampleInputEmail1">Nombre completo</label>
-            <input required class="form-control" type="text" name="name" value="{{name}}" placeholder="Nombre completo">
+            <input required="required" class="form-control" type="text" name="name" value="{{name}}" placeholder="Nombre completo">
           </div>
           <div class="form-group col-6">
             <label for="exampleInputEmail1">Correo electrónico</label>
-            <input required class="form-control" type="text" name="email" value="{{email}}"
+            <input required="required" class="form-control" type="text" name="email" value="{{email}}"
               placeholder="joan@visitme.com">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group col-12">
             <label for="exampleInputEmail1">Cédula</label>
-            <input required class="form-control" type="text" name="identification" value="{{identification}}"
+            <input required="required" class="form-control" type="text" name="identification" value="{{identification}}"
               placeholder="Cédula">
           </div>
         </div>
@@ -30,12 +30,12 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputEmail4">Teléfono de casa</label>
-            <input required class="form-control required" type="text" name="homePhone" value="{{homePhone}}"
+            <input required="required" class="form-control required" type="text" name="homePhone" value="{{homePhone}}"
               placeholder="Teléfono Casa">
           </div>
           <div class="form-group col-md-6 order-1">
             <label for="inputEmail4">Teléfono personal</label>
-            <input required class="form-control" type="text" name="cellPhone" value="{{cellPhone}}"
+            <input required="required" class="form-control" type="text" name="cellPhone" value="{{cellPhone}}"
               placeholder="Teléfono Personal">
           </div>
         </div>
@@ -45,13 +45,13 @@
         <div class="form-row">
           <div class="form-group col-4">
             <label for="exampleInputEmail1">Ciudad</label>
-            <input required class="form-control" type="text" name="address[city]" value="{{city}}"
+            <input required="required" class="form-control" type="text" name="address[city]" value="{{city}}"
               placeholder="Puerto Ordaz">
           </div>
 
           <div class="form-group col-4">
             <label for="exampleInputEmail1">Estado</label>
-            <select required class="form-control custom-select" name="address[state]">
+            <select required="required" class="form-control custom-select" name="address[state]">
               {{#select state}}
               <option value="">Selecciona un estado</option>
               <option value="Bolívar">Bolívar</option>
@@ -61,12 +61,24 @@
 
           <div class="form-group col-4">
             <label for="exampleInputEmail1">Código Postal</label>
-            <input required class="form-control" type="text" name="address[zip]" value="{{zip}}" placeholder="ZIP">
+            <input required="required" class="form-control" type="text" name="address[zip]" value="{{zip}}" placeholder="ZIP">
           </div>
         </div>
         {{/with}}
 
-        <input type="hidden" name="address[country]" value="Venezuela" />
+
+        <div class="form-group">
+          <label for="country">Pais</label>
+          <select name="address[country]" id="country" required="required" class="form-control custom-select">
+            {{#select address.country}}
+              <option value="">Selecciona un pais</option>
+              <option value="Bolívar">Venezuela</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Alemania">Alemania</option>
+            {{/select}}
+
+          </select>
+        </div>
 
         <div class="d-flex justify-content-end mb-3">
           <div class="col-4">
