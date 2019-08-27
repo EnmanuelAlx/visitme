@@ -22,9 +22,12 @@
   const communitySelection = (communities, allCommunities) => {
     const template = Handlebars.partials["community-selection"];
     communities = communities.filter(com => com.status === "APPROVED");
+    if(communities.length == 1){
+      communities[0].unique = true;
+    }
     const data = {
       communities,
-      allCommunities
+      allCommunities,
     };
     console.log("data", data);
 

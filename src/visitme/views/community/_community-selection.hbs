@@ -26,8 +26,8 @@
                   {{/if}}
                   <div class="community-option col-xl-3 col-sm-4 col-6 d-flex align-items-center flex-column">
                     <input type="radio" required name="community" id="prop_option_detached" class="square-option"
-                      value="{{_id}}">
-                    <img class="img-property img-fluid w-100"
+                      value="{{_id}}" {{#if unique}} checked {{/if}}>
+                    <img class="{{#if unique}} img-property img-fluid w-100 checked {{else}} img-property img-fluid w-100{{/if}}"
                       src="{{#if image}} {{image}} {{else}} ../../assets/img/house.png {{/if}}" alt="{{name}}">
                     <label for="community">{{name}}</label>
                   </div>
