@@ -18,7 +18,7 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-6">
+      <div class="form-group col-4">
         <label for="exampleInputEmail1">Estado</label>
         <select required class="form-control custom-select" name="address[state]">
           <option value="">Selecciona un estado</option>
@@ -26,12 +26,30 @@
         </select>
       </div>
 
-      <div class="form-group col-6">
+      <div class="form-group col-4">
         <label for="exampleInputEmail1">Código Postal</label>
         <input required class="form-control" type="text" name="address[zip]" placeholder="ZIP">
       </div>
 
-      <input type="hidden" name="address[country]" value="Venezuela" />
+      <div class="form-group col-4">
+        <label for="country">Pais</label>
+        <select name="address[country]" id="country" required="required" class="form-control custom-select">
+          {{#select address.country}}
+            <option value="">Selecciona un pais</option>
+            <option value="Bolívar">Venezuela</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Alemania">Alemania</option>
+          {{/select}}
+
+        </select>
+      </div>
+
+      <div class="form-group col-12">
+        <input type="checkbox" value="security" id="security" name="rule[name]">
+        <label for="security">
+          El vigilante no tiene autorizacion de dejar pasar personas
+        </label>
+      </div>
 
     </div>
     <div class="d-flex justify-content-end">
