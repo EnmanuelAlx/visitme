@@ -1,7 +1,6 @@
 {
   "mainApi": {
-    "test": "http://localhost:3000/api",
-    "test2": "https://visitme1.herokuapp.com/api",
+    "test": "https://visitme1.herokuapp.com/api",
     "production": "http://visitme.southcentralus.cloudapp.azure.com"
   }
 }
