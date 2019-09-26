@@ -19,7 +19,9 @@
     sporadic = sporadic.filter(item => filterAlert(item, community));
     scheduled = scheduled.filter(item => filterAlert(item, community));
     frequent = frequent.filter(item => filterAlert(item, community));
-
+    sporadic.forEach(element => element.token_show = element.token.substr(-6));
+    scheduled.forEach(element => element.token_show = element.token.substr(-6));
+    frequent.forEach(element => element.token_show = element.token.substr(-6));
     loadTemplate(
       CONTAINER,
       TEMPLATE_NAME,

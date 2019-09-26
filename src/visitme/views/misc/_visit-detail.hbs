@@ -57,6 +57,12 @@
                   <label for="exampleInputEmail1">Tipo</label>
                   <p>{{kind}}</p>
                 </div>
+                {{#if note}}
+                  <div class="form-group col">
+                    <label for="exampleInputEmail1">Nota:</label>
+                    <p>{{ note }}</p>
+                  </div>
+                {{/if}}
               </div>
               <h6 class="text-light-gray">Datos del residente</h6>
               {{#with resident}}
